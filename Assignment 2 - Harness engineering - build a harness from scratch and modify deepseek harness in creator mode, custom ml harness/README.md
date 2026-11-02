@@ -6,9 +6,9 @@ Three parts, one idea: **Model + Harness = Agent.**
 
 | Part | What it is | Code | Video |
 |---|---|---|---|
-| **A** | A coding-agent harness built from scratch in 6 progressive steps, on the **OpenRouter** API | [`part-a-harness-from-scratch/`](https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) | [6m 26s]( https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) |
-| **B** | **DeepSeek Harness** in **Creator mode**: 6 existing plugins installed + **2 plugins written from scratch** | [`part-b-deepseek-harness/`](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) | [4m 56s](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) |
-| **C** | A custom **ML autoresearch harness** + its DeepSeek Harness plugin, shown working end to end | [`part-c-ml-autoresearch-harness/`](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) | [5m 39s](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) |
+| **A** | A coding-agent harness built from scratch in 6 progressive steps, on the **OpenRouter** API | [`part-a-harness-from-scratch/`](https://github.com/ashivashankars/CMPE297/tree/main/Assignment%202%20-%20Harness%20engineering%20-%20build%20a%20harness%20from%20scratch%20and%20modify%20deepseek%20harness%20in%20creator%20mode%2C%20custom%20ml%20harness/part-a-harness-from-scratch) | [6m 26s]( https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) |
+| **B** | **DeepSeek Harness** in **Creator mode**: 6 existing plugins installed + **2 plugins written from scratch** | [`part-b-deepseek-harness/`](https://github.com/ashivashankars/CMPE297/tree/main/Assignment%202%20-%20Harness%20engineering%20-%20build%20a%20harness%20from%20scratch%20and%20modify%20deepseek%20harness%20in%20creator%20mode%2C%20custom%20ml%20harness/part-b-deepseek-harness) | [4m 56s](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) |
+| **C** | A custom **ML autoresearch harness** + its DeepSeek Harness plugin, shown working end to end | [`part-c-ml-autoresearch-harness/`](https://github.com/ashivashankars/CMPE297/tree/main/Assignment%202%20-%20Harness%20engineering%20-%20build%20a%20harness%20from%20scratch%20and%20modify%20deepseek%20harness%20in%20creator%20mode%2C%20custom%20ml%20harness/part-c-ml-autoresearch-harness) | [5m 39s](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) |
 
 ## 🎬 Videos
 
