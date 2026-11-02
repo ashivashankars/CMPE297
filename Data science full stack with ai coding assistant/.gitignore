@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+docs/video/raw/
+projects/02_nano_llm/artifacts_train.log

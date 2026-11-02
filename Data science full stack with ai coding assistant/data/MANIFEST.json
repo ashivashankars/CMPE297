@@ -1,0 +1,57 @@
+{
+  "taxis.csv": {
+    "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/taxis.csv",
+    "bytes": 869349,
+    "sha256": "08d6d71784dbaa2651fee37fc03389754194c05d72d2d19cbc2c799dea6ac09d"
+  },
+  "tinyshakespeare.txt": {
+    "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+    "bytes": 1115394,
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed"
+  },
+  "mall_customers.csv": {
+    "url": "https://raw.githubusercontent.com/SteffiPeTaffy/machineLearningAZ/master/Machine%20Learning%20A-Z%20Template%20Folder/Part%204%20-%20Clustering/Section%2025%20-%20Hierarchical%20Clustering/Mall_Customers.csv",
+    "bytes": 4286,
+    "sha256": "293887b3a8de822afa42629d01c2679006adcc8269890b19eba1ff8ab4a49075"
+  },
+  "groceries.csv": {
+    "url": "https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/master/groceries.csv",
+    "bytes": 500843,
+    "sha256": "ff1be892fd6b9b57d1a7bc50de067798963dda607619645988b21789bf23ae3b"
+  },
+  "nab_machine_temperature.csv": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/machine_temperature_system_failure.csv",
+    "bytes": 732223,
+    "sha256": "92bf5b87fc7f9bba8ca0b7ec63ccaac8cb4a1371a258e8c29a10ae9c018d82a4"
+  },
+  "nab_ambient_temperature.csv": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/ambient_temperature_system_failure.csv",
+    "bytes": 233321,
+    "sha256": "230b68ccca20f59d562afd5d24ad52939c9b784386bed0054018358bf9120581"
+  },
+  "nab_cpu_asg_misconfig.csv": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/cpu_utilization_asg_misconfiguration.csv",
+    "bytes": 539274,
+    "sha256": "58ba65dc0737cfbac11b51514476d50c438d44011232144bb8d93f392df58f9f"
+  },
+  "nab_ec2_latency.csv": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/ec2_request_latency_system_failure.csv",
+    "bytes": 123428,
+    "sha256": "98378580aa80157e057c61d59d81daddccc6c65a2c0c800e3f01f603b8215c3f"
+  },
+  "nab_nyc_taxi.csv": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/nyc_taxi.csv",
+    "bytes": 265771,
+    "sha256": "d8fa6f7f0734bf5c8be12c52a94e20a82664c397d9dec4449156bd453d32856d"
+  },
+  "nab_labels.json": {
+    "url": "https://raw.githubusercontent.com/numenta/NAB/master/labels/combined_windows.json",
+    "bytes": 15359,
+    "sha256": "1e1fbc4601321aad8d0f8b3784c8134299379f68f6c1f7777565f8ffd57ab6b1"
+  },
+  "opsd_germany_daily.csv": {
+    "url": "https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv",
+    "bytes": 217983,
+    "sha256": "729b025d984497827cb6b89048d7c2c6a551e7aa727bc47ea0b74a2d1e84675d"
+  }
+}

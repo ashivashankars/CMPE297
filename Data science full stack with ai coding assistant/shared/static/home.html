@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Science Full-Stack Lab</title>
+<link rel="stylesheet" href="/shared/shell.css">
+<script src="/shared/shell.js"></script>
+<style>
+  .hero { max-width: 1240px; margin: 0 auto; padding: 48px 24px 8px; }
+  .hero h1 { font-size: 2.1rem; letter-spacing: -.01em; }
+  .hero p { max-width: 74ch; color: var(--muted); font-size: 1.05rem; }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 900px) { .cards { grid-template-columns: 1fr; } }
+  .pcard { display: block; text-decoration: none; color: inherit; background: var(--panel); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: var(--radius); padding: 18px; transition: transform .15s, box-shadow .15s; }
+  .pcard:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(40,30,10,.08); }
+  .pcard .num { color: var(--c); font-weight: 700; }
+  .pcard h2 { margin: 4px 0 6px; }
+  .pcard .tag { font-size: .78rem; font-weight: 600; color: var(--c); }
+  .pcard p { color: var(--muted); font-size: .92rem; margin: 8px 0 0; }
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0 28px; }
+  .principles div { border-left: 3px solid var(--ink); padding: 4px 12px; font-size: .9rem; }
+  .principles b { display: block; }
+  @media (max-width: 900px) { .principles { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Data Science Full-Stack Lab</h1>
+  <p>Six end-to-end data science systems, each following CRISP-DM from business question to a deployed, interactive app. Every model is trained on a real public dataset, validated on data it never saw, and audited for leakage. Each app includes a Code tour of the source that built it.</p>
+  <div class="principles">
+    <div><b>Real data</b>Public, checksummed datasets. No synthetic stand-ins.</div>
+    <div><b>Frozen evaluation</b>Test sets are scored once, after all choices are made.</div>
+    <div><b>Leakage-aware</b>Time-ordered splits, fit-on-train only, explicit traps.</div>
+    <div><b>Shown, not claimed</b>Every number in the UI comes from the pipeline's report.</div>
+  </div>
+  <div class="cards" id="cards"></div>
+</div>
+<div id="caption"></div>
+<script>
+fetch("/api/projects").then((r) => r.json()).then((ps) => {
+  document.getElementById("cards").innerHTML = ps.map((p) => `
+    <a class="pcard" href="/p/${p.slug}/" style="--c:${p.accent}">
+      <span class="num">${p.slug.slice(0, 2)}</span> <span class="tag">${p.tag}</span>
+      <h2>${p.title}</h2><p>${p.blurb}</p></a>`).join("");
+});
+</script>
+</body>
+</html>

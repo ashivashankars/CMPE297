@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anomaly Detection</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+</head>
+<body>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>Page the on-call engineer before the machine fails, not after.</h2>
+        <p class="lead">Every missed failure is downtime; every false page erodes trust until alerts get ignored. The goal: catch as many <b>real failure windows</b> as possible, as <b>early</b> as possible, within a tolerable <b>false-alarm budget</b> (≈ a few per week).</p>
+        <div class="note">Failure labels are never used to train a detector or pick a threshold, only to grade the result. In production you don't have labels for the next failure, so a benchmark that tunes on them overstates performance.</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <h3 style="margin-top:24px">CRISP-DM, as executed here</h3>
+    <div class="crisp">
+      <div><b>Business</b>Early failure alerts under a false-alarm budget.</div>
+      <div><b>Data</b>5 real NAB series, 62k points, 15 labeled failure windows.</div>
+      <div><b>Preparation</b>Causal rolling features; 15% probation period for fitting.</div>
+      <div><b>Modeling</b>Robust z, seasonal residual, Isolation Forest, LOF, ensemble.</div>
+      <div><b>Evaluation</b>Windows caught, detection lead, false alarms/week, PR-AUC.</div>
+      <div><b>Deployment</b>Live monitor with sensitivity dial + anomaly injection sandbox.</div>
+    </div>
+  </section>
+
+  <section data-tab="Data" data-phase="2 · Understanding">
+    <p class="lead">Shaded red = labeled failure windows. Gray = the probation period the detectors learn "normal" from.</p>
+    <div class="grid g2" id="gallery"></div>
+  </section>
+
+  <section data-tab="Detectors" data-phase="3–4 · Prep & Modeling">
+    <div class="grid g2">
+      <div class="card"><h3>Five detectors, all causal</h3>
+        <table class="data">
+          <tr><td><b>Rolling robust z</b></td><td>|x − median| / MAD over the trailing day. Fast, explainable, robust to outliers in the window.</td></tr>
+          <tr><td><b>Seasonal residual z</b></td><td>Deviation from the median of the same time on the past 7 days. Ignores normal daily cycles.</td></tr>
+          <tr><td><b>Isolation Forest</b></td><td>Random splits isolate outliers in few steps. Uses 6 window features (level, change, deviation from yesterday, volatility, slope).</td></tr>
+          <tr><td><b>Local Outlier Factor</b></td><td>Is this point in a sparser region than its 35 nearest "normal" neighbours?</td></tr>
+          <tr><td><b>Ensemble</b></td><td>Mean of each detector's percentile rank, so scales are comparable.</td></tr>
+        </table>
+        <div class="note" style="margin-top:12px">Thresholds: a detector alerts when its score beats the 99.9th percentile of its own probation scores. That's ~1 expected alert per 1,000 normal points, chosen with zero knowledge of the failures.</div>
+      </div>
+      <div class="card"><h3>Detector scores on <select id="det_series" style="width:auto;display:inline-block"></select></h3><p class="muted" style="margin:0">Each score is shown as a percentile of its own probation distribution, zoomed to the top 10%. Dotted red = alert threshold (99.9%).</p><div id="det_plot" class="plot" style="min-height:620px"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Evaluation" data-phase="5 · Evaluation">
+    <div class="card"><h3>Benchmark summary (all 5 series, 15 failure windows, threshold = probation 99.9th pct)</h3><div id="summary"></div></div>
+    <div class="grid g2">
+      <div class="card"><h3>Operating curve: failures caught vs false alarms</h3><div id="curve" class="plot" style="min-height:400px"></div><p class="muted">Each point is a different (label-free) threshold. Up-and-left is better. This is the real decision an on-call team makes.</p></div>
+      <div class="card"><h3>Windows caught per series</h3><div id="perseries" class="plot" style="min-height:400px"></div></div>
+    </div>
+    <div class="note warn">Honest read: no detector dominates. Isolation Forest catches the most failures, LOF has the cleanest alerts (best PR-AUC and alert precision), and the simple robust z-score is the quietest (0.3 false alarms/week). The ensemble averages away some of each detector's strengths. A stacked or vote-based ensemble would be the next experiment.</div>
+  </section>
+
+  <section data-tab="Monitor" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card">
+        <h3>Live monitor</h3>
+        <label class="f">Series</label><select id="m_series"></select>
+        <label class="f">Detector</label><select id="m_method"></select>
+        <label class="f">Sensitivity: alert above probation <span id="qv" class="num"></span> pct</label>
+        <input type="range" id="m_q" min="0" max="5" step="1" value="3">
+        <div id="m_stats" style="margin-top:12px"></div>
+        <h3 style="margin-top:22px">Inject an anomaly</h3>
+        <label class="f">Type</label><select id="i_kind"><option value="spike">Spike (2 points)</option><option value="level_shift">Level shift (1 day)</option><option value="drift">Slow drift (2 days)</option><option value="flatline">Stuck sensor (½ day)</option></select>
+        <label class="f">Where: <span id="posv" class="num"></span>% into series</label><input type="range" id="i_pos" min="25" max="95" value="70">
+        <label class="f">Size: <span id="magv" class="num"></span> σ</label><input type="range" id="i_mag" min="1" max="10" step="0.5" value="4">
+        <button class="btn" id="i_go" style="margin-top:12px">Inject &amp; re-score</button>
+        <button class="btn ghost" id="i_reset" style="margin-top:12px">Reset</button>
+      </div>
+      <div>
+        <div class="card"><h3 id="m_title"></h3><div id="m_plot" class="plot" style="min-height:460px"></div></div>
+        <div class="card" id="i_result" style="display:none"><h3>Which detectors caught the injected anomaly?</h3><div id="i_table"></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

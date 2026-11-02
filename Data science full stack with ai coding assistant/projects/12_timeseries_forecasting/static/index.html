@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electricity Demand Forecasting</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+</head>
+<body>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>How much power will Germany use over the next two weeks?</h2>
+        <p class="lead">Grid operators buy and schedule generation days ahead. Under-forecast and they pay spot-market premiums; over-forecast and they pay for idle reserve. They need a point forecast <i>and</i> a margin whose stated confidence is true.</p>
+        <div class="note">Every number on this page comes from a rolling-origin backtest: 51 weekly forecast origins across 2017, each forecasting 14 days ahead using only data available at that origin. 2017 was never used for training, tuning or calibration.</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <h3 style="margin-top:24px">CRISP-DM, as executed here</h3>
+    <div class="crisp">
+      <div><b>Business</b>1–14 day demand forecasts with honest margins.</div>
+      <div><b>Data</b>OPSD daily consumption 2006–2017 (4,383 days, GWh).</div>
+      <div><b>Preparation</b>Origin-relative lags, calendar + holiday features, horizon as a feature.</div>
+      <div><b>Modeling</b>Seasonal naive, Holt-Winters, direct gradient boosting.</div>
+      <div><b>Evaluation</b>Rolling-origin backtest, MAE/MAPE/MASE by horizon, holiday slice, coverage.</div>
+      <div><b>Deployment</b>Forecast API + interactive fan chart from any 2016–17 origin.</div>
+    </div>
+  </section>
+
+  <section data-tab="Data" data-phase="2 · Understanding">
+    <div class="card"><h3>12 years of daily consumption (GWh)</h3><div id="full" class="plot" style="min-height:300px"></div></div>
+    <div class="grid g2">
+      <div class="card"><h3>MSTL decomposition, 2012–2016</h3><div id="decomp" class="plot" style="min-height:460px"></div></div>
+      <div>
+        <div class="card"><h3>Autocorrelation (ACF / PACF, 40 lags)</h3><div id="acf" class="plot" style="min-height:260px"></div><p class="muted">Spikes at 7, 14, 21… : the weekly cycle dominates. This is why "same day last week" is a strong baseline.</p></div>
+        <div class="grid g2">
+          <div class="card"><h3>Day of week</h3><div id="dow" class="plot" style="min-height:200px"></div></div>
+          <div class="card"><h3>Holidays look like Sundays</h3><div id="hol" class="plot" style="min-height:200px"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-tab="Preparation" data-phase="3 · Data prep">
+    <div class="grid g2">
+      <div class="card"><h3>Rolling-origin evaluation</h3><div id="origins" class="plot" style="min-height:260px"></div>
+        <p class="muted">Train 2006–2015 → calibrate intervals on 2016 → refit through 2016 → backtest every Sunday of 2017. Each origin only "knows" its own past.</p></div>
+      <div class="card"><h3>Features for a forecast made at origin <i>t</i> for day <i>t+h</i></h3>
+        <table class="data">
+          <tr><td><span class="pill good">known at t</span></td><td><code>lag_0…lag_6</code> (last 7 days up to t), 7/28-day means, 7-day volatility, mean of the last 4 same-weekdays ≤ t, same weekday a year before target (only if ≤ t)</td></tr>
+          <tr><td><span class="pill good">known in advance</span></td><td>target's weekday, month, season (sin/cos day-of-year), public holiday, bridge day, Christmas week</td></tr>
+          <tr><td><span class="pill good">design</span></td><td><code>horizon</code> h = 1…14 as a feature: one global "direct" model, no recursive error compounding</td></tr>
+          <tr><td><span class="pill bad">never</span></td><td>any value after t: e.g. "yesterday" relative to a target 10 days out</td></tr>
+        </table>
+        <div id="rows" class="muted" style="margin-top:10px"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Evaluation" data-phase="4–5 · Model & Eval">
+    <div class="card"><h3>2017 backtest leaderboard (51 origins × 14 days = 714 forecasts per model)</h3><div id="board"></div></div>
+    <div class="grid g2">
+      <div class="card"><h3>Error grows with horizon, but not equally</h3><div id="byh" class="plot"></div></div>
+      <div class="card"><h3>Public holidays: where baselines break</h3><div id="holslice" class="plot"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Interval calibration on 2017</h3><div id="cov" class="plot"></div><p class="muted" id="covnote"></p></div>
+      <div class="card"><h3>Permutation importance (2017)</h3><div id="imp" class="plot"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Forecast" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card">
+        <h3>Forecast origin</h3>
+        <input type="date" id="orig" min="2016-01-01" max="2017-12-17" value="2017-12-17">
+        <div class="chips" style="margin-top:10px" id="presets"></div>
+        <label class="f">Models</label>
+        <div class="chips" id="mchips"></div>
+        <label class="f">Band</label><select id="band"><option value="80">80%</option><option value="95">95%</option><option value="50">50%</option></select>
+        <div id="fstats" style="margin-top:14px"></div>
+      </div>
+      <div class="card"><h3 id="ftitle"></h3><div id="fan" class="plot" style="min-height:480px"></div></div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

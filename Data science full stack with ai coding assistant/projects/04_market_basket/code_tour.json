@@ -1,0 +1,14 @@
+[
+  {"title": "Mining with FP-Growth", "file": "basket_pipeline.py", "anchor": "def mine(", "lines": 7,
+   "note": "FP-Growth builds a compressed prefix tree of the baskets and finds frequent itemsets without generating candidates, unlike Apriori. Both are run in the benchmark and must return identical itemsets. Rules with lift ≤ 1 are dropped: they say A makes B less likely, not more."},
+  {"title": "Out-of-sample validation + FDR", "file": "basket_pipeline.py", "anchor": "def validate(", "lines": 24,
+   "note": "Every rule is re-measured on held-out baskets. A one-sided Fisher exact test asks whether B is over-represented when A is present. With hundreds of rules tested at once, about 5% would pass p<0.05 by luck, so Benjamini-Hochberg controls the false discovery rate."},
+  {"title": "Rule-based recommender", "file": "basket_pipeline.py", "anchor": "class RuleRecommender", "lines": 24,
+   "note": "A rule fires when its whole antecedent is in the cart. Candidates are scored by confidence × log(1+lift), rewarding rules that are reliable and surprising. If too few rules fire it back-fills with best-sellers, so it always returns k items. That back-fill is why it ties the popularity baseline."},
+  {"title": "Co-occurrence recommender (champion)", "file": "basket_pipeline.py", "anchor": "class CooccurrenceRecommender", "lines": 28,
+   "note": "One matrix product (XᵀX) gives every pairwise count. Each candidate's score is the average conditional probability given each cart item, with optional shrinkage for rare items and a lift exponent (beta) against popularity bias. It uses weak signals that support thresholds throw away."},
+  {"title": "Evaluating a recommender honestly", "file": "basket_pipeline.py", "anchor": "def hit_rate(", "lines": 20,
+   "note": "Leave-one-out: hide one random item from each held-out basket and ask whether the recommender's top-k contains it. The 'exclude' option re-scores only baskets whose hidden item is outside the 10 best-sellers. That long-tail metric shows whether a model finds anything non-obvious."},
+  {"title": "Live re-mining endpoint", "file": "app.py", "anchor": "def mine(", "lines": 15,
+   "note": "The Mining tab's sliders call this endpoint, which re-runs FP-Growth or Apriori on the cached one-hot training matrix and returns the top rules by lift with the timing."}
+]

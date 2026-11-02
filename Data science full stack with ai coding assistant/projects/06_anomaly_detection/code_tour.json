@@ -1,0 +1,14 @@
+[
+  {"title": "Labels come from NAB windows", "file": "anomaly_pipeline.py", "anchor": "def load(", "lines": 9,
+   "note": "Each series' known-cause failure windows come from NAB's combined_windows.json. Points inside a window are labelled True. These labels are used only in evaluate(), never in fitting or thresholding."},
+  {"title": "Causal window features", "file": "anomaly_pipeline.py", "anchor": "def causal_features(", "lines": 14,
+   "note": "pandas .rolling() windows end at the current row and .shift() only looks back, so every feature at time t uses data ≤ t. A centered window would quietly use the future, which a live system can't do."},
+  {"title": "The five detectors", "file": "anomaly_pipeline.py", "anchor": "def score_series(", "lines": 45,
+   "note": "Statistical detectors compare x_t with statistics computed up to t-1 (note the shift(1)). Isolation Forest and LOF are fit on the probation period only, and LOF uses novelty=True so it can score unseen points. The ensemble converts each score to a percentile of its own probation distribution so detectors on different scales can be averaged."},
+  {"title": "Label-free thresholds", "file": "anomaly_pipeline.py", "anchor": "def alerts_from(", "lines": 12,
+   "note": "The alert threshold is a quantile of probation-period scores, so it is chosen without seeing a single failure. A refractory period (half a day) collapses bursts of consecutive alerts into one page, which is how on-call alerting works in practice."},
+  {"title": "Event-level evaluation", "file": "anomaly_pipeline.py", "anchor": "def evaluate(", "lines": 25,
+   "note": "Operators care about failures caught, not points. A window counts as detected if any alert lands inside it; detection position measures how early (0 = start). Alerts outside every window are false alarms, normalized per week. PR-AUC is computed after probation for a threshold-free view."},
+  {"title": "Injection sandbox", "file": "app.py", "anchor": "def inject(", "lines": 32,
+   "note": "Adds a synthetic anomaly (spike, level shift, drift, stuck sensor) sized in probation standard deviations, then re-runs every detector end-to-end. This is a quick way to learn each detector's blind spots: slow drift and flat-lines are much harder than spikes."}
+]

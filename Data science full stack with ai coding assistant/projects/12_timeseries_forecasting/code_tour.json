@@ -1,0 +1,14 @@
+[
+  {"title": "Calendar features known in advance", "file": "forecast_pipeline.py", "anchor": "def calendar(", "lines": 14,
+   "note": "A target day's weekday, season and German public holiday status are known ahead of time, so they're safe to use at any horizon. Bridge days (a working day next to a holiday) and Christmas week get their own flags because many people take them off."},
+  {"title": "Origin-relative rows: the anti-leakage core", "file": "forecast_pipeline.py", "anchor": "def build_rows(", "lines": 27,
+   "note": "For every (origin, horizon) pair, lags are read at integer positions ≤ the origin's position i. The same-weekday mean walks back from the origin, and the year-ago value is used only if it's already observed (j ≤ i). A 14-day-ahead row sees exactly what a forecaster would know at that moment."},
+  {"title": "Baselines worth beating", "file": "forecast_pipeline.py", "anchor": "def seasonal_naive(", "lines": 12,
+   "note": "Seasonal naive repeats last week. Holt-Winters (damped additive trend, additive weekly seasonality) is refit at every backtest origin on the last 3 years. MASE divides MAE by the seasonal-naive in-sample error, so MASE < 1 means beating 'same day last week'."},
+  {"title": "Conformal bands per horizon", "file": "forecast_pipeline.py", "anchor": "# 1) calibration", "lines": 9,
+   "note": "A model trained only to 2015 is backtested on 2016. Its absolute residuals, grouped by horizon, give band half-widths that widen with distance into the future. The final model (trained to 2016) reuses those widths, and 2017 checks whether the stated coverage holds."},
+  {"title": "Rolling-origin backtest", "file": "forecast_pipeline.py", "anchor": "# 3) rolling-origin backtest", "lines": 12,
+   "note": "51 Sunday origins in 2017, each forecasting 14 days. Holt-Winters is refit per origin; the GBM is fixed but reads fresh lags at every origin. Metrics are then cut by horizon and by holiday to find where each model breaks."},
+  {"title": "Serving a forecast", "file": "app.py", "anchor": "def forecast(", "lines": 15,
+   "note": "The API builds the same origin-relative rows with the same function used in training (no train/serve skew), runs all three models, and returns horizon-specific bands plus 8 weeks of history for context."}
+]

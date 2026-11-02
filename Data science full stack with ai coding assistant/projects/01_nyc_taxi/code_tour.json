@@ -1,0 +1,18 @@
+[
+  {"title": "Cleaning rules, fixed up front", "file": "taxi_pipeline.py", "anchor": "def clean(", "lines": 18,
+   "note": "Every rule is a named boolean mask, and the log counts how many rows each rule removed (only rows not already removed by an earlier rule). The rules were written before looking at model results, so they can't be tuned to flatter the test score."},
+  {"title": "Booking-time features only", "file": "taxi_pipeline.py", "anchor": "def featurize(", "lines": 16,
+   "note": "Each feature is a pure function of a single row known at booking: no group statistics, no target values. That makes this step impossible to leak through. Cyclic hour encoding (sin/cos) tells the model 23:00 is next to 00:00."},
+  {"title": "Temporal 4-way split", "file": "taxi_pipeline.py", "anchor": "def temporal_split(", "lines": 10,
+   "note": "Fit, tune, calibrate and test are consecutive date ranges. A random split would let the model learn from Friday's traffic to predict Thursday, which inflates scores. The test week is used exactly once."},
+  {"title": "The model pipeline", "file": "taxi_pipeline.py", "anchor": "def gbm(", "lines": 10,
+   "note": "Encoders live inside the sklearn Pipeline, so they are fitted only on the training rows each time. Zones go straight into HistGradientBoosting's native categorical splits, with unknown zones mapped to -1 instead of crashing."},
+  {"title": "AutoResearch hill climbing", "file": "taxi_pipeline.py", "anchor": "def autoresearch(", "lines": 28,
+   "note": "Greedy local search: mutate one or two hyperparameters of the current best config, keep the change only if tune-week RMSLE improves. Every trial is logged and plotted in the Modeling tab. The search never sees the calibration or test data."},
+  {"title": "Split-conformal intervals", "file": "taxi_pipeline.py", "anchor": "def conformal_q(", "lines": 7,
+   "note": "Absolute log-residuals on the calibration days give a quantile q. Under exchangeability, prediction ± q covers the truth with probability ≥ 1-α, with no distributional assumptions. The Evaluation tab checks this promise on the test week."},
+  {"title": "The leakage trap", "file": "taxi_pipeline.py", "anchor": "# --- the leakage trap", "lines": 7,
+   "note": "The same model is retrained with fare, tip, tolls and total. Its test score jumps dramatically, which is exactly what leakage looks like. Kept in the report as a permanent regression check."},
+  {"title": "Serving: /predict", "file": "app.py", "anchor": "def predict(", "lines": 26,
+   "note": "The API reuses pipeline.featurize, so training and serving compute features with the same code (no train/serve skew). If the user leaves distance blank it falls back to the route's historical median, then the city median, and says which it used."}
+]

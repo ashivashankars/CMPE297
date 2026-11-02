@@ -1,0 +1,14 @@
+[
+  {"title": "Three algorithms behind one interface", "file": "segments_pipeline.py", "anchor": "def fit_labels(", "lines": 9,
+   "note": "k-means (spherical clusters), Gaussian mixture (elliptical, soft assignments) and Ward hierarchical clustering share one function, so the tournament can compare them without special cases."},
+  {"title": "Bootstrap stability", "file": "segments_pipeline.py", "anchor": "def stability(", "lines": 10,
+   "note": "Resample customers with replacement, refit, and compare the new labels with the full-data labels on the shared customers using the Adjusted Rand Index (label-permutation invariant). A real segment structure survives resampling; noise does not."},
+  {"title": "The tournament", "file": "segments_pipeline.py", "anchor": "# ---------------- tournament", "lines": 31,
+   "note": "Every feature set × algorithm × k is scored on silhouette and stability. DBSCAN joins with an eps sweep (it chooses k itself). Configs with a cluster under 8 customers are dropped as not actionable, then ranked by an equal blend of the two percentile ranks."},
+  {"title": "Holdout generalization check", "file": "segments_pipeline.py", "anchor": "# ---------------- generalization", "lines": 12,
+   "note": "Clustering has no test labels, but we can still hold out customers. The scaler and k-means are fitted on 80% only, then the unseen 20% are assigned. Similar silhouette plus a high ARI against a full-data fit means the segments generalize."},
+  {"title": "Transparent persona naming", "file": "segments_pipeline.py", "anchor": "def persona(", "lines": 15,
+   "note": "Personas come from simple, auditable rules on the centroid (income vs population mean, spending score bands, age) rather than hand-labelling after the fact. Each persona maps to one concrete marketing action."},
+  {"title": "Serving: assign a customer", "file": "app.py", "anchor": "def assign(", "lines": 24,
+   "note": "The saved scaler + k-means give the hard assignment; the Gaussian mixture gives soft membership probabilities, mapped onto k-means segment ids. A customer is flagged 'borderline' when the two nearest centroids are within 0.5 standard units."}
+]

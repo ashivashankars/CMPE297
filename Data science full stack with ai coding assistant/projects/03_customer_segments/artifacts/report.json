@@ -1,0 +1,3412 @@
+{
+ "n_customers": 200,
+ "chosen": {
+  "features": "income + spending",
+  "algo": "k-means",
+  "k": 5,
+  "silhouette": 0.5546571631111091,
+  "stability": 0.978232067777966
+ },
+ "tournament": [
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 2,
+   "silhouette": 0.3213,
+   "stability": 0.2091,
+   "min_cluster": 76,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 3,
+   "silhouette": 0.4666,
+   "stability": 1.0,
+   "min_cluster": 38,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 4,
+   "silhouette": 0.4939,
+   "stability": 0.833,
+   "min_cluster": 23,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 5,
+   "silhouette": 0.5547,
+   "stability": 0.9782,
+   "min_cluster": 22,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 6,
+   "silhouette": 0.5399,
+   "stability": 0.9237,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 7,
+   "silhouette": 0.5281,
+   "stability": 0.8792,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 8,
+   "silhouette": 0.4567,
+   "stability": 0.8683,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 9,
+   "silhouette": 0.4571,
+   "stability": 0.8718,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "k-means",
+   "k": 10,
+   "silhouette": 0.4362,
+   "stability": 0.7496,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 2,
+   "silhouette": 0.3872,
+   "stability": 0.2058,
+   "min_cluster": 38,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 3,
+   "silhouette": 0.4302,
+   "stability": 0.4981,
+   "min_cluster": 31,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 4,
+   "silhouette": 0.4509,
+   "stability": 0.8521,
+   "min_cluster": 25,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 5,
+   "silhouette": 0.5537,
+   "stability": 0.9381,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 6,
+   "silhouette": 0.5358,
+   "stability": 0.8693,
+   "min_cluster": 11,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 7,
+   "silhouette": 0.3852,
+   "stability": 0.6695,
+   "min_cluster": 12,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 8,
+   "silhouette": 0.4651,
+   "stability": 0.6593,
+   "min_cluster": 8,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 9,
+   "silhouette": 0.4233,
+   "stability": 0.7281,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "GMM",
+   "k": 10,
+   "silhouette": 0.3402,
+   "stability": 0.5687,
+   "min_cluster": 4,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 2,
+   "silhouette": 0.3842,
+   "stability": 0.619,
+   "min_cluster": 39,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 3,
+   "silhouette": 0.461,
+   "stability": 0.9731,
+   "min_cluster": 32,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 4,
+   "silhouette": 0.4926,
+   "stability": 0.8196,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 5,
+   "silhouette": 0.5538,
+   "stability": 0.9429,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 6,
+   "silhouette": 0.5387,
+   "stability": 0.9025,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 7,
+   "silhouette": 0.5198,
+   "stability": 0.7986,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 8,
+   "silhouette": 0.4309,
+   "stability": 0.7808,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 9,
+   "silhouette": 0.4377,
+   "stability": 0.7678,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "Ward",
+   "k": 10,
+   "silhouette": 0.4339,
+   "stability": 0.7561,
+   "min_cluster": 9,
+   "noise_frac": null
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.25",
+   "k": 6,
+   "silhouette": 0.5317,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.25
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.30",
+   "k": 7,
+   "silhouette": 0.5243,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.175
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.35",
+   "k": 6,
+   "silhouette": 0.5577,
+   "stability": null,
+   "min_cluster": 7,
+   "noise_frac": 0.115
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.40",
+   "k": 4,
+   "silhouette": 0.4781,
+   "stability": null,
+   "min_cluster": 11,
+   "noise_frac": 0.075
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.45",
+   "k": 3,
+   "silhouette": 0.3536,
+   "stability": null,
+   "min_cluster": 11,
+   "noise_frac": 0.055
+  },
+  {
+   "features": "income + spending",
+   "algo": "DBSCAN eps=0.50",
+   "k": 2,
+   "silhouette": 0.3876,
+   "stability": null,
+   "min_cluster": 35,
+   "noise_frac": 0.04
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 2,
+   "silhouette": 0.3355,
+   "stability": 0.9542,
+   "min_cluster": 97,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 3,
+   "silhouette": 0.3578,
+   "stability": 0.6796,
+   "min_cluster": 41,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 4,
+   "silhouette": 0.404,
+   "stability": 0.9857,
+   "min_cluster": 38,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 5,
+   "silhouette": 0.4166,
+   "stability": 0.878,
+   "min_cluster": 20,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 6,
+   "silhouette": 0.4274,
+   "stability": 0.9585,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 7,
+   "silhouette": 0.4172,
+   "stability": 0.9275,
+   "min_cluster": 20,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 8,
+   "silhouette": 0.4087,
+   "stability": 0.852,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 9,
+   "silhouette": 0.4201,
+   "stability": 0.8445,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "k-means",
+   "k": 10,
+   "silhouette": 0.3973,
+   "stability": 0.8593,
+   "min_cluster": 11,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 2,
+   "silhouette": 0.3288,
+   "stability": 0.9376,
+   "min_cluster": 90,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 3,
+   "silhouette": 0.2049,
+   "stability": 0.427,
+   "min_cluster": 60,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 4,
+   "silhouette": 0.2604,
+   "stability": 0.581,
+   "min_cluster": 26,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 5,
+   "silhouette": 0.4064,
+   "stability": 0.9074,
+   "min_cluster": 23,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 6,
+   "silhouette": 0.3767,
+   "stability": 0.7263,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 7,
+   "silhouette": 0.3897,
+   "stability": 0.7069,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 8,
+   "silhouette": 0.3486,
+   "stability": 0.6693,
+   "min_cluster": 14,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 9,
+   "silhouette": 0.3584,
+   "stability": 0.7444,
+   "min_cluster": 8,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "GMM",
+   "k": 10,
+   "silhouette": 0.3738,
+   "stability": 0.7378,
+   "min_cluster": 2,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 2,
+   "silhouette": 0.318,
+   "stability": 0.7185,
+   "min_cluster": 95,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 3,
+   "silhouette": 0.3215,
+   "stability": 0.5372,
+   "min_cluster": 39,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 4,
+   "silhouette": 0.3615,
+   "stability": 0.7641,
+   "min_cluster": 28,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 5,
+   "silhouette": 0.39,
+   "stability": 0.7352,
+   "min_cluster": 22,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 6,
+   "silhouette": 0.4201,
+   "stability": 0.7802,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 7,
+   "silhouette": 0.3983,
+   "stability": 0.7374,
+   "min_cluster": 7,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 8,
+   "silhouette": 0.3665,
+   "stability": 0.7525,
+   "min_cluster": 7,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 9,
+   "silhouette": 0.3754,
+   "stability": 0.7099,
+   "min_cluster": 7,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "Ward",
+   "k": 10,
+   "silhouette": 0.3809,
+   "stability": 0.7043,
+   "min_cluster": 7,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.25",
+   "k": 5,
+   "silhouette": 0.69,
+   "stability": null,
+   "min_cluster": 6,
+   "noise_frac": 0.825
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.30",
+   "k": 10,
+   "silhouette": 0.5144,
+   "stability": null,
+   "min_cluster": 4,
+   "noise_frac": 0.67
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.35",
+   "k": 8,
+   "silhouette": 0.49,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.55
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.40",
+   "k": 6,
+   "silhouette": 0.519,
+   "stability": null,
+   "min_cluster": 7,
+   "noise_frac": 0.49
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.45",
+   "k": 5,
+   "silhouette": 0.5423,
+   "stability": null,
+   "min_cluster": 6,
+   "noise_frac": 0.375
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.50",
+   "k": 6,
+   "silhouette": 0.4817,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.3
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.55",
+   "k": 4,
+   "silhouette": 0.2336,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.195
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.60",
+   "k": 2,
+   "silhouette": 0.273,
+   "stability": null,
+   "min_cluster": 35,
+   "noise_frac": 0.14
+  },
+  {
+   "features": "age + income + spending",
+   "algo": "DBSCAN eps=0.65",
+   "k": 2,
+   "silhouette": 0.2646,
+   "stability": null,
+   "min_cluster": 36,
+   "noise_frac": 0.105
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 2,
+   "silhouette": 0.2518,
+   "stability": 0.7643,
+   "min_cluster": 97,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 3,
+   "silhouette": 0.2595,
+   "stability": 0.7143,
+   "min_cluster": 49,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 4,
+   "silhouette": 0.3012,
+   "stability": 0.7756,
+   "min_cluster": 40,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 5,
+   "silhouette": 0.3144,
+   "stability": 0.7209,
+   "min_cluster": 28,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 6,
+   "silhouette": 0.3347,
+   "stability": 0.8471,
+   "min_cluster": 23,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 7,
+   "silhouette": 0.3574,
+   "stability": 0.8148,
+   "min_cluster": 18,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 8,
+   "silhouette": 0.388,
+   "stability": 0.8898,
+   "min_cluster": 18,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 9,
+   "silhouette": 0.4025,
+   "stability": 0.8735,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "k-means",
+   "k": 10,
+   "silhouette": 0.4208,
+   "stability": 0.9246,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 2,
+   "silhouette": 0.2776,
+   "stability": 0.7334,
+   "min_cluster": 88,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 3,
+   "silhouette": 0.2083,
+   "stability": 0.7062,
+   "min_cluster": 28,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 4,
+   "silhouette": 0.2645,
+   "stability": 0.5594,
+   "min_cluster": 36,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 5,
+   "silhouette": 0.2952,
+   "stability": 0.6895,
+   "min_cluster": 21,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 6,
+   "silhouette": 0.3075,
+   "stability": 0.6343,
+   "min_cluster": 17,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 7,
+   "silhouette": 0.3351,
+   "stability": 0.6726,
+   "min_cluster": 14,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 8,
+   "silhouette": 0.323,
+   "stability": 0.7198,
+   "min_cluster": 2,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 9,
+   "silhouette": 0.2782,
+   "stability": 0.5625,
+   "min_cluster": 10,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "GMM",
+   "k": 10,
+   "silhouette": 0.3338,
+   "stability": 0.631,
+   "min_cluster": 2,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 2,
+   "silhouette": 0.2418,
+   "stability": 0.7151,
+   "min_cluster": 100,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 3,
+   "silhouette": 0.2483,
+   "stability": 0.551,
+   "min_cluster": 33,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 4,
+   "silhouette": 0.2632,
+   "stability": 0.5182,
+   "min_cluster": 33,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 5,
+   "silhouette": 0.287,
+   "stability": 0.6317,
+   "min_cluster": 29,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 6,
+   "silhouette": 0.3102,
+   "stability": 0.7525,
+   "min_cluster": 23,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 7,
+   "silhouette": 0.3456,
+   "stability": 0.7844,
+   "min_cluster": 18,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 8,
+   "silhouette": 0.3789,
+   "stability": 0.8221,
+   "min_cluster": 15,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 9,
+   "silhouette": 0.3923,
+   "stability": 0.815,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "Ward",
+   "k": 10,
+   "silhouette": 0.4176,
+   "stability": 0.8745,
+   "min_cluster": 13,
+   "noise_frac": null
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.35",
+   "k": 2,
+   "silhouette": 0.8016,
+   "stability": null,
+   "min_cluster": 6,
+   "noise_frac": 0.92
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.40",
+   "k": 4,
+   "silhouette": 0.7116,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.825
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.45",
+   "k": 6,
+   "silhouette": 0.6584,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.685
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.50",
+   "k": 9,
+   "silhouette": 0.5395,
+   "stability": null,
+   "min_cluster": 4,
+   "noise_frac": 0.525
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.55",
+   "k": 8,
+   "silhouette": 0.5732,
+   "stability": null,
+   "min_cluster": 6,
+   "noise_frac": 0.455
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.60",
+   "k": 9,
+   "silhouette": 0.3407,
+   "stability": null,
+   "min_cluster": 4,
+   "noise_frac": 0.31
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.65",
+   "k": 9,
+   "silhouette": 0.3497,
+   "stability": null,
+   "min_cluster": 4,
+   "noise_frac": 0.26
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.70",
+   "k": 7,
+   "silhouette": 0.2766,
+   "stability": null,
+   "min_cluster": 5,
+   "noise_frac": 0.185
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.75",
+   "k": 7,
+   "silhouette": 0.2736,
+   "stability": null,
+   "min_cluster": 8,
+   "noise_frac": 0.13
+  },
+  {
+   "features": "age + income + spending + gender",
+   "algo": "DBSCAN eps=0.80",
+   "k": 5,
+   "silhouette": 0.2273,
+   "stability": null,
+   "min_cluster": 9,
+   "noise_frac": 0.095
+  }
+ ],
+ "k_selection": [
+  {
+   "k": 2,
+   "inertia": 269.691012192764,
+   "silhouette": 0.3212707813918878,
+   "calinski_harabasz": 95.66940839463767,
+   "davies_bouldin": 1.266953745774289,
+   "gmm_bic": 1148.47253135969,
+   "stability": 0.25201889221190343
+  },
+  {
+   "k": 3,
+   "inertia": 157.7040081503594,
+   "silhouette": 0.46658474419000145,
+   "calinski_harabasz": 151.3351212635948,
+   "davies_bouldin": 0.716482156943549,
+   "gmm_bic": 1151.718274341355,
+   "stability": 1.0
+  },
+  {
+   "k": 4,
+   "inertia": 108.92131661364358,
+   "silhouette": 0.4939069237513199,
+   "calinski_harabasz": 174.59521459297633,
+   "davies_bouldin": 0.7095564965521565,
+   "gmm_bic": 1079.4939915082437,
+   "stability": 0.8232512407144267
+  },
+  {
+   "k": 5,
+   "inertia": 65.56840815571681,
+   "silhouette": 0.5546571631111091,
+   "calinski_harabasz": 248.64932001536357,
+   "davies_bouldin": 0.5722356162263352,
+   "gmm_bic": 1058.6522524191894,
+   "stability": 0.9819883863844516
+  },
+  {
+   "k": 6,
+   "inertia": 55.057348270386015,
+   "silhouette": 0.5398800926790663,
+   "calinski_harabasz": 243.08789485068303,
+   "davies_bouldin": 0.6545674732339849,
+   "gmm_bic": 1071.5668274077339,
+   "stability": 0.9247057262061755
+  },
+  {
+   "k": 7,
+   "inertia": 44.86475569922557,
+   "silhouette": 0.5281492781108291,
+   "calinski_harabasz": 254.621179742776,
+   "davies_bouldin": 0.7147841166477835,
+   "gmm_bic": 1085.5903615581929,
+   "stability": 0.8519186724182417
+  },
+  {
+   "k": 8,
+   "inertia": 37.14811697229113,
+   "silhouette": 0.4567208019716266,
+   "calinski_harabasz": 267.9142202292719,
+   "davies_bouldin": 0.7579113679371183,
+   "gmm_bic": 1082.4803883625245,
+   "stability": 0.8759142617165013
+  },
+  {
+   "k": 9,
+   "inertia": 32.39226763033117,
+   "silhouette": 0.4570853966942764,
+   "calinski_harabasz": 270.94844703331796,
+   "davies_bouldin": 0.7632260748108199,
+   "gmm_bic": 1106.8058256120178,
+   "stability": 0.8705248849884988
+  },
+  {
+   "k": 10,
+   "inertia": 29.685787841036316,
+   "silhouette": 0.43621223292728883,
+   "calinski_harabasz": 263.3497389651405,
+   "davies_bouldin": 0.7645240605902103,
+   "gmm_bic": 1113.752900778869,
+   "stability": 0.7406763442413717
+  }
+ ],
+ "holdout": {
+  "train_silhouette": 0.5518224979035311,
+  "holdout_silhouette": 0.5668208621148623,
+  "holdout_ari_vs_full_fit": 1.0,
+  "n_train": 160,
+  "n_holdout": 40
+ },
+ "profiles": [
+  {
+   "cluster": 0,
+   "persona": "Low-income young big spenders",
+   "action": "Loyalty points and buy-now-pay-later. Watch credit risk and over-discounting.",
+   "size": 22,
+   "share": 0.11,
+   "age": 25.272727272727273,
+   "income": 25.727272727272727,
+   "score": 79.36363636363636,
+   "male_share": 0.4090909090909091,
+   "silhouette": 0.5982119461245773
+  },
+  {
+   "cluster": 1,
+   "persona": "Low-income older cautious savers",
+   "action": "Low priority for spend. Use bundles and seasonal sales only.",
+   "size": 23,
+   "share": 0.115,
+   "age": 45.21739130434783,
+   "income": 26.304347826086957,
+   "score": 20.91304347826087,
+   "male_share": 0.391304347826087,
+   "silhouette": 0.5105060797073505
+  },
+  {
+   "cluster": 2,
+   "persona": "Mid-income steady shoppers",
+   "action": "Core mass market: broad campaigns, cross-sell, and newsletter engagement.",
+   "size": 81,
+   "share": 0.405,
+   "age": 42.71604938271605,
+   "income": 55.2962962962963,
+   "score": 49.51851851851852,
+   "male_share": 0.4074074074074074,
+   "silhouette": 0.5978670176450109
+  },
+  {
+   "cluster": 3,
+   "persona": "High-income big spenders",
+   "action": "VIP tier, early access, premium brands. Protect this group from churn.",
+   "size": 39,
+   "share": 0.195,
+   "age": 32.69230769230769,
+   "income": 86.53846153846153,
+   "score": 82.12820512820512,
+   "male_share": 0.46153846153846156,
+   "silhouette": 0.5107528927571015
+  },
+  {
+   "cluster": 4,
+   "persona": "High-income cautious savers",
+   "action": "Biggest upside. Test quality/value messaging and personal styling offers.",
+   "size": 35,
+   "share": 0.175,
+   "age": 41.114285714285714,
+   "income": 88.2,
+   "score": 17.114285714285714,
+   "male_share": 0.5428571428571428,
+   "silhouette": 0.5052153922125491
+  }
+ ],
+ "algo_agreement": [
+  {
+   "a": "k-means",
+   "b": "GMM",
+   "ari": 0.9564557277050136
+  },
+  {
+   "a": "k-means",
+   "b": "Ward",
+   "ari": 0.9419606318143182
+  },
+  {
+   "a": "GMM",
+   "b": "Ward",
+   "ari": 0.9849824491645105
+  }
+ ],
+ "points": [
+  {
+   "id": 1,
+   "gender": "Male",
+   "age": 19,
+   "income": 15,
+   "score": 39,
+   "cluster": 1,
+   "silhouette": 0.411,
+   "pc1": -0.616,
+   "pc2": -1.763
+  },
+  {
+   "id": 2,
+   "gender": "Male",
+   "age": 21,
+   "income": 15,
+   "score": 81,
+   "cluster": 0,
+   "silhouette": 0.696,
+   "pc1": -1.666,
+   "pc2": -1.821
+  },
+  {
+   "id": 3,
+   "gender": "Female",
+   "age": 20,
+   "income": 16,
+   "score": 6,
+   "cluster": 1,
+   "silhouette": 0.639,
+   "pc1": 0.338,
+   "pc2": -1.675
+  },
+  {
+   "id": 4,
+   "gender": "Female",
+   "age": 23,
+   "income": 16,
+   "score": 77,
+   "cluster": 0,
+   "silhouette": 0.696,
+   "pc1": -1.457,
+   "pc2": -1.772
+  },
+  {
+   "id": 5,
+   "gender": "Female",
+   "age": 31,
+   "income": 17,
+   "score": 40,
+   "cluster": 1,
+   "silhouette": 0.386,
+   "pc1": -0.038,
+   "pc2": -1.663
+  },
+  {
+   "id": 6,
+   "gender": "Female",
+   "age": 22,
+   "income": 17,
+   "score": 76,
+   "cluster": 0,
+   "silhouette": 0.697,
+   "pc1": -1.482,
+   "pc2": -1.735
+  },
+  {
+   "id": 7,
+   "gender": "Female",
+   "age": 35,
+   "income": 18,
+   "score": 6,
+   "cluster": 1,
+   "silhouette": 0.648,
+   "pc1": 1.095,
+   "pc2": -1.566
+  },
+  {
+   "id": 8,
+   "gender": "Female",
+   "age": 23,
+   "income": 18,
+   "score": 94,
+   "cluster": 0,
+   "silhouette": 0.659,
+   "pc1": -1.926,
+   "pc2": -1.721
+  },
+  {
+   "id": 9,
+   "gender": "Male",
+   "age": 64,
+   "income": 19,
+   "score": 3,
+   "cluster": 1,
+   "silhouette": 0.629,
+   "pc1": 2.645,
+   "pc2": -1.461
+  },
+  {
+   "id": 10,
+   "gender": "Female",
+   "age": 30,
+   "income": 19,
+   "score": 72,
+   "cluster": 0,
+   "silhouette": 0.662,
+   "pc1": -0.97,
+   "pc2": -1.636
+  },
+  {
+   "id": 11,
+   "gender": "Male",
+   "age": 67,
+   "income": 19,
+   "score": 14,
+   "cluster": 1,
+   "silhouette": 0.677,
+   "pc1": 2.496,
+   "pc2": -1.47
+  },
+  {
+   "id": 12,
+   "gender": "Female",
+   "age": 35,
+   "income": 19,
+   "score": 99,
+   "cluster": 0,
+   "silhouette": 0.623,
+   "pc1": -1.457,
+   "pc2": -1.664
+  },
+  {
+   "id": 13,
+   "gender": "Female",
+   "age": 58,
+   "income": 20,
+   "score": 15,
+   "cluster": 1,
+   "silhouette": 0.679,
+   "pc1": 2.01,
+   "pc2": -1.453
+  },
+  {
+   "id": 14,
+   "gender": "Female",
+   "age": 24,
+   "income": 20,
+   "score": 77,
+   "cluster": 0,
+   "silhouette": 0.718,
+   "pc1": -1.413,
+   "pc2": -1.618
+  },
+  {
+   "id": 15,
+   "gender": "Male",
+   "age": 37,
+   "income": 20,
+   "score": 13,
+   "cluster": 1,
+   "silhouette": 0.68,
+   "pc1": 1.0,
+   "pc2": -1.496
+  },
+  {
+   "id": 16,
+   "gender": "Male",
+   "age": 22,
+   "income": 20,
+   "score": 79,
+   "cluster": 0,
+   "silhouette": 0.725,
+   "pc1": -1.569,
+   "pc2": -1.625
+  },
+  {
+   "id": 17,
+   "gender": "Female",
+   "age": 35,
+   "income": 21,
+   "score": 35,
+   "cluster": 1,
+   "silhouette": 0.481,
+   "pc1": 0.294,
+   "pc2": -1.494
+  },
+  {
+   "id": 18,
+   "gender": "Male",
+   "age": 20,
+   "income": 21,
+   "score": 66,
+   "cluster": 0,
+   "silhouette": 0.541,
+   "pc1": -1.316,
+   "pc2": -1.572
+  },
+  {
+   "id": 19,
+   "gender": "Male",
+   "age": 52,
+   "income": 23,
+   "score": 29,
+   "cluster": 1,
+   "silhouette": 0.578,
+   "pc1": 1.317,
+   "pc2": -1.372
+  },
+  {
+   "id": 20,
+   "gender": "Female",
+   "age": 35,
+   "income": 23,
+   "score": 98,
+   "cluster": 0,
+   "silhouette": 0.631,
+   "pc1": -1.437,
+   "pc2": -1.51
+  },
+  {
+   "id": 21,
+   "gender": "Male",
+   "age": 35,
+   "income": 24,
+   "score": 35,
+   "cluster": 1,
+   "silhouette": 0.461,
+   "pc1": 0.289,
+   "pc2": -1.38
+  },
+  {
+   "id": 22,
+   "gender": "Male",
+   "age": 25,
+   "income": 24,
+   "score": 73,
+   "cluster": 0,
+   "silhouette": 0.676,
+   "pc1": -1.26,
+   "pc2": -1.457
+  },
+  {
+   "id": 23,
+   "gender": "Female",
+   "age": 46,
+   "income": 25,
+   "score": 5,
+   "cluster": 1,
+   "silhouette": 0.641,
+   "pc1": 1.667,
+   "pc2": -1.274
+  },
+  {
+   "id": 24,
+   "gender": "Male",
+   "age": 31,
+   "income": 25,
+   "score": 73,
+   "cluster": 0,
+   "silhouette": 0.67,
+   "pc1": -0.958,
+   "pc2": -1.406
+  },
+  {
+   "id": 25,
+   "gender": "Female",
+   "age": 54,
+   "income": 28,
+   "score": 14,
+   "cluster": 1,
+   "silhouette": 0.661,
+   "pc1": 1.82,
+   "pc2": -1.155
+  },
+  {
+   "id": 26,
+   "gender": "Male",
+   "age": 29,
+   "income": 28,
+   "score": 82,
+   "cluster": 0,
+   "silhouette": 0.705,
+   "pc1": -1.311,
+   "pc2": -1.309
+  },
+  {
+   "id": 27,
+   "gender": "Female",
+   "age": 45,
+   "income": 28,
+   "score": 32,
+   "cluster": 1,
+   "silhouette": 0.486,
+   "pc1": 0.87,
+   "pc2": -1.201
+  },
+  {
+   "id": 28,
+   "gender": "Male",
+   "age": 35,
+   "income": 28,
+   "score": 61,
+   "cluster": 0,
+   "silhouette": 0.293,
+   "pc1": -0.432,
+   "pc2": -1.266
+  },
+  {
+   "id": 29,
+   "gender": "Female",
+   "age": 40,
+   "income": 29,
+   "score": 31,
+   "cluster": 1,
+   "silhouette": 0.493,
+   "pc1": 0.643,
+   "pc2": -1.173
+  },
+  {
+   "id": 30,
+   "gender": "Female",
+   "age": 23,
+   "income": 29,
+   "score": 87,
+   "cluster": 0,
+   "silhouette": 0.685,
+   "pc1": -1.755,
+   "pc2": -1.291
+  },
+  {
+   "id": 31,
+   "gender": "Male",
+   "age": 60,
+   "income": 30,
+   "score": 4,
+   "cluster": 1,
+   "silhouette": 0.606,
+   "pc1": 2.395,
+   "pc2": -1.052
+  },
+  {
+   "id": 32,
+   "gender": "Female",
+   "age": 21,
+   "income": 30,
+   "score": 73,
+   "cluster": 0,
+   "silhouette": 0.612,
+   "pc1": -1.474,
+   "pc2": -1.237
+  },
+  {
+   "id": 33,
+   "gender": "Male",
+   "age": 53,
+   "income": 33,
+   "score": 4,
+   "cluster": 1,
+   "silhouette": 0.577,
+   "pc1": 2.034,
+   "pc2": -0.952
+  },
+  {
+   "id": 34,
+   "gender": "Male",
+   "age": 18,
+   "income": 33,
+   "score": 92,
+   "cluster": 0,
+   "silhouette": 0.618,
+   "pc1": -2.152,
+   "pc2": -1.157
+  },
+  {
+   "id": 35,
+   "gender": "Female",
+   "age": 49,
+   "income": 33,
+   "score": 14,
+   "cluster": 1,
+   "silhouette": 0.61,
+   "pc1": 1.558,
+   "pc2": -0.976
+  },
+  {
+   "id": 36,
+   "gender": "Female",
+   "age": 21,
+   "income": 33,
+   "score": 81,
+   "cluster": 0,
+   "silhouette": 0.64,
+   "pc1": -1.699,
+   "pc2": -1.134
+  },
+  {
+   "id": 37,
+   "gender": "Female",
+   "age": 42,
+   "income": 34,
+   "score": 17,
+   "cluster": 1,
+   "silhouette": 0.586,
+   "pc1": 1.119,
+   "pc2": -0.957
+  },
+  {
+   "id": 38,
+   "gender": "Female",
+   "age": 30,
+   "income": 34,
+   "score": 73,
+   "cluster": 0,
+   "silhouette": 0.529,
+   "pc1": -1.025,
+   "pc2": -1.065
+  },
+  {
+   "id": 39,
+   "gender": "Female",
+   "age": 36,
+   "income": 37,
+   "score": 26,
+   "cluster": 1,
+   "silhouette": 0.422,
+   "pc1": 0.562,
+   "pc2": -0.869
+  },
+  {
+   "id": 40,
+   "gender": "Female",
+   "age": 20,
+   "income": 37,
+   "score": 75,
+   "cluster": 0,
+   "silhouette": 0.486,
+   "pc1": -1.592,
+   "pc2": -0.975
+  },
+  {
+   "id": 41,
+   "gender": "Female",
+   "age": 65,
+   "income": 38,
+   "score": 35,
+   "cluster": 1,
+   "silhouette": 0.091,
+   "pc1": 1.784,
+   "pc2": -0.781
+  },
+  {
+   "id": 42,
+   "gender": "Male",
+   "age": 24,
+   "income": 38,
+   "score": 92,
+   "cluster": 0,
+   "silhouette": 0.548,
+   "pc1": -1.857,
+   "pc2": -0.954
+  },
+  {
+   "id": 43,
+   "gender": "Male",
+   "age": 48,
+   "income": 39,
+   "score": 36,
+   "cluster": 1,
+   "silhouette": -0.012,
+   "pc1": 0.893,
+   "pc2": -0.781
+  },
+  {
+   "id": 44,
+   "gender": "Female",
+   "age": 31,
+   "income": 39,
+   "score": 61,
+   "cluster": 2,
+   "silhouette": 0.121,
+   "pc1": -0.655,
+   "pc2": -0.855
+  },
+  {
+   "id": 45,
+   "gender": "Female",
+   "age": 49,
+   "income": 39,
+   "score": 28,
+   "cluster": 1,
+   "silhouette": 0.313,
+   "pc1": 1.163,
+   "pc2": -0.767
+  },
+  {
+   "id": 46,
+   "gender": "Female",
+   "age": 24,
+   "income": 39,
+   "score": 65,
+   "cluster": 0,
+   "silhouette": 0.05,
+   "pc1": -1.119,
+   "pc2": -0.876
+  },
+  {
+   "id": 47,
+   "gender": "Female",
+   "age": 50,
+   "income": 40,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.394,
+   "pc1": 0.471,
+   "pc2": -0.767
+  },
+  {
+   "id": 48,
+   "gender": "Female",
+   "age": 27,
+   "income": 40,
+   "score": 47,
+   "cluster": 2,
+   "silhouette": 0.439,
+   "pc1": -0.475,
+   "pc2": -0.805
+  },
+  {
+   "id": 49,
+   "gender": "Female",
+   "age": 29,
+   "income": 40,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.297,
+   "pc1": -0.237,
+   "pc2": -0.793
+  },
+  {
+   "id": 50,
+   "gender": "Female",
+   "age": 31,
+   "income": 40,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.297,
+   "pc1": -0.135,
+   "pc2": -0.789
+  },
+  {
+   "id": 51,
+   "gender": "Female",
+   "age": 49,
+   "income": 42,
+   "score": 52,
+   "cluster": 2,
+   "silhouette": 0.525,
+   "pc1": 0.499,
+   "pc2": -0.688
+  },
+  {
+   "id": 52,
+   "gender": "Male",
+   "age": 33,
+   "income": 42,
+   "score": 60,
+   "cluster": 2,
+   "silhouette": 0.304,
+   "pc1": -0.531,
+   "pc2": -0.735
+  },
+  {
+   "id": 53,
+   "gender": "Female",
+   "age": 31,
+   "income": 43,
+   "score": 54,
+   "cluster": 2,
+   "silhouette": 0.519,
+   "pc1": -0.47,
+   "pc2": -0.692
+  },
+  {
+   "id": 54,
+   "gender": "Male",
+   "age": 59,
+   "income": 43,
+   "score": 60,
+   "cluster": 2,
+   "silhouette": 0.343,
+   "pc1": 0.785,
+   "pc2": -0.64
+  },
+  {
+   "id": 55,
+   "gender": "Female",
+   "age": 50,
+   "income": 43,
+   "score": 45,
+   "cluster": 2,
+   "silhouette": 0.493,
+   "pc1": 0.74,
+   "pc2": -0.638
+  },
+  {
+   "id": 56,
+   "gender": "Male",
+   "age": 47,
+   "income": 43,
+   "score": 41,
+   "cluster": 2,
+   "silhouette": 0.376,
+   "pc1": 0.698,
+   "pc2": -0.638
+  },
+  {
+   "id": 57,
+   "gender": "Female",
+   "age": 51,
+   "income": 44,
+   "score": 50,
+   "cluster": 2,
+   "silhouette": 0.602,
+   "pc1": 0.652,
+   "pc2": -0.605
+  },
+  {
+   "id": 58,
+   "gender": "Male",
+   "age": 69,
+   "income": 44,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.544,
+   "pc1": 1.674,
+   "pc2": -0.56
+  },
+  {
+   "id": 59,
+   "gender": "Female",
+   "age": 27,
+   "income": 46,
+   "score": 51,
+   "cluster": 2,
+   "silhouette": 0.641,
+   "pc1": -0.596,
+   "pc2": -0.582
+  },
+  {
+   "id": 60,
+   "gender": "Male",
+   "age": 53,
+   "income": 46,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.596,
+   "pc1": 0.859,
+   "pc2": -0.518
+  },
+  {
+   "id": 61,
+   "gender": "Male",
+   "age": 70,
+   "income": 46,
+   "score": 56,
+   "cluster": 2,
+   "silhouette": 0.56,
+   "pc1": 1.447,
+   "pc2": -0.496
+  },
+  {
+   "id": 62,
+   "gender": "Male",
+   "age": 19,
+   "income": 46,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.581,
+   "pc1": -1.111,
+   "pc2": -0.605
+  },
+  {
+   "id": 63,
+   "gender": "Female",
+   "age": 67,
+   "income": 47,
+   "score": 52,
+   "cluster": 2,
+   "silhouette": 0.651,
+   "pc1": 1.403,
+   "pc2": -0.459
+  },
+  {
+   "id": 64,
+   "gender": "Female",
+   "age": 54,
+   "income": 47,
+   "score": 59,
+   "cluster": 2,
+   "silhouette": 0.504,
+   "pc1": 0.552,
+   "pc2": -0.497
+  },
+  {
+   "id": 65,
+   "gender": "Male",
+   "age": 63,
+   "income": 48,
+   "score": 51,
+   "cluster": 2,
+   "silhouette": 0.68,
+   "pc1": 1.225,
+   "pc2": -0.428
+  },
+  {
+   "id": 66,
+   "gender": "Male",
+   "age": 18,
+   "income": 48,
+   "score": 59,
+   "cluster": 2,
+   "silhouette": 0.528,
+   "pc1": -1.275,
+   "pc2": -0.537
+  },
+  {
+   "id": 67,
+   "gender": "Female",
+   "age": 43,
+   "income": 48,
+   "score": 50,
+   "cluster": 2,
+   "silhouette": 0.685,
+   "pc1": 0.239,
+   "pc2": -0.47
+  },
+  {
+   "id": 68,
+   "gender": "Female",
+   "age": 68,
+   "income": 48,
+   "score": 48,
+   "cluster": 2,
+   "silhouette": 0.667,
+   "pc1": 1.561,
+   "pc2": -0.413
+  },
+  {
+   "id": 69,
+   "gender": "Male",
+   "age": 19,
+   "income": 48,
+   "score": 59,
+   "cluster": 2,
+   "silhouette": 0.528,
+   "pc1": -1.225,
+   "pc2": -0.535
+  },
+  {
+   "id": 70,
+   "gender": "Female",
+   "age": 32,
+   "income": 48,
+   "score": 47,
+   "cluster": 2,
+   "silhouette": 0.654,
+   "pc1": -0.237,
+   "pc2": -0.489
+  },
+  {
+   "id": 71,
+   "gender": "Male",
+   "age": 70,
+   "income": 49,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.643,
+   "pc1": 1.469,
+   "pc2": -0.38
+  },
+  {
+   "id": 72,
+   "gender": "Female",
+   "age": 47,
+   "income": 49,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.574,
+   "pc1": 0.659,
+   "pc2": -0.411
+  },
+  {
+   "id": 73,
+   "gender": "Female",
+   "age": 60,
+   "income": 50,
+   "score": 49,
+   "cluster": 2,
+   "silhouette": 0.708,
+   "pc1": 1.124,
+   "pc2": -0.355
+  },
+  {
+   "id": 74,
+   "gender": "Female",
+   "age": 60,
+   "income": 50,
+   "score": 56,
+   "cluster": 2,
+   "silhouette": 0.64,
+   "pc1": 0.933,
+   "pc2": -0.365
+  },
+  {
+   "id": 75,
+   "gender": "Male",
+   "age": 59,
+   "income": 54,
+   "score": 47,
+   "cluster": 2,
+   "silhouette": 0.732,
+   "pc1": 1.121,
+   "pc2": -0.202
+  },
+  {
+   "id": 76,
+   "gender": "Male",
+   "age": 26,
+   "income": 54,
+   "score": 54,
+   "cluster": 2,
+   "silhouette": 0.72,
+   "pc1": -0.744,
+   "pc2": -0.283
+  },
+  {
+   "id": 77,
+   "gender": "Female",
+   "age": 45,
+   "income": 54,
+   "score": 53,
+   "cluster": 2,
+   "silhouette": 0.732,
+   "pc1": 0.247,
+   "pc2": -0.241
+  },
+  {
+   "id": 78,
+   "gender": "Male",
+   "age": 40,
+   "income": 54,
+   "score": 48,
+   "cluster": 2,
+   "silhouette": 0.741,
+   "pc1": 0.131,
+   "pc2": -0.244
+  },
+  {
+   "id": 79,
+   "gender": "Female",
+   "age": 23,
+   "income": 54,
+   "score": 52,
+   "cluster": 2,
+   "silhouette": 0.742,
+   "pc1": -0.841,
+   "pc2": -0.287
+  },
+  {
+   "id": 80,
+   "gender": "Female",
+   "age": 49,
+   "income": 54,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.654,
+   "pc1": 0.751,
+   "pc2": -0.216
+  },
+  {
+   "id": 81,
+   "gender": "Male",
+   "age": 57,
+   "income": 54,
+   "score": 51,
+   "cluster": 2,
+   "silhouette": 0.749,
+   "pc1": 0.91,
+   "pc2": -0.212
+  },
+  {
+   "id": 82,
+   "gender": "Male",
+   "age": 38,
+   "income": 54,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.705,
+   "pc1": -0.163,
+   "pc2": -0.259
+  },
+  {
+   "id": 83,
+   "gender": "Male",
+   "age": 67,
+   "income": 54,
+   "score": 41,
+   "cluster": 2,
+   "silhouette": 0.631,
+   "pc1": 1.691,
+   "pc2": -0.176
+  },
+  {
+   "id": 84,
+   "gender": "Female",
+   "age": 46,
+   "income": 54,
+   "score": 44,
+   "cluster": 2,
+   "silhouette": 0.692,
+   "pc1": 0.544,
+   "pc2": -0.226
+  },
+  {
+   "id": 85,
+   "gender": "Female",
+   "age": 21,
+   "income": 54,
+   "score": 57,
+   "cluster": 2,
+   "silhouette": 0.668,
+   "pc1": -1.079,
+   "pc2": -0.299
+  },
+  {
+   "id": 86,
+   "gender": "Male",
+   "age": 48,
+   "income": 54,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.721,
+   "pc1": 0.591,
+   "pc2": -0.224
+  },
+  {
+   "id": 87,
+   "gender": "Female",
+   "age": 55,
+   "income": 57,
+   "score": 58,
+   "cluster": 2,
+   "silhouette": 0.666,
+   "pc1": 0.611,
+   "pc2": -0.112
+  },
+  {
+   "id": 88,
+   "gender": "Female",
+   "age": 22,
+   "income": 57,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.72,
+   "pc1": -0.979,
+   "pc2": -0.179
+  },
+  {
+   "id": 89,
+   "gender": "Female",
+   "age": 34,
+   "income": 58,
+   "score": 60,
+   "cluster": 2,
+   "silhouette": 0.618,
+   "pc1": -0.51,
+   "pc2": -0.122
+  },
+  {
+   "id": 90,
+   "gender": "Female",
+   "age": 50,
+   "income": 58,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.741,
+   "pc1": 0.685,
+   "pc2": -0.067
+  },
+  {
+   "id": 91,
+   "gender": "Female",
+   "age": 68,
+   "income": 59,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.711,
+   "pc1": 1.349,
+   "pc2": -0.003
+  },
+  {
+   "id": 92,
+   "gender": "Male",
+   "age": 18,
+   "income": 59,
+   "score": 41,
+   "cluster": 2,
+   "silhouette": 0.668,
+   "pc1": -0.802,
+   "pc2": -0.091
+  },
+  {
+   "id": 93,
+   "gender": "Male",
+   "age": 48,
+   "income": 60,
+   "score": 49,
+   "cluster": 2,
+   "silhouette": 0.759,
+   "pc1": 0.498,
+   "pc2": 0.0
+  },
+  {
+   "id": 94,
+   "gender": "Female",
+   "age": 40,
+   "income": 60,
+   "score": 40,
+   "cluster": 2,
+   "silhouette": 0.637,
+   "pc1": 0.339,
+   "pc2": -0.004
+  },
+  {
+   "id": 95,
+   "gender": "Female",
+   "age": 32,
+   "income": 60,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.68,
+   "pc1": -0.121,
+   "pc2": -0.024
+  },
+  {
+   "id": 96,
+   "gender": "Male",
+   "age": 24,
+   "income": 60,
+   "score": 52,
+   "cluster": 2,
+   "silhouette": 0.739,
+   "pc1": -0.801,
+   "pc2": -0.056
+  },
+  {
+   "id": 97,
+   "gender": "Female",
+   "age": 47,
+   "income": 60,
+   "score": 47,
+   "cluster": 2,
+   "silhouette": 0.748,
+   "pc1": 0.502,
+   "pc2": 0.001
+  },
+  {
+   "id": 98,
+   "gender": "Female",
+   "age": 27,
+   "income": 60,
+   "score": 50,
+   "cluster": 2,
+   "silhouette": 0.754,
+   "pc1": -0.594,
+   "pc2": -0.047
+  },
+  {
+   "id": 99,
+   "gender": "Male",
+   "age": 48,
+   "income": 61,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.668,
+   "pc1": 0.688,
+   "pc2": 0.049
+  },
+  {
+   "id": 100,
+   "gender": "Male",
+   "age": 20,
+   "income": 61,
+   "score": 49,
+   "cluster": 2,
+   "silhouette": 0.749,
+   "pc1": -0.924,
+   "pc2": -0.022
+  },
+  {
+   "id": 101,
+   "gender": "Female",
+   "age": 23,
+   "income": 62,
+   "score": 41,
+   "cluster": 2,
+   "silhouette": 0.633,
+   "pc1": -0.554,
+   "pc2": 0.034
+  },
+  {
+   "id": 102,
+   "gender": "Female",
+   "age": 49,
+   "income": 62,
+   "score": 48,
+   "cluster": 2,
+   "silhouette": 0.733,
+   "pc1": 0.572,
+   "pc2": 0.08
+  },
+  {
+   "id": 103,
+   "gender": "Male",
+   "age": 67,
+   "income": 62,
+   "score": 59,
+   "cluster": 2,
+   "silhouette": 0.584,
+   "pc1": 1.183,
+   "pc2": 0.103
+  },
+  {
+   "id": 104,
+   "gender": "Male",
+   "age": 26,
+   "income": 62,
+   "score": 55,
+   "cluster": 2,
+   "silhouette": 0.672,
+   "pc1": -0.786,
+   "pc2": 0.02
+  },
+  {
+   "id": 105,
+   "gender": "Male",
+   "age": 49,
+   "income": 62,
+   "score": 56,
+   "cluster": 2,
+   "silhouette": 0.654,
+   "pc1": 0.353,
+   "pc2": 0.068
+  },
+  {
+   "id": 106,
+   "gender": "Female",
+   "age": 21,
+   "income": 62,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.654,
+   "pc1": -0.683,
+   "pc2": 0.028
+  },
+  {
+   "id": 107,
+   "gender": "Female",
+   "age": 66,
+   "income": 63,
+   "score": 50,
+   "cluster": 2,
+   "silhouette": 0.717,
+   "pc1": 1.377,
+   "pc2": 0.152
+  },
+  {
+   "id": 108,
+   "gender": "Male",
+   "age": 54,
+   "income": 63,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.7,
+   "pc1": 0.879,
+   "pc2": 0.132
+  },
+  {
+   "id": 109,
+   "gender": "Male",
+   "age": 68,
+   "income": 63,
+   "score": 43,
+   "cluster": 2,
+   "silhouette": 0.656,
+   "pc1": 1.671,
+   "pc2": 0.167
+  },
+  {
+   "id": 110,
+   "gender": "Male",
+   "age": 66,
+   "income": 63,
+   "score": 48,
+   "cluster": 2,
+   "silhouette": 0.719,
+   "pc1": 1.432,
+   "pc2": 0.155
+  },
+  {
+   "id": 111,
+   "gender": "Male",
+   "age": 65,
+   "income": 63,
+   "score": 52,
+   "cluster": 2,
+   "silhouette": 0.698,
+   "pc1": 1.272,
+   "pc2": 0.147
+  },
+  {
+   "id": 112,
+   "gender": "Female",
+   "age": 19,
+   "income": 63,
+   "score": 54,
+   "cluster": 2,
+   "silhouette": 0.672,
+   "pc1": -1.115,
+   "pc2": 0.045
+  },
+  {
+   "id": 113,
+   "gender": "Female",
+   "age": 38,
+   "income": 64,
+   "score": 42,
+   "cluster": 2,
+   "silhouette": 0.619,
+   "pc1": 0.175,
+   "pc2": 0.141
+  },
+  {
+   "id": 114,
+   "gender": "Male",
+   "age": 19,
+   "income": 64,
+   "score": 46,
+   "cluster": 2,
+   "silhouette": 0.683,
+   "pc1": -0.897,
+   "pc2": 0.094
+  },
+  {
+   "id": 115,
+   "gender": "Female",
+   "age": 18,
+   "income": 65,
+   "score": 48,
+   "cluster": 2,
+   "silhouette": 0.683,
+   "pc1": -1.005,
+   "pc2": 0.127
+  },
+  {
+   "id": 116,
+   "gender": "Female",
+   "age": 19,
+   "income": 65,
+   "score": 50,
+   "cluster": 2,
+   "silhouette": 0.681,
+   "pc1": -1.009,
+   "pc2": 0.127
+  },
+  {
+   "id": 117,
+   "gender": "Female",
+   "age": 63,
+   "income": 65,
+   "score": 43,
+   "cluster": 2,
+   "silhouette": 0.617,
+   "pc1": 1.414,
+   "pc2": 0.232
+  },
+  {
+   "id": 118,
+   "gender": "Female",
+   "age": 49,
+   "income": 65,
+   "score": 59,
+   "cluster": 2,
+   "silhouette": 0.521,
+   "pc1": 0.265,
+   "pc2": 0.178
+  },
+  {
+   "id": 119,
+   "gender": "Female",
+   "age": 51,
+   "income": 67,
+   "score": 43,
+   "cluster": 2,
+   "silhouette": 0.57,
+   "pc1": 0.802,
+   "pc2": 0.282
+  },
+  {
+   "id": 120,
+   "gender": "Female",
+   "age": 50,
+   "income": 67,
+   "score": 57,
+   "cluster": 2,
+   "silhouette": 0.523,
+   "pc1": 0.367,
+   "pc2": 0.26
+  },
+  {
+   "id": 121,
+   "gender": "Male",
+   "age": 27,
+   "income": 67,
+   "score": 56,
+   "cluster": 2,
+   "silhouette": 0.547,
+   "pc1": -0.772,
+   "pc2": 0.211
+  },
+  {
+   "id": 122,
+   "gender": "Female",
+   "age": 38,
+   "income": 67,
+   "score": 40,
+   "cluster": 2,
+   "silhouette": 0.5,
+   "pc1": 0.225,
+   "pc2": 0.259
+  },
+  {
+   "id": 123,
+   "gender": "Female",
+   "age": 40,
+   "income": 69,
+   "score": 58,
+   "cluster": 2,
+   "silhouette": 0.439,
+   "pc1": -0.171,
+   "pc2": 0.313
+  },
+  {
+   "id": 124,
+   "gender": "Male",
+   "age": 39,
+   "income": 69,
+   "score": 91,
+   "cluster": 3,
+   "silhouette": 0.487,
+   "pc1": -1.126,
+   "pc2": 0.262
+  },
+  {
+   "id": 125,
+   "gender": "Female",
+   "age": 23,
+   "income": 70,
+   "score": 29,
+   "cluster": 4,
+   "silhouette": 0.008,
+   "pc1": -0.24,
+   "pc2": 0.357
+  },
+  {
+   "id": 126,
+   "gender": "Female",
+   "age": 31,
+   "income": 70,
+   "score": 77,
+   "cluster": 3,
+   "silhouette": 0.355,
+   "pc1": -1.15,
+   "pc2": 0.304
+  },
+  {
+   "id": 127,
+   "gender": "Male",
+   "age": 43,
+   "income": 71,
+   "score": 35,
+   "cluster": 2,
+   "silhouette": 0.2,
+   "pc1": 0.608,
+   "pc2": 0.429
+  },
+  {
+   "id": 128,
+   "gender": "Male",
+   "age": 40,
+   "income": 71,
+   "score": 95,
+   "cluster": 3,
+   "silhouette": 0.513,
+   "pc1": -1.189,
+   "pc2": 0.335
+  },
+  {
+   "id": 129,
+   "gender": "Male",
+   "age": 59,
+   "income": 71,
+   "score": 11,
+   "cluster": 4,
+   "silhouette": 0.49,
+   "pc1": 2.077,
+   "pc2": 0.499
+  },
+  {
+   "id": 130,
+   "gender": "Male",
+   "age": 38,
+   "income": 71,
+   "score": 75,
+   "cluster": 3,
+   "silhouette": 0.336,
+   "pc1": -0.742,
+   "pc2": 0.36
+  },
+  {
+   "id": 131,
+   "gender": "Male",
+   "age": 47,
+   "income": 71,
+   "score": 9,
+   "cluster": 4,
+   "silhouette": 0.501,
+   "pc1": 1.524,
+   "pc2": 0.476
+  },
+  {
+   "id": 132,
+   "gender": "Male",
+   "age": 39,
+   "income": 71,
+   "score": 75,
+   "cluster": 3,
+   "silhouette": 0.336,
+   "pc1": -0.691,
+   "pc2": 0.362
+  },
+  {
+   "id": 133,
+   "gender": "Female",
+   "age": 25,
+   "income": 72,
+   "score": 34,
+   "cluster": 2,
+   "silhouette": 0.116,
+   "pc1": -0.279,
+   "pc2": 0.43
+  },
+  {
+   "id": 134,
+   "gender": "Female",
+   "age": 31,
+   "income": 72,
+   "score": 71,
+   "cluster": 3,
+   "silhouette": 0.228,
+   "pc1": -0.989,
+   "pc2": 0.389
+  },
+  {
+   "id": 135,
+   "gender": "Male",
+   "age": 20,
+   "income": 73,
+   "score": 5,
+   "cluster": 4,
+   "silhouette": 0.537,
+   "pc1": 0.261,
+   "pc2": 0.5
+  },
+  {
+   "id": 136,
+   "gender": "Female",
+   "age": 29,
+   "income": 73,
+   "score": 88,
+   "cluster": 3,
+   "silhouette": 0.553,
+   "pc1": -1.558,
+   "pc2": 0.398
+  },
+  {
+   "id": 137,
+   "gender": "Female",
+   "age": 44,
+   "income": 73,
+   "score": 7,
+   "cluster": 4,
+   "silhouette": 0.54,
+   "pc1": 1.423,
+   "pc2": 0.549
+  },
+  {
+   "id": 138,
+   "gender": "Male",
+   "age": 32,
+   "income": 73,
+   "score": 73,
+   "cluster": 3,
+   "silhouette": 0.334,
+   "pc1": -0.995,
+   "pc2": 0.426
+  },
+  {
+   "id": 139,
+   "gender": "Male",
+   "age": 19,
+   "income": 74,
+   "score": 10,
+   "cluster": 4,
+   "silhouette": 0.551,
+   "pc1": 0.071,
+   "pc2": 0.528
+  },
+  {
+   "id": 140,
+   "gender": "Female",
+   "age": 35,
+   "income": 74,
+   "score": 72,
+   "cluster": 3,
+   "silhouette": 0.328,
+   "pc1": -0.817,
+   "pc2": 0.472
+  },
+  {
+   "id": 141,
+   "gender": "Female",
+   "age": 57,
+   "income": 75,
+   "score": 5,
+   "cluster": 4,
+   "silhouette": 0.564,
+   "pc1": 2.133,
+   "pc2": 0.656
+  },
+  {
+   "id": 142,
+   "gender": "Male",
+   "age": 32,
+   "income": 75,
+   "score": 93,
+   "cluster": 3,
+   "silhouette": 0.58,
+   "pc1": -1.547,
+   "pc2": 0.473
+  },
+  {
+   "id": 143,
+   "gender": "Female",
+   "age": 28,
+   "income": 76,
+   "score": 40,
+   "cluster": 2,
+   "silhouette": 0.198,
+   "pc1": -0.299,
+   "pc2": 0.58
+  },
+  {
+   "id": 144,
+   "gender": "Female",
+   "age": 32,
+   "income": 76,
+   "score": 87,
+   "cluster": 3,
+   "silhouette": 0.596,
+   "pc1": -1.384,
+   "pc2": 0.52
+  },
+  {
+   "id": 145,
+   "gender": "Male",
+   "age": 25,
+   "income": 77,
+   "score": 12,
+   "cluster": 4,
+   "silhouette": 0.586,
+   "pc1": 0.315,
+   "pc2": 0.653
+  },
+  {
+   "id": 146,
+   "gender": "Male",
+   "age": 28,
+   "income": 77,
+   "score": 97,
+   "cluster": 3,
+   "silhouette": 0.579,
+   "pc1": -1.863,
+   "pc2": 0.535
+  },
+  {
+   "id": 147,
+   "gender": "Male",
+   "age": 48,
+   "income": 77,
+   "score": 36,
+   "cluster": 4,
+   "silhouette": -0.029,
+   "pc1": 0.823,
+   "pc2": 0.667
+  },
+  {
+   "id": 148,
+   "gender": "Female",
+   "age": 32,
+   "income": 77,
+   "score": 74,
+   "cluster": 3,
+   "silhouette": 0.453,
+   "pc1": -1.03,
+   "pc2": 0.577
+  },
+  {
+   "id": 149,
+   "gender": "Female",
+   "age": 34,
+   "income": 78,
+   "score": 22,
+   "cluster": 4,
+   "silhouette": 0.485,
+   "pc1": 0.495,
+   "pc2": 0.696
+  },
+  {
+   "id": 150,
+   "gender": "Male",
+   "age": 34,
+   "income": 78,
+   "score": 90,
+   "cluster": 3,
+   "silhouette": 0.62,
+   "pc1": -1.369,
+   "pc2": 0.596
+  },
+  {
+   "id": 151,
+   "gender": "Male",
+   "age": 43,
+   "income": 78,
+   "score": 17,
+   "cluster": 4,
+   "silhouette": 0.564,
+   "pc1": 1.089,
+   "pc2": 0.723
+  },
+  {
+   "id": 152,
+   "gender": "Male",
+   "age": 39,
+   "income": 78,
+   "score": 88,
+   "cluster": 3,
+   "silhouette": 0.621,
+   "pc1": -1.061,
+   "pc2": 0.61
+  },
+  {
+   "id": 153,
+   "gender": "Female",
+   "age": 44,
+   "income": 78,
+   "score": 20,
+   "cluster": 4,
+   "silhouette": 0.522,
+   "pc1": 1.057,
+   "pc2": 0.72
+  },
+  {
+   "id": 154,
+   "gender": "Female",
+   "age": 38,
+   "income": 78,
+   "score": 76,
+   "cluster": 3,
+   "silhouette": 0.512,
+   "pc1": -0.782,
+   "pc2": 0.625
+  },
+  {
+   "id": 155,
+   "gender": "Female",
+   "age": 47,
+   "income": 78,
+   "score": 16,
+   "cluster": 4,
+   "silhouette": 0.574,
+   "pc1": 1.319,
+   "pc2": 0.733
+  },
+  {
+   "id": 156,
+   "gender": "Female",
+   "age": 27,
+   "income": 78,
+   "score": 89,
+   "cluster": 3,
+   "silhouette": 0.621,
+   "pc1": -1.696,
+   "pc2": 0.582
+  },
+  {
+   "id": 157,
+   "gender": "Male",
+   "age": 37,
+   "income": 78,
+   "score": 1,
+   "cluster": 4,
+   "silhouette": 0.574,
+   "pc1": 1.223,
+   "pc2": 0.733
+  },
+  {
+   "id": 158,
+   "gender": "Female",
+   "age": 30,
+   "income": 78,
+   "score": 78,
+   "cluster": 3,
+   "silhouette": 0.544,
+   "pc1": -1.243,
+   "pc2": 0.605
+  },
+  {
+   "id": 159,
+   "gender": "Male",
+   "age": 34,
+   "income": 78,
+   "score": 1,
+   "cluster": 4,
+   "silhouette": 0.574,
+   "pc1": 1.071,
+   "pc2": 0.727
+  },
+  {
+   "id": 160,
+   "gender": "Female",
+   "age": 30,
+   "income": 78,
+   "score": 73,
+   "cluster": 3,
+   "silhouette": 0.444,
+   "pc1": -1.106,
+   "pc2": 0.612
+  },
+  {
+   "id": 161,
+   "gender": "Female",
+   "age": 56,
+   "income": 79,
+   "score": 35,
+   "cluster": 4,
+   "silhouette": 0.097,
+   "pc1": 1.252,
+   "pc2": 0.762
+  },
+  {
+   "id": 162,
+   "gender": "Female",
+   "age": 29,
+   "income": 79,
+   "score": 83,
+   "cluster": 3,
+   "silhouette": 0.607,
+   "pc1": -1.432,
+   "pc2": 0.634
+  },
+  {
+   "id": 163,
+   "gender": "Male",
+   "age": 19,
+   "income": 81,
+   "score": 5,
+   "cluster": 4,
+   "silhouette": 0.615,
+   "pc1": 0.195,
+   "pc2": 0.803
+  },
+  {
+   "id": 164,
+   "gender": "Female",
+   "age": 31,
+   "income": 81,
+   "score": 93,
+   "cluster": 3,
+   "silhouette": 0.63,
+   "pc1": -1.609,
+   "pc2": 0.7
+  },
+  {
+   "id": 165,
+   "gender": "Male",
+   "age": 50,
+   "income": 85,
+   "score": 26,
+   "cluster": 4,
+   "silhouette": 0.505,
+   "pc1": 1.184,
+   "pc2": 0.991
+  },
+  {
+   "id": 166,
+   "gender": "Female",
+   "age": 36,
+   "income": 85,
+   "score": 75,
+   "cluster": 3,
+   "silhouette": 0.557,
+   "pc1": -0.869,
+   "pc2": 0.889
+  },
+  {
+   "id": 167,
+   "gender": "Male",
+   "age": 42,
+   "income": 86,
+   "score": 20,
+   "cluster": 4,
+   "silhouette": 0.608,
+   "pc1": 0.941,
+   "pc2": 1.021
+  },
+  {
+   "id": 168,
+   "gender": "Female",
+   "age": 33,
+   "income": 86,
+   "score": 95,
+   "cluster": 3,
+   "silhouette": 0.635,
+   "pc1": -1.571,
+   "pc2": 0.892
+  },
+  {
+   "id": 169,
+   "gender": "Female",
+   "age": 36,
+   "income": 87,
+   "score": 27,
+   "cluster": 4,
+   "silhouette": 0.504,
+   "pc1": 0.443,
+   "pc2": 1.036
+  },
+  {
+   "id": 170,
+   "gender": "Male",
+   "age": 32,
+   "income": 87,
+   "score": 63,
+   "cluster": 3,
+   "silhouette": 0.28,
+   "pc1": -0.747,
+   "pc2": 0.974
+  },
+  {
+   "id": 171,
+   "gender": "Male",
+   "age": 40,
+   "income": 87,
+   "score": 13,
+   "cluster": 4,
+   "silhouette": 0.658,
+   "pc1": 1.03,
+   "pc2": 1.065
+  },
+  {
+   "id": 172,
+   "gender": "Male",
+   "age": 28,
+   "income": 87,
+   "score": 75,
+   "cluster": 3,
+   "silhouette": 0.565,
+   "pc1": -1.278,
+   "pc2": 0.948
+  },
+  {
+   "id": 173,
+   "gender": "Male",
+   "age": 36,
+   "income": 87,
+   "score": 10,
+   "cluster": 4,
+   "silhouette": 0.655,
+   "pc1": 0.909,
+   "pc2": 1.061
+  },
+  {
+   "id": 174,
+   "gender": "Male",
+   "age": 36,
+   "income": 87,
+   "score": 92,
+   "cluster": 3,
+   "silhouette": 0.65,
+   "pc1": -1.339,
+   "pc2": 0.941
+  },
+  {
+   "id": 175,
+   "gender": "Female",
+   "age": 52,
+   "income": 88,
+   "score": 13,
+   "cluster": 4,
+   "silhouette": 0.66,
+   "pc1": 1.636,
+   "pc2": 1.129
+  },
+  {
+   "id": 176,
+   "gender": "Female",
+   "age": 30,
+   "income": 88,
+   "score": 86,
+   "cluster": 3,
+   "silhouette": 0.655,
+   "pc1": -1.48,
+   "pc2": 0.975
+  },
+  {
+   "id": 177,
+   "gender": "Male",
+   "age": 58,
+   "income": 88,
+   "score": 15,
+   "cluster": 4,
+   "silhouette": 0.655,
+   "pc1": 1.886,
+   "pc2": 1.139
+  },
+  {
+   "id": 178,
+   "gender": "Male",
+   "age": 27,
+   "income": 88,
+   "score": 69,
+   "cluster": 3,
+   "silhouette": 0.453,
+   "pc1": -1.166,
+   "pc2": 0.993
+  },
+  {
+   "id": 179,
+   "gender": "Male",
+   "age": 59,
+   "income": 93,
+   "score": 14,
+   "cluster": 4,
+   "silhouette": 0.653,
+   "pc1": 1.954,
+   "pc2": 1.333
+  },
+  {
+   "id": 180,
+   "gender": "Male",
+   "age": 35,
+   "income": 93,
+   "score": 90,
+   "cluster": 3,
+   "silhouette": 0.649,
+   "pc1": -1.346,
+   "pc2": 1.17
+  },
+  {
+   "id": 181,
+   "gender": "Female",
+   "age": 37,
+   "income": 97,
+   "score": 32,
+   "cluster": 4,
+   "silhouette": 0.462,
+   "pc1": 0.338,
+   "pc2": 1.412
+  },
+  {
+   "id": 182,
+   "gender": "Female",
+   "age": 32,
+   "income": 97,
+   "score": 86,
+   "cluster": 3,
+   "silhouette": 0.634,
+   "pc1": -1.396,
+   "pc2": 1.322
+  },
+  {
+   "id": 183,
+   "gender": "Male",
+   "age": 46,
+   "income": 98,
+   "score": 15,
+   "cluster": 4,
+   "silhouette": 0.636,
+   "pc1": 1.259,
+   "pc2": 1.494
+  },
+  {
+   "id": 184,
+   "gender": "Female",
+   "age": 29,
+   "income": 98,
+   "score": 88,
+   "cluster": 3,
+   "silhouette": 0.632,
+   "pc1": -1.604,
+   "pc2": 1.351
+  },
+  {
+   "id": 185,
+   "gender": "Female",
+   "age": 41,
+   "income": 99,
+   "score": 39,
+   "cluster": 4,
+   "silhouette": 0.335,
+   "pc1": 0.346,
+   "pc2": 1.487
+  },
+  {
+   "id": 186,
+   "gender": "Male",
+   "age": 30,
+   "income": 99,
+   "score": 97,
+   "cluster": 3,
+   "silhouette": 0.604,
+   "pc1": -1.802,
+   "pc2": 1.378
+  },
+  {
+   "id": 187,
+   "gender": "Female",
+   "age": 54,
+   "income": 101,
+   "score": 24,
+   "cluster": 4,
+   "silhouette": 0.572,
+   "pc1": 1.412,
+   "pc2": 1.613
+  },
+  {
+   "id": 188,
+   "gender": "Male",
+   "age": 28,
+   "income": 101,
+   "score": 68,
+   "cluster": 3,
+   "silhouette": 0.464,
+   "pc1": -1.112,
+   "pc2": 1.492
+  },
+  {
+   "id": 189,
+   "gender": "Female",
+   "age": 41,
+   "income": 103,
+   "score": 17,
+   "cluster": 4,
+   "silhouette": 0.607,
+   "pc1": 0.941,
+   "pc2": 1.671
+  },
+  {
+   "id": 190,
+   "gender": "Female",
+   "age": 36,
+   "income": 103,
+   "score": 85,
+   "cluster": 3,
+   "silhouette": 0.601,
+   "pc1": -1.176,
+   "pc2": 1.561
+  },
+  {
+   "id": 191,
+   "gender": "Female",
+   "age": 34,
+   "income": 103,
+   "score": 23,
+   "cluster": 4,
+   "silhouette": 0.573,
+   "pc1": 0.422,
+   "pc2": 1.647
+  },
+  {
+   "id": 192,
+   "gender": "Female",
+   "age": 32,
+   "income": 103,
+   "score": 69,
+   "cluster": 3,
+   "silhouette": 0.475,
+   "pc1": -0.94,
+   "pc2": 1.576
+  },
+  {
+   "id": 193,
+   "gender": "Male",
+   "age": 33,
+   "income": 113,
+   "score": 8,
+   "cluster": 4,
+   "silhouette": 0.558,
+   "pc1": 0.764,
+   "pc2": 2.048
+  },
+  {
+   "id": 194,
+   "gender": "Female",
+   "age": 38,
+   "income": 113,
+   "score": 91,
+   "cluster": 3,
+   "silhouette": 0.547,
+   "pc1": -1.258,
+   "pc2": 1.938
+  },
+  {
+   "id": 195,
+   "gender": "Female",
+   "age": 47,
+   "income": 120,
+   "score": 16,
+   "cluster": 4,
+   "silhouette": 0.512,
+   "pc1": 1.242,
+   "pc2": 2.334
+  },
+  {
+   "id": 196,
+   "gender": "Female",
+   "age": 35,
+   "income": 120,
+   "score": 79,
+   "cluster": 3,
+   "silhouette": 0.482,
+   "pc1": -1.094,
+   "pc2": 2.216
+  },
+  {
+   "id": 197,
+   "gender": "Female",
+   "age": 45,
+   "income": 126,
+   "score": 28,
+   "cluster": 4,
+   "silhouette": 0.388,
+   "pc1": 0.8,
+   "pc2": 2.541
+  },
+  {
+   "id": 198,
+   "gender": "Male",
+   "age": 32,
+   "income": 126,
+   "score": 74,
+   "cluster": 3,
+   "silhouette": 0.389,
+   "pc1": -1.12,
+   "pc2": 2.445
+  },
+  {
+   "id": 199,
+   "gender": "Male",
+   "age": 32,
+   "income": 137,
+   "score": 18,
+   "cluster": 4,
+   "silhouette": 0.388,
+   "pc1": 0.395,
+   "pc2": 2.947
+  },
+  {
+   "id": 200,
+   "gender": "Male",
+   "age": 30,
+   "income": 137,
+   "score": 83,
+   "cluster": 3,
+   "silhouette": 0.373,
+   "pc1": -1.488,
+   "pc2": 2.847
+  }
+ ],
+ "pca_var": [
+  0.4426616720824504,
+  0.33308378461522425
+ ],
+ "eda": {
+  "describe": {
+   "age": {
+    "count": 200.0,
+    "mean": 38.85,
+    "std": 13.97,
+    "min": 18.0,
+    "25%": 28.75,
+    "50%": 36.0,
+    "75%": 49.0,
+    "max": 70.0
+   },
+   "income": {
+    "count": 200.0,
+    "mean": 60.56,
+    "std": 26.26,
+    "min": 15.0,
+    "25%": 41.5,
+    "50%": 61.5,
+    "75%": 78.0,
+    "max": 137.0
+   },
+   "score": {
+    "count": 200.0,
+    "mean": 50.2,
+    "std": 25.82,
+    "min": 1.0,
+    "25%": 34.75,
+    "50%": 50.0,
+    "75%": 73.0,
+    "max": 99.0
+   }
+  },
+  "gender": {
+   "Female": 112,
+   "Male": 88
+  },
+  "corr": [
+   [
+    1.0,
+    -0.012,
+    -0.327,
+    0.061
+   ],
+   [
+    -0.012,
+    1.0,
+    0.01,
+    0.056
+   ],
+   [
+    -0.327,
+    0.01,
+    1.0,
+    -0.058
+   ],
+   [
+    0.061,
+    0.056,
+    -0.058,
+    1.0
+   ]
+  ],
+  "corr_cols": [
+   "age",
+   "income",
+   "score",
+   "is_male"
+  ]
+ },
+ "runtime_sec": 39.3
+}

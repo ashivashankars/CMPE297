@@ -1,0 +1,16 @@
+[
+  {"title": "Training a BPE tokenizer", "file": "nanogpt.py", "anchor": "    def train(cls, text", "lines": 30,
+   "note": "Text is first split GPT-2-style into words (so merges never cross spaces) and words are counted, which makes training seconds instead of minutes. Each round counts adjacent byte pairs, weighted by word frequency, and merges the most common pair into a new token id."},
+  {"title": "RMSNorm and RoPE", "file": "nanogpt.py", "anchor": "class RMSNorm", "lines": 20,
+   "note": "RMSNorm rescales by the root-mean-square only (no mean subtraction, no bias): cheaper than LayerNorm and as good in practice. RoPE rotates each pair of query/key channels by an angle proportional to position, so q·k depends on relative distance between tokens, with no learned position table."},
+  {"title": "Causal self-attention", "file": "nanogpt.py", "anchor": "class Attention", "lines": 26,
+   "note": "One linear layer produces q, k, v for all heads. Training uses PyTorch's fused scaled_dot_product_attention with is_causal=True. The explicit path (softmax of qkᵀ/√d with an upper-triangular mask) exists only for the attention viewer. It computes the same thing and returns the weights."},
+  {"title": "SwiGLU MLP and the GPT-2 switch", "file": "nanogpt.py", "anchor": "class MLP", "lines": 17,
+   "note": "SwiGLU gates one projection with SiLU of another (silu(W1 x) ⊙ W3 x). Its hidden size is 8/3·d so parameters match the classic 4·d GELU MLP, which keeps the ablation fair. modern=False swaps in the GPT-2 GELU MLP, LayerNorm and learned positions."},
+  {"title": "Sampling: temperature, top-k, top-p", "file": "nanogpt.py", "anchor": "def generate(", "lines": 23,
+   "note": "Temperature rescales logits (lower = sharper). Top-k keeps the k most likely tokens. Nucleus (top-p) keeps the smallest set whose probability mass reaches p. The generator also yields the untempered probability of each chosen token and its top-5 alternatives, which the Playground shows on hover."},
+  {"title": "Training loop", "file": "nanogpt.py", "anchor": "def train(cfg", "lines": 34,
+   "note": "AdamW with weight decay only on matrices (not norms), betas (0.9, 0.95), linear warmup then cosine decay, and gradient clipping at 1.0. Validation uses a fixed-seed set of batches from the held-out last 10% of the text, so every point on the curve is comparable."},
+  {"title": "Data split and baselines", "file": "train.py", "anchor": "    cut = int(len(text) * 0.9)", "lines": 12,
+   "note": "A contiguous split (not random windows) means no validation sentence appears inside a training window. The tokenizer only sees training text. Unigram and bigram cross-entropies on the same validation tokens give the floor a real model must beat."}
+]

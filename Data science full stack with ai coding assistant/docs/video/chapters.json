@@ -1,0 +1,42 @@
+[
+ {
+  "title": "Introduction",
+  "start_sec": 0.0,
+  "duration_sec": 36.3
+ },
+ {
+  "title": "01 \u00b7 NYC taxi trip duration",
+  "start_sec": 36.3,
+  "duration_sec": 182.7
+ },
+ {
+  "title": "02 \u00b7 NanoGPT from scratch",
+  "start_sec": 219.0,
+  "duration_sec": 167.7
+ },
+ {
+  "title": "03 \u00b7 Customer segmentation",
+  "start_sec": 386.7,
+  "duration_sec": 125.2
+ },
+ {
+  "title": "04 \u00b7 Market basket mining",
+  "start_sec": 511.9,
+  "duration_sec": 129.6
+ },
+ {
+  "title": "06 \u00b7 Anomaly detection",
+  "start_sec": 641.5,
+  "duration_sec": 115.4
+ },
+ {
+  "title": "12 \u00b7 Electricity demand forecasting",
+  "start_sec": 756.9,
+  "duration_sec": 111.4
+ },
+ {
+  "title": "Wrap-up",
+  "start_sec": 868.3,
+  "duration_sec": 16.3
+ }
+]

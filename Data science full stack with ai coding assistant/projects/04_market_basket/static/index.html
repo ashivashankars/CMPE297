@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market Basket Mining</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+</head>
+<body>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>What goes in the basket together, and what should we suggest next?</h2>
+        <p class="lead">A grocery chain wants (a) product pairings for shelf placement and promotions, and (b) a "you might also need…" prompt at checkout. Association rules answer (a) directly. For (b), the rules have to beat the obvious strategy of always suggesting the best-sellers.</p>
+        <div class="note warn">Headline finding: high-confidence rules mostly predict whole milk and vegetables, which "most popular" already suggests. They tie the popularity baseline. A tuned item co-occurrence model wins, especially on long-tail items. Full numbers in Evaluation.</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <h3 style="margin-top:24px">CRISP-DM, as executed here</h3>
+    <div class="crisp">
+      <div><b>Business</b>Pairings for merchandising + a checkout recommender that beats best-sellers.</div>
+      <div><b>Data</b>9,835 real baskets, 169 products, avg 4.4 items. Heavy long tail.</div>
+      <div><b>Preparation</b>De-duplicate, one-hot encode, 80/20 basket split, then fit/validation split.</div>
+      <div><b>Modeling</b>Apriori vs FP-Growth, threshold sweep, co-occurrence model.</div>
+      <div><b>Evaluation</b>Out-of-sample lift, Fisher test + FDR, leave-one-out hit rate vs baselines.</div>
+      <div><b>Deployment</b>Live rule explorer + cart recommender API.</div>
+    </div>
+  </section>
+
+  <section data-tab="Data" data-phase="2 · Understanding">
+    <div class="grid g2">
+      <div class="card"><h3>Top 25 products by share of baskets</h3><div id="top" class="plot" style="min-height:520px"></div></div>
+      <div>
+        <div class="card"><h3>Basket size</h3><div id="sizes" class="plot" style="min-height:240px"></div></div>
+        <div class="card"><h3>The long tail (log scale)</h3><div id="tail" class="plot" style="min-height:240px"></div><p class="muted">A handful of items appear in 15–25% of baskets; most appear in under 1%. Any rule ending in "→ whole milk" will look confident just because milk is everywhere. That's why lift matters.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-tab="Mining" data-phase="4 · Modeling">
+    <div class="grid side">
+      <div class="card">
+        <h3>Mine rules live</h3>
+        <label class="f">Min support: <span id="sv" class="num"></span></label><input type="range" id="ms" min="0.002" max="0.05" step="0.001" value="0.01">
+        <label class="f">Min confidence: <span id="cv" class="num"></span></label><input type="range" id="mc" min="0.05" max="0.8" step="0.01" value="0.25">
+        <label class="f">Min lift: <span id="lv" class="num"></span></label><input type="range" id="ml" min="1" max="4" step="0.1" value="1.5">
+        <label class="f">Algorithm</label><select id="algo"><option value="fpgrowth">FP-Growth</option><option value="apriori">Apriori</option></select>
+        <p id="mstat" class="muted" style="margin-top:14px"></p>
+        <div class="note" style="font-size:.85rem"><b>support</b> P(A∪B) · <b>confidence</b> P(B|A) · <b>lift</b> P(B|A)/P(B): above 1 means A makes B more likely than usual.</div>
+      </div>
+      <div class="card"><h3>Rules (sorted by lift)</h3><div class="scroll" id="mined" style="max-height:600px"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Apriori vs FP-Growth: identical itemsets, different cost</h3><div id="bench" class="plot"></div></div>
+      <div class="card"><h3>Threshold sweep (validation hit rate @5)</h3><div id="sweep" class="plot"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Evaluation" data-phase="5 · Evaluation">
+    <div class="grid g4" id="evkpis"></div>
+    <div class="grid g2">
+      <div class="card"><h3>Do rules survive on unseen baskets?</h3><div id="holdout" class="plot" style="min-height:420px"></div><p class="muted">Each dot is a rule: lift on training baskets vs lift on held-out baskets. Gray dots fail the out-of-sample test (lift ≤ 1 or not significant after FDR correction).</p></div>
+      <div class="card"><h3>Recommender leaderboard (held-out baskets, leave-one-out)</h3><div id="board"></div><div id="boardplot" class="plot" style="min-height:300px"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Rule graph" data-phase="Insight">
+    <div class="card"><h3>Strongest validated rules as a product network</h3><div id="graph" class="plot" style="min-height:640px"></div>
+      <p class="muted">Arrows go from antecedent to consequent; thicker and darker = higher lift. Node size = how common the product is. Clusters reveal "missions": baking, breakfast, beverages.</p></div>
+  </section>
+
+  <section data-tab="Checkout" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card">
+        <h3>Your cart</h3><div class="chips" id="cart"></div>
+        <label class="f">Add a product</label><input type="text" id="search" list="itemlist" placeholder="type to search…"><datalist id="itemlist"></datalist>
+        <label class="f">Popular</label><div class="chips" id="popular"></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Co-occurrence recommender (champion)</h3><div id="rec_co"></div></div>
+        <div class="card"><h3>Association rules: why</h3><div id="rec_rules"></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

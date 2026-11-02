@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer Segmentation</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+</head>
+<body>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>Who shops here, and what should we do about each group?</h2>
+        <p class="lead">A mall's marketing team has one budget and one newsletter. They want a small number of customer groups that are <b>real</b> (they don't change if we resample), <b>distinct</b> (well separated), and <b>actionable</b> (each one implies a different campaign).</p>
+        <div class="note">There is no label to score against, so "accuracy" doesn't exist. Instead the pipeline is judged on separation (silhouette), stability under resampling (bootstrap ARI), agreement across algorithms, and whether segments hold up on held-out customers.</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <h3 style="margin-top:24px">CRISP-DM, as executed here</h3>
+    <div class="crisp">
+      <div><b>Business</b>Few, stable, actionable segments for campaign targeting.</div>
+      <div><b>Data</b>200 customers: age, gender, income, spending score.</div>
+      <div><b>Preparation</b>Standardize, compare 3 feature sets (with/without age, gender).</div>
+      <div><b>Modeling</b>k-means, GMM, Ward, DBSCAN tournament over k = 2–10.</div>
+      <div><b>Evaluation</b>Silhouette, bootstrap stability, cross-algorithm ARI, holdout check.</div>
+      <div><b>Deployment</b>Personas + actions, and a live segment classifier.</div>
+    </div>
+  </section>
+
+  <section data-tab="Data" data-phase="2 · Understanding">
+    <div class="grid g3">
+      <div class="card"><h3>Age</h3><div id="h_age" class="plot" style="min-height:240px"></div></div>
+      <div class="card"><h3>Annual income (k$)</h3><div id="h_income" class="plot" style="min-height:240px"></div></div>
+      <div class="card"><h3>Spending score</h3><div id="h_score" class="plot" style="min-height:240px"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Income vs spending, raw</h3><div id="raw" class="plot"></div><p class="muted">You can already see five blobs by eye. The job is to confirm them rigorously, not to invent structure.</p></div>
+      <div class="card"><h3>Correlations</h3><div id="corr" class="plot"></div><p class="muted">Income and spending are almost uncorrelated, so they carry independent information. Gender barely relates to anything.</p></div>
+    </div>
+  </section>
+
+  <section data-tab="Preparation" data-phase="3 · Data prep">
+    <div class="grid g2">
+      <div class="card"><h3>Why standardize?</h3>
+        <p>k-means measures Euclidean distance. Unscaled, a 10-unit change in income (k$) would count the same as 10 spending points, and age (range ~50) would weigh differently from income (range ~120). Every feature set is z-scored inside the pipeline so each feature contributes on the same scale.</p>
+        <div class="note warn">Gender is binary. After z-scoring it becomes a ±1 jump that can split every segment in two by gender alone. The tournament tests whether including it helps (it doesn't).</div></div>
+      <div class="card"><h3>Feature sets competing in the tournament</h3><div id="fsets"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Modeling" data-phase="4 · Modeling">
+    <div class="grid g2">
+      <div class="card"><h3>Choosing k: four views that should agree</h3><div id="ksel" class="plot" style="min-height:420px"></div></div>
+      <div class="card"><h3>Bootstrap stability per k</h3><div id="stab" class="plot" style="min-height:420px"></div><p class="muted">Refit on 40 bootstrap samples and compare labels to the full fit (ARI). Stability collapses for k &gt; 5: those extra clusters are noise.</p></div>
+    </div>
+    <div class="card"><h3>Tournament: feature set × algorithm × k (ranked by 50% silhouette + 50% stability)</h3>
+      <div class="grid g2"><div id="tourn_heat" class="plot" style="min-height:380px"></div><div class="scroll" id="tourn_table"></div></div></div>
+  </section>
+
+  <section data-tab="Evaluation" data-phase="5 · Evaluation">
+    <div class="grid g3" id="evalkpis"></div>
+    <div class="grid g2">
+      <div class="card"><h3>Silhouette of every customer</h3><div id="silplot" class="plot" style="min-height:420px"></div><p class="muted">Bars below zero would be customers closer to another segment than their own. Each segment is sorted, widest first.</p></div>
+      <div class="card"><h3>Do different algorithms find the same segments?</h3><div id="agree"></div>
+        <h3 style="margin-top:20px">Generalization to unseen customers</h3><div id="holdout"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Segments" data-phase="Insight">
+    <div class="grid g2">
+      <div class="card"><h3>The five segments</h3><div id="seg" class="plot" style="min-height:440px"></div></div>
+      <div class="card"><h3>Same customers in 3-D (age, income, score)</h3><div id="seg3d" class="plot" style="min-height:440px"></div></div>
+    </div>
+    <div class="grid g3" id="personas"></div>
+  </section>
+
+  <section data-tab="Classifier" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card">
+        <h3>New customer</h3>
+        <label class="f">Age: <span id="agev" class="num"></span></label><input type="range" id="age" min=18 max=70 value=29>
+        <label class="f">Annual income (k$): <span id="incv" class="num"></span></label><input type="range" id="inc" min=15 max=140 value=95>
+        <label class="f">Spending score: <span id="scv" class="num"></span></label><input type="range" id="sc" min=1 max=100 value=88>
+        <label class="f">Gender</label><select id="male"><option value=0>Female</option><option value=1>Male</option></select>
+        <p class="muted" style="font-size:.85rem">Try moving income slowly from 40 to 75 with score at 50: you'll watch the customer cross a boundary.</p>
+      </div>
+      <div>
+        <div class="card" id="assign"></div>
+        <div class="grid g2">
+          <div class="card"><h3>Where they land</h3><div id="where" class="plot"></div></div>
+          <div class="card"><h3>Soft membership (Gaussian mixture)</h3><div id="soft" class="plot"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

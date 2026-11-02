@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NanoGPT from Scratch</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+<style>
+  .tok { display: inline; white-space: pre-wrap; border-radius: 3px; padding: 0 1px; cursor: default; font: 15px/1.9 var(--mono); }
+  .tokchip { display: inline-block; margin: 2px; padding: 1px 6px; border-radius: 4px; font: 13px var(--mono); white-space: pre; border: 1px solid rgba(0,0,0,.08); }
+  .gen { background: #fbfaf6; border: 1px solid var(--line); border-radius: 8px; padding: 14px; min-height: 180px; }
+  .gen .prompt { color: var(--muted); font: 15px/1.9 var(--mono); white-space: pre-wrap; }
+  #tip { position: fixed; pointer-events: none; background: #1e1d1a; color: #fff; padding: 8px 10px; border-radius: 8px; font: 12px var(--mono); display: none; z-index: 50; }
+  .arch { display: flex; flex-direction: column; gap: 6px; align-items: stretch; font-size: .85rem; }
+  .arch div { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: #fff; }
+  .arch .blk { border: 2px dashed var(--accent); background: var(--accent-soft); }
+  .arch .blk div { margin: 6px 0; }
+  .arch .new { border-left: 4px solid var(--accent); }
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>What does it take to build a language model, end to end, on a laptop?</h2>
+        <p class="lead">The goal is understanding, not scale: build every piece by hand (tokenizer, transformer, training loop, sampler), train it on Shakespeare on 2 CPU cores, and measure it honestly against simple baselines. Then test whether 2023-era building blocks (RoPE, RMSNorm, SwiGLU) beat the 2019 GPT-2 recipe at equal size.</p>
+        <div class="note">Success criteria: validation loss far below an n-gram model on text the model never trained on; a stable, non-diverging training curve; samples that pick up Shakespeare's form (speaker names, verse lines, archaic words).</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3>CRISP-DM, as executed here</h3>
+        <div class="crisp" style="grid-template-columns:repeat(3,1fr)">
+          <div><b>Business</b>Teaching-grade LLM, honest measurement.</div>
+          <div><b>Data</b>Tiny Shakespeare, 1.1M chars, contiguous 90/10 split.</div>
+          <div><b>Preparation</b>Byte-level BPE (512 tokens) trained on the train split only.</div>
+          <div><b>Modeling</b>6-layer decoder, AdamW, warmup + cosine, clip 1.0.</div>
+          <div><b>Evaluation</b>Val loss vs n-gram baselines, 3-way ablation, samples.</div>
+          <div><b>Deployment</b>Sampling API, token probabilities, attention viewer.</div>
+        </div>
+      </div>
+      <div class="card"><h3>Architecture (decoder-only)</h3>
+        <div class="arch" id="arch"></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-tab="Tokenizer" data-phase="2–3 · Data & prep">
+    <div class="grid g2">
+      <div class="card"><h3>Try the tokenizer</h3>
+        <textarea id="tk_in" rows="4">ROMEO:
+But, soft! what light through yonder window breaks?</textarea>
+        <div id="tk_out" style="margin-top:10px"></div><p class="muted" id="tk_stats"></p></div>
+      <div class="card"><h3>Corpus & tokenizer</h3><div id="corpus"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>First 40 merges learned (in order)</h3><div id="merges" class="chips"></div><p class="muted">BPE starts from 256 raw bytes and repeatedly merges the most frequent adjacent pair. The first merges are the most common English fragments.</p></div>
+      <div class="card"><h3>Longest tokens in the vocabulary</h3><div id="longest" class="chips"></div><p class="muted">Frequent whole words (" shall", " would", " thou", " thee") become single tokens, leading space included, because they repeat constantly in the plays.</p></div>
+    </div>
+  </section>
+
+  <section data-tab="Training" data-phase="4 · Modeling">
+    <div class="grid g4" id="trkpis"></div>
+    <div class="grid g2">
+      <div class="card"><h3>Loss curves (cross-entropy, nats/token)</h3><div id="loss" class="plot" style="min-height:400px"></div><p class="muted" id="lossnote"></p></div>
+      <div class="card"><h3>Learning-rate schedule</h3><div id="lr" class="plot" style="min-height:400px"></div><p class="muted">Linear warmup (100 steps) avoids early divergence while Adam's moment estimates settle; cosine decay to 10% of peak lets the model fine-settle at the end.</p></div>
+    </div>
+    <div class="card"><h3>Same prompt: random weights vs trained</h3><div id="snaps" class="grid g2"></div></div>
+  </section>
+
+  <section data-tab="Ablation" data-phase="5 · Evaluation">
+    <div class="grid g2">
+      <div class="card"><h3>Validation loss: three architectures, same budget</h3><div id="abl" class="plot" style="min-height:420px"></div></div>
+      <div class="card"><h3>Result</h3><div id="abltable"></div><div id="ablnote" style="margin-top:12px"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Playground" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card">
+        <h3>Prompt</h3><textarea id="pr" rows="4">KING RICHARD III:
+Now is the</textarea>
+        <label class="f">Temperature: <span id="tv" class="num"></span></label><input type="range" id="temp" min="0.1" max="1.6" step="0.05" value="0.8">
+        <label class="f">Top-k: <span id="kv" class="num"></span></label><input type="range" id="topk" min="0" max="200" step="5" value="40">
+        <label class="f">Top-p (nucleus): <span id="pv" class="num"></span></label><input type="range" id="topp" min="0.3" max="1" step="0.01" value="0.95">
+        <label class="f">Tokens: <span id="nv" class="num"></span></label><input type="range" id="maxn" min="10" max="250" step="10" value="120">
+        <label class="f">Seed</label><input type="number" id="seed" value="0">
+        <button class="btn" id="go" style="margin-top:14px">Generate</button>
+        <div class="chips" style="margin-top:12px" id="prompts"></div>
+      </div>
+      <div>
+        <div class="card"><h3>Output: each token shaded by the probability the model gave it (hover for alternatives)</h3><div class="gen" id="gen"></div><p class="muted" id="genstat"></p></div>
+        <div class="card"><h3>What comes next? Top-15 candidates after the prompt</h3><div id="nxt" class="plot" style="min-height:300px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-tab="Attention" data-phase="Interpretability">
+    <div class="grid side">
+      <div class="card"><h3>Attention viewer</h3>
+        <textarea id="at_in" rows="3">ROMEO:
+I love thee, Juliet, and thou lovest me.</textarea>
+        <label class="f">Layer</label><select id="at_layer"></select>
+        <label class="f">Head</label><select id="at_head"></select>
+        <button class="btn ghost" id="at_go" style="margin-top:12px">Show attention</button>
+        <p class="muted" style="font-size:.85rem;margin-top:12px">Row = the token doing the looking; column = the token it attends to. The causal mask makes everything above the diagonal zero: a token can never look at the future.</p>
+      </div>
+      <div class="card"><div id="att" class="plot" style="min-height:620px"></div></div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

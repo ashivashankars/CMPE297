@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NYC Taxi Trip Duration</title>
+<link rel="stylesheet" href="/shared/shell.css"><link rel="stylesheet" href="/shared/pygments.css">
+<script src="/shared/plotly.min.js"></script><script src="/shared/shell.js"></script>
+</head>
+<body>
+<main>
+  <section data-tab="Overview" data-phase="1 · Business">
+    <div class="grid g2">
+      <div>
+        <h2>How long will this ride take?</h2>
+        <p class="lead">A dispatcher quotes a time <b>at booking</b>. Too optimistic and riders churn; too pessimistic and they book elsewhere. So the product needs an estimate <i>and</i> an honest range, using only what is known before the car arrives.</p>
+        <div class="note">Success criterion fixed before modeling: beat the "distance ÷ typical speed" rule of thumb on MAE, and make the 90% range actually contain the true time ~90% of the time on a week the model never saw.</div>
+      </div>
+      <div class="grid g2" id="kpis"></div>
+    </div>
+    <h3 style="margin-top:24px">CRISP-DM, as executed here</h3>
+    <div class="crisp">
+      <div><b>Business</b>Booking-time ETA with a calibrated range.</div>
+      <div><b>Data</b>6,433 real TLC rides, March 2019. Profiling, missing zones, odd rows.</div>
+      <div><b>Preparation</b>Fixed cleaning rules, booking-time features only, 4-way temporal split.</div>
+      <div><b>Modeling</b>Baselines → Ridge → gradient boosting → hill-climbing search.</div>
+      <div><b>Evaluation</b>Frozen test week, conformal coverage, error slices, leakage audit, drift.</div>
+      <div><b>Deployment</b>FastAPI endpoint + the live estimator tab.</div>
+    </div>
+  </section>
+
+  <section data-tab="Data" data-phase="2 · Understanding">
+    <div class="grid g2">
+      <div class="card"><h3>Trip duration (minutes)</h3><div id="hist" class="plot"></div><p class="muted">Right-skewed, so the model learns log(1 + minutes) and is scored with RMSLE as well as MAE.</p></div>
+      <div class="card"><h3>Distance vs duration, by pickup borough</h3><div id="scatter" class="plot"></div><p class="muted">Distance explains a lot, but the vertical spread at the same distance is traffic: that is what time and zone features have to learn.</p></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Median duration by day × hour</h3><div id="heat" class="plot"></div></div>
+      <div class="card"><h3>Correlation with duration</h3><div id="corr" class="plot"></div>
+        <div class="note bad">Fare, total and tip correlate strongly with duration because the meter charges by time. None of them exist at booking time, so they are excluded. See the leakage demo in Evaluation.</div></div>
+    </div>
+  </section>
+
+  <section data-tab="Preparation" data-phase="3 · Data prep">
+    <div class="grid g2">
+      <div class="card"><h3>Cleaning rules (decided before modeling)</h3><div id="cleanlog"></div></div>
+      <div class="card"><h3>Temporal split: the future is never used to predict the past</h3><div id="split" class="plot" style="min-height:220px"></div>
+        <p class="muted">Hyperparameters are chosen on the tune week, interval widths on the calibration days, and the final week is scored exactly once.</p></div>
+    </div>
+    <div class="card"><h3>Features</h3>
+      <div class="grid g2">
+        <div><span class="pill good">allowed: known at booking</span><p><code>pickup/dropoff zone & borough</code>, <code>hour</code> (+ sin/cos), <code>day of week</code>, <code>weekend</code>, <code>same zone</code>, <code>passengers</code>, <code>taxi colour</code>, <code>route distance</code> (from the trip planner; the app fills in the historical median for the route).</p></div>
+        <div><span class="pill bad">excluded: leaks the answer</span><p><code>fare</code>, <code>tip</code>, <code>tolls</code>, <code>total</code> are all computed from the finished trip. <code>dropoff time</code> is the label itself.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-tab="Modeling" data-phase="4 · Modeling">
+    <div class="card"><h3>Leaderboard: every model scored once on the unseen final week</h3><div id="board"></div></div>
+    <div class="grid g2">
+      <div class="card"><h3>AutoResearch hill climbing (tune-week RMSLE)</h3><div id="trials" class="plot"></div><p class="muted" id="bestparams"></p></div>
+      <div class="card"><h3>Permutation importance on the test week</h3><div id="imp" class="plot"></div></div>
+    </div>
+  </section>
+
+  <section data-tab="Evaluation" data-phase="5 · Evaluation">
+    <div class="grid g2">
+      <div class="card"><h3>Do the ranges keep their promise?</h3><div id="coverage" class="plot"></div><p class="muted">Split-conformal intervals: target coverage vs what actually happened on the test week.</p></div>
+      <div class="card"><h3>Predicted vs actual (test week)</h3><div id="pva" class="plot"></div></div>
+    </div>
+    <div class="grid g3">
+      <div class="card"><h3>Error by pickup borough</h3><div id="sl_b"></div></div>
+      <div class="card"><h3>Error by time of day</h3><div id="sl_h"></div></div>
+      <div class="card"><h3>Error by distance</h3><div id="sl_d"></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>The leakage trap, trained on purpose</h3><div id="leak"></div></div>
+      <div class="card"><h3>Drift monitor: train vs test (PSI)</h3><div id="drift" class="plot" style="min-height:240px"></div><p class="muted">PSI &lt; 0.1 stable · 0.1–0.25 watch · &gt; 0.25 retrain.</p></div>
+    </div>
+  </section>
+
+  <section data-tab="Estimator" data-phase="6 · Deployment">
+    <div class="grid side">
+      <div class="card" id="form">
+        <h3>Book a ride</h3>
+        <label class="f">Pickup zone</label><select id="pz"></select>
+        <label class="f">Dropoff zone</label><select id="dz"></select>
+        <label class="f">Day</label><select id="dow"><option value=0>Monday</option><option value=1>Tuesday</option><option value=2>Wednesday</option><option value=3>Thursday</option><option value=4>Friday</option><option value=5>Saturday</option><option value=6>Sunday</option></select>
+        <label class="f">Pickup hour: <span id="hourv" class="num"></span></label><input type="range" id="hour" min=0 max=23 value=17>
+        <label class="f">Route distance, miles (blank = use route history)</label><input type="number" id="dist" step="0.1" min="0.1" placeholder="auto">
+        <label class="f">Taxi</label><select id="color"><option>yellow</option><option>green</option></select>
+      </div>
+      <div>
+        <div class="grid g3" id="est"></div>
+        <div class="card"><h3>Same trip at every hour of the day (90% range shaded)</h3><div id="hourly" class="plot"></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

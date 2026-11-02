@@ -1,0 +1,618 @@
+{
+ "threshold_quantile": 0.999,
+ "probation_fraction": 0.15,
+ "per_series": [
+  {
+   "series": "machine_temperature",
+   "method": "Rolling robust z",
+   "windows": 4,
+   "detected": 2,
+   "recall_events": 0.5,
+   "false_alarms": 7,
+   "false_alarms_per_week": 0.7320261437908497,
+   "alert_precision": 0.2222222222222222,
+   "mean_detection_position": 0.5088339222614842,
+   "pr_auc": 0.15672303493069628,
+   "pr_auc_base_rate": 0.0881758332901353
+  },
+  {
+   "series": "machine_temperature",
+   "method": "Seasonal residual z",
+   "windows": 4,
+   "detected": 3,
+   "recall_events": 0.75,
+   "false_alarms": 11,
+   "false_alarms_per_week": 1.1503267973856208,
+   "alert_precision": 0.3125,
+   "mean_detection_position": 0.3050647820965842,
+   "pr_auc": 0.39030414315197937,
+   "pr_auc_base_rate": 0.0881758332901353
+  },
+  {
+   "series": "machine_temperature",
+   "method": "Isolation Forest",
+   "windows": 4,
+   "detected": 2,
+   "recall_events": 0.5,
+   "false_alarms": 8,
+   "false_alarms_per_week": 0.8366013071895425,
+   "alert_precision": 0.3333333333333333,
+   "mean_detection_position": 0.5291519434628975,
+   "pr_auc": 0.32911504736880853,
+   "pr_auc_base_rate": 0.0881758332901353
+  },
+  {
+   "series": "machine_temperature",
+   "method": "Local Outlier Factor",
+   "windows": 4,
+   "detected": 3,
+   "recall_events": 0.75,
+   "false_alarms": 21,
+   "false_alarms_per_week": 2.196078431372549,
+   "alert_precision": 0.3,
+   "mean_detection_position": 0.2950530035335689,
+   "pr_auc": 0.4022838305425433,
+   "pr_auc_base_rate": 0.0881758332901353
+  },
+  {
+   "series": "machine_temperature",
+   "method": "Ensemble (rank mean)",
+   "windows": 4,
+   "detected": 1,
+   "recall_events": 0.25,
+   "false_alarms": 13,
+   "false_alarms_per_week": 1.3594771241830066,
+   "alert_precision": 0.13333333333333333,
+   "mean_detection_position": 0.10247349823321555,
+   "pr_auc": 0.2697590672065705,
+   "pr_auc_base_rate": 0.0881758332901353
+  },
+  {
+   "series": "ambient_temperature",
+   "method": "Rolling robust z",
+   "windows": 2,
+   "detected": 1,
+   "recall_events": 0.5,
+   "false_alarms": 15,
+   "false_alarms_per_week": 0.37250554323725055,
+   "alert_precision": 0.16666666666666666,
+   "mean_detection_position": 0.08785046728971962,
+   "pr_auc": 0.12003460295770424,
+   "pr_auc_base_rate": 0.11753278290432248
+  },
+  {
+   "series": "ambient_temperature",
+   "method": "Seasonal residual z",
+   "windows": 2,
+   "detected": 0,
+   "recall_events": 0.0,
+   "false_alarms": 2,
+   "false_alarms_per_week": 0.04966740576496674,
+   "alert_precision": 0.0,
+   "mean_detection_position": null,
+   "pr_auc": 0.14483324607405218,
+   "pr_auc_base_rate": 0.11753278290432248
+  },
+  {
+   "series": "ambient_temperature",
+   "method": "Isolation Forest",
+   "windows": 2,
+   "detected": 1,
+   "recall_events": 0.5,
+   "false_alarms": 7,
+   "false_alarms_per_week": 0.17383592017738358,
+   "alert_precision": 0.125,
+   "mean_detection_position": 0.7140186915887851,
+   "pr_auc": 0.23691313208082745,
+   "pr_auc_base_rate": 0.11753278290432248
+  },
+  {
+   "series": "ambient_temperature",
+   "method": "Local Outlier Factor",
+   "windows": 2,
+   "detected": 0,
+   "recall_events": 0.0,
+   "false_alarms": 2,
+   "false_alarms_per_week": 0.04966740576496674,
+   "alert_precision": 0.0,
+   "mean_detection_position": null,
+   "pr_auc": 0.2924713112608696,
+   "pr_auc_base_rate": 0.11753278290432248
+  },
+  {
+   "series": "ambient_temperature",
+   "method": "Ensemble (rank mean)",
+   "windows": 2,
+   "detected": 2,
+   "recall_events": 1.0,
+   "false_alarms": 10,
+   "false_alarms_per_week": 0.24833702882483372,
+   "alert_precision": 0.23076923076923078,
+   "mean_detection_position": 0.4654153973253472,
+   "pr_auc": 0.21768353791173742,
+   "pr_auc_base_rate": 0.11753278290432248
+  },
+  {
+   "series": "cpu_asg_misconfig",
+   "method": "Rolling robust z",
+   "windows": 1,
+   "detected": 0,
+   "recall_events": 0.0,
+   "false_alarms": 3,
+   "false_alarms_per_week": 0.39421196714900275,
+   "alert_precision": 0.0,
+   "mean_detection_position": null,
+   "pr_auc": 0.09299800428403424,
+   "pr_auc_base_rate": 0.09769927654304894
+  },
+  {
+   "series": "cpu_asg_misconfig",
+   "method": "Seasonal residual z",
+   "windows": 1,
+   "detected": 1,
+   "recall_events": 1.0,
+   "false_alarms": 15,
+   "false_alarms_per_week": 1.9710598357450135,
+   "alert_precision": 0.0625,
+   "mean_detection_position": 0.157543391188251,
+   "pr_auc": 0.15784163849419497,
+   "pr_auc_base_rate": 0.09769927654304894
+  },
+  {
+   "series": "cpu_asg_misconfig",
+   "method": "Isolation Forest",
+   "windows": 1,
+   "detected": 1,
+   "recall_events": 1.0,
+   "false_alarms": 21,
+   "false_alarms_per_week": 2.759483770043019,
+   "alert_precision": 0.08695652173913043,
+   "mean_detection_position": 0.06141522029372497,
+   "pr_auc": 0.2779623124717902,
+   "pr_auc_base_rate": 0.09769927654304894
+  },
+  {
+   "series": "cpu_asg_misconfig",
+   "method": "Local Outlier Factor",
+   "windows": 1,
+   "detected": 1,
+   "recall_events": 1.0,
+   "false_alarms": 22,
+   "false_alarms_per_week": 2.8908877590926867,
+   "alert_precision": 0.2413793103448276,
+   "mean_detection_position": 0.30173564753004006,
+   "pr_auc": 0.36231457154173574,
+   "pr_auc_base_rate": 0.09769927654304894
+  },
+  {
+   "series": "cpu_asg_misconfig",
+   "method": "Ensemble (rank mean)",
+   "windows": 1,
+   "detected": 0,
+   "recall_events": 0.0,
+   "false_alarms": 7,
+   "false_alarms_per_week": 0.919827923347673,
+   "alert_precision": 0.0,
+   "mean_detection_position": null,
+   "pr_auc": 0.17907254325758093,
+   "pr_auc_base_rate": 0.09769927654304894
+  },
+  {
+   "series": "ec2_latency",
+   "method": "Rolling robust z",
+   "windows": 3,
+   "detected": 3,
+   "recall_events": 1.0,
+   "false_alarms": 0,
+   "false_alarms_per_week": 0.0,
+   "alert_precision": 1.0,
+   "mean_detection_position": 0.4300497512437811,
+   "pr_auc": 0.15221320069616312,
+   "pr_auc_base_rate": 0.10093348891481914
+  },
+  {
+   "series": "ec2_latency",
+   "method": "Seasonal residual z",
+   "windows": 3,
+   "detected": 1,
+   "recall_events": 0.3333333333333333,
+   "false_alarms": 14,
+   "false_alarms_per_week": 8.233372228704784,
+   "alert_precision": 0.06666666666666667,
+   "mean_detection_position": 0.32,
+   "pr_auc": 0.14098630101198228,
+   "pr_auc_base_rate": 0.10093348891481914
+  },
+  {
+   "series": "ec2_latency",
+   "method": "Isolation Forest",
+   "windows": 3,
+   "detected": 3,
+   "recall_events": 1.0,
+   "false_alarms": 15,
+   "false_alarms_per_week": 8.82147024504084,
+   "alert_precision": 0.16666666666666666,
+   "mean_detection_position": 0.5062023217247097,
+   "pr_auc": 0.21081954510864517,
+   "pr_auc_base_rate": 0.10093348891481914
+  },
+  {
+   "series": "ec2_latency",
+   "method": "Local Outlier Factor",
+   "windows": 3,
+   "detected": 3,
+   "recall_events": 1.0,
+   "false_alarms": 4,
+   "false_alarms_per_week": 2.352392065344224,
+   "alert_precision": 0.42857142857142855,
+   "mean_detection_position": 0.4300497512437811,
+   "pr_auc": 0.43593317658413205,
+   "pr_auc_base_rate": 0.10093348891481914
+  },
+  {
+   "series": "ec2_latency",
+   "method": "Ensemble (rank mean)",
+   "windows": 3,
+   "detected": 3,
+   "recall_events": 1.0,
+   "false_alarms": 14,
+   "false_alarms_per_week": 8.233372228704784,
+   "alert_precision": 0.17647058823529413,
+   "mean_detection_position": 0.59575456053068,
+   "pr_auc": 0.18080288725011326,
+   "pr_auc_base_rate": 0.10093348891481914
+  },
+  {
+   "series": "nyc_taxi",
+   "method": "Rolling robust z",
+   "windows": 5,
+   "detected": 0,
+   "recall_events": 0.0,
+   "false_alarms": 4,
+   "false_alarms_per_week": 0.1532322426177175,
+   "alert_precision": 0.0,
+   "mean_detection_position": null,
+   "pr_auc": 0.12249654041099715,
+   "pr_auc_base_rate": 0.1179890560875513
+  },
+  {
+   "series": "nyc_taxi",
+   "method": "Seasonal residual z",
+   "windows": 5,
+   "detected": 1,
+   "recall_events": 0.2,
+   "false_alarms": 13,
+   "false_alarms_per_week": 0.4980047885075819,
+   "alert_precision": 0.13333333333333333,
+   "mean_detection_position": 0.3155339805825243,
+   "pr_auc": 0.13235625040404542,
+   "pr_auc_base_rate": 0.1179890560875513
+  },
+  {
+   "series": "nyc_taxi",
+   "method": "Isolation Forest",
+   "windows": 5,
+   "detected": 3,
+   "recall_events": 0.6,
+   "false_alarms": 5,
+   "false_alarms_per_week": 0.19154030327214686,
+   "alert_precision": 0.5,
+   "mean_detection_position": 0.4644012944983819,
+   "pr_auc": 0.15093686249106622,
+   "pr_auc_base_rate": 0.1179890560875513
+  },
+  {
+   "series": "nyc_taxi",
+   "method": "Local Outlier Factor",
+   "windows": 5,
+   "detected": 2,
+   "recall_events": 0.4,
+   "false_alarms": 0,
+   "false_alarms_per_week": 0.0,
+   "alert_precision": 1.0,
+   "mean_detection_position": 0.5218446601941747,
+   "pr_auc": 0.2516218680622695,
+   "pr_auc_base_rate": 0.1179890560875513
+  },
+  {
+   "series": "nyc_taxi",
+   "method": "Ensemble (rank mean)",
+   "windows": 5,
+   "detected": 3,
+   "recall_events": 0.6,
+   "false_alarms": 29,
+   "false_alarms_per_week": 1.1109337589784518,
+   "alert_precision": 0.12121212121212122,
+   "mean_detection_position": 0.31067961165048547,
+   "pr_auc": 0.15983954692898403,
+   "pr_auc_base_rate": 0.1179890560875513
+  }
+ ],
+ "summary": [
+  {
+   "method": "Rolling robust z",
+   "windows": 15,
+   "detected": 6,
+   "false_alarms": 29,
+   "fa_per_week": 0.3303951793589641,
+   "pr_auc": 0.128893076655919,
+   "alert_precision": 0.2777777777777778,
+   "detection_position": 0.34224471359832825,
+   "recall_events": 0.4
+  },
+  {
+   "method": "Seasonal residual z",
+   "windows": 15,
+   "detected": 6,
+   "false_alarms": 55,
+   "fa_per_week": 2.3804862112215934,
+   "pr_auc": 0.19326431582725084,
+   "alert_precision": 0.11499999999999999,
+   "detection_position": 0.27453553846683987,
+   "recall_events": 0.4
+  },
+  {
+   "method": "Isolation Forest",
+   "windows": 15,
+   "detected": 10,
+   "false_alarms": 56,
+   "fa_per_week": 2.5565863091445866,
+   "pr_auc": 0.24114937990422752,
+   "alert_precision": 0.24239130434782608,
+   "detection_position": 0.4550378943136998,
+   "recall_events": 0.6666666666666666
+  },
+  {
+   "method": "Local Outlier Factor",
+   "windows": 15,
+   "detected": 9,
+   "false_alarms": 49,
+   "fa_per_week": 1.4978051323148853,
+   "pr_auc": 0.34892495159831005,
+   "alert_precision": 0.3939901477832512,
+   "detection_position": 0.3871707656253912,
+   "recall_events": 0.6
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "windows": 15,
+   "detected": 9,
+   "false_alarms": 73,
+   "fa_per_week": 2.3743896128077493,
+   "pr_auc": 0.20143151651099722,
+   "alert_precision": 0.13235705470999587,
+   "detection_position": 0.3685807669349321,
+   "recall_events": 0.6
+  }
+ ],
+ "operating_curve": [
+  {
+   "method": "Rolling robust z",
+   "quantile": 0.98,
+   "detected": 11,
+   "windows": 15,
+   "fa_per_week": 3.0493420859988616
+  },
+  {
+   "method": "Rolling robust z",
+   "quantile": 0.99,
+   "detected": 10,
+   "windows": 15,
+   "fa_per_week": 2.282020187536834
+  },
+  {
+   "method": "Rolling robust z",
+   "quantile": 0.995,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 1.5061676597492606
+  },
+  {
+   "method": "Rolling robust z",
+   "quantile": 0.999,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 0.3303951793589641
+  },
+  {
+   "method": "Rolling robust z",
+   "quantile": 0.9995,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 0.305138473944199
+  },
+  {
+   "method": "Rolling robust z",
+   "quantile": 1.0,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 0.2562958422738896
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 0.98,
+   "detected": 10,
+   "windows": 15,
+   "fa_per_week": 3.86688892184353
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 0.99,
+   "detected": 10,
+   "windows": 15,
+   "fa_per_week": 2.8183147444197427
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 0.995,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 2.7042581864436004
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 0.999,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 2.3804862112215934
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 0.9995,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 2.3492386728351633
+  },
+  {
+   "method": "Seasonal residual z",
+   "quantile": 1.0,
+   "detected": 7,
+   "windows": 15,
+   "fa_per_week": 2.0383210936083107
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 0.98,
+   "detected": 12,
+   "windows": 15,
+   "fa_per_week": 5.283701226014504
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 0.99,
+   "detected": 11,
+   "windows": 15,
+   "fa_per_week": 4.348578510138362
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 0.995,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 3.8077234761975163
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 0.999,
+   "detected": 10,
+   "windows": 15,
+   "fa_per_week": 2.5565863091445866
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 0.9995,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 2.2875638138418153
+  },
+  {
+   "method": "Isolation Forest",
+   "quantile": 1.0,
+   "detected": 6,
+   "windows": 15,
+   "fa_per_week": 1.7040367160425398
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 0.98,
+   "detected": 14,
+   "windows": 15,
+   "fa_per_week": 7.069052424636494
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 0.99,
+   "detected": 14,
+   "windows": 15,
+   "fa_per_week": 6.011765914603186
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 0.995,
+   "detected": 13,
+   "windows": 15,
+   "fa_per_week": 4.644850613204819
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 0.999,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 1.4978051323148853
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 0.9995,
+   "detected": 8,
+   "windows": 15,
+   "fa_per_week": 1.2384490342913148
+  },
+  {
+   "method": "Local Outlier Factor",
+   "quantile": 1.0,
+   "detected": 7,
+   "windows": 15,
+   "fa_per_week": 0.8934760057088063
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 0.98,
+   "detected": 14,
+   "windows": 15,
+   "fa_per_week": 5.781256286081971
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 0.99,
+   "detected": 13,
+   "windows": 15,
+   "fa_per_week": 4.989407965739295
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 0.995,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 3.4382948675666647
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 0.999,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 2.3743896128077493
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 0.9995,
+   "detected": 9,
+   "windows": 15,
+   "fa_per_week": 2.1695953392372163
+  },
+  {
+   "method": "Ensemble (rank mean)",
+   "quantile": 1.0,
+   "detected": 7,
+   "windows": 15,
+   "fa_per_week": 1.7596778921717344
+  }
+ ],
+ "series_meta": {
+  "machine_temperature": {
+   "description": "Industrial machine temperature sensor; known catastrophic failure"
+  },
+  "ambient_temperature": {
+   "description": "Office ambient temperature during an HVAC system failure"
+  },
+  "cpu_asg_misconfig": {
+   "description": "AWS CPU utilization after an auto-scaling group misconfiguration"
+  },
+  "ec2_latency": {
+   "description": "EC2 request latency ahead of a system failure"
+  },
+  "nyc_taxi": {
+   "description": "NYC taxi demand (30-min): marathon, Thanksgiving, Christmas, New Year, blizzard"
+  }
+ },
+ "runtime_sec": 3.7
+}
