@@ -1,0 +1,104 @@
+# Production path: MCP Toolbox for Databases on AlloyDB for PostgreSQL
+# (schema & data: the reference repo's data/store_backup.sql, or mcp_server/store_db.py).
+#   ./toolbox --tools-file ecommerce_agent/deployment/toolbox/tools.yaml
+#   export MCP_TOOLBOX_URL=http://127.0.0.1:5000      # agent switches automatically
+# user_email is bound from a verified Google ID token (authServices), so - exactly
+# like the local before_tool_callback - the model can never choose whose data it touches.
+authServices:
+  google_signin:
+    kind: google
+    clientId: ${GOOGLE_OAUTH_CLIENT_ID}
+
+sources:
+  store-db:
+    kind: alloydb-postgres
+    project: ${PROJECT_ID}
+    region: ${REGION}
+    cluster: ${ALLOYDB_CLUSTER}
+    instance: ${ALLOYDB_INSTANCE}
+    database: store
+    user: ${DB_USER}
+    password: ${DB_PASS}
+
+tools:
+  search_products:
+    kind: postgres-sql
+    source: store-db
+    description: Find products matching a shopper's description (semantic vector search).
+    parameters:
+      - {name: query, type: string, description: What the shopper is looking for.}
+    statement: |
+      SELECT p.name, p.brand, p.category, p.description, MIN(v.price) AS price
+      FROM products p JOIN products_variants v USING (product_id)
+      GROUP BY p.product_id
+      ORDER BY p.embedding <=> embedding('text-embedding-005', $1)::vector LIMIT 5;
+  search_products_by_brand:
+    kind: postgres-sql
+    source: store-db
+    description: Products for a brand name only (e.g. Nike).
+    parameters:
+      - {name: brand, type: string, description: Brand name.}
+    statement: |
+      SELECT p.name, p.brand, p.category, p.description, MIN(v.price) AS price
+      FROM products p JOIN products_variants v USING (product_id)
+      WHERE p.brand ILIKE '%' || $1 || '%' GROUP BY p.product_id ORDER BY p.popularity_score DESC;
+  get_product_details:
+    kind: postgres-sql
+    source: store-db
+    description: Sizes, colours and prices of a product.
+    parameters:
+      - {name: product_name, type: string, description: Product name.}
+    statement: |
+      SELECT p.name, p.brand, p.category, p.description,
+             array_agg(DISTINCT v.size) AS sizes, array_agg(DISTINCT v.color) AS colors, MIN(v.price) AS price
+      FROM products p JOIN products_variants v USING (product_id)
+      WHERE p.name ILIKE $1 GROUP BY p.product_id;
+  show_shopping_list:
+    kind: postgres-sql
+    source: store-db
+    description: The signed-in user's shopping list.
+    parameters:
+      - name: user_email
+        type: string
+        description: Auto-populated from Google sign-in.
+        authServices: [{name: google_signin, field: email}]
+    statement: |
+      SELECT p.name AS product, p.brand, v.size, v.color, v.price, sli.quantity
+      FROM users u JOIN shopping_lists sl USING (user_id)
+      JOIN shopping_list_items sli USING (list_id)
+      JOIN products_variants v USING (variant_id) JOIN products p ON p.product_id = v.product_id
+      WHERE u.email = $1;
+  check_order_status:
+    kind: postgres-sql
+    source: store-db
+    description: Orders of the signed-in user.
+    parameters:
+      - name: user_email
+        type: string
+        description: Auto-populated from Google sign-in.
+        authServices: [{name: google_signin, field: email}]
+    statement: |
+      SELECT o.order_id, s.name AS store, o.order_status, o.total_amount, o.shipping_address
+      FROM orders o JOIN users u USING (user_id) JOIN stores s USING (store_id)
+      WHERE u.email = $1 ORDER BY o.order_id DESC;
+  list_delivery_methods:
+    kind: postgres-sql
+    source: store-db
+    description: Delivery options of a store.
+    parameters:
+      - {name: store_name, type: string, description: Store name.}
+    statement: |
+      SELECT d.name, d.description, d.base_cost AS cost, d.estimated_delivery_time AS eta
+      FROM delivery_methods d JOIN stores s USING (store_id) WHERE s.name ILIKE '%' || $1 || '%';
+  # add_to_shopping_list, find_nearby_stores, place_order, update_order_delivery_method and
+  # cancel_order follow the same pattern; see the reference repo's src/toolbox/tools.yaml
+  # for their full SQL (place_order is a single CTE that inserts the order + items).
+
+toolsets:
+  store_toolset:
+    - search_products
+    - search_products_by_brand
+    - get_product_details
+    - show_shopping_list
+    - check_order_status
+    - list_delivery_methods
