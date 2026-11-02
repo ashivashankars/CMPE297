@@ -1,0 +1,13 @@
+# Core (tested with google-adk 2.13 / mcp 2.3 on Python 3.11-3.13)
+google-adk>=2.13,<3
+mcp>=1.13
+python-dotenv>=1.0
+pydantic>=2.7
+pycodestyle>=2.11          # (d) style checks
+
+# Optional integrations
+langchain-community>=0.3   # (c) StackExchange tool
+stackapi>=0.3              # (c) StackExchange tool
+
+# Dev
+pytest>=8

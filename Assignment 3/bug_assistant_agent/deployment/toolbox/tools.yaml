@@ -1,0 +1,106 @@
+# MCP Toolbox for Databases config - the production twin of mcp_server/ticket_server.py.
+# Start:   ./toolbox --tools-file deployment/toolbox/tools.yaml
+# Then:    export MCP_TOOLBOX_URL=http://127.0.0.1:5000   (agent switches automatically)
+sources:
+  tickets-db:
+    kind: cloud-sql-postgres          # or: kind: postgres (local) / alloydb-postgres
+    project: ${PROJECT_ID}
+    region: ${REGION}
+    instance: ${INSTANCE}
+    database: tickets
+    user: ${DB_USER}
+    password: ${DB_PASS}
+
+tools:
+  search_tickets:
+    kind: postgres-sql
+    source: tickets-db
+    description: Find tickets similar to a bug description (vector search). distance <= 0.3 suggests a duplicate.
+    parameters:
+      - {name: query, type: string, description: Bug description to search with.}
+    statement: |
+      SELECT ticket_id, title, description, assignee, priority, status,
+             (embedding <=> embedding('text-embedding-005', $1)::vector) AS distance
+      FROM tickets ORDER BY distance ASC LIMIT 3;
+  get_ticket_by_id:
+    kind: postgres-sql
+    source: tickets-db
+    description: Retrieve one ticket by ID.
+    parameters:
+      - {name: ticket_id, type: integer, description: Ticket ID.}
+    statement: SELECT * FROM tickets WHERE ticket_id = $1;
+  get_tickets_by_assignee:
+    kind: postgres-sql
+    source: tickets-db
+    description: Tickets whose assignee email contains the text.
+    parameters:
+      - {name: assignee, type: string, description: Assignee email or part of it.}
+    statement: SELECT * FROM tickets WHERE assignee ILIKE '%' || $1 || '%';
+  get_tickets_by_status:
+    kind: postgres-sql
+    source: tickets-db
+    description: Tickets with a status (Open, In Progress, Resolved, Closed).
+    parameters:
+      - {name: status, type: string, description: Status.}
+    statement: SELECT * FROM tickets WHERE status ILIKE '%' || $1 || '%';
+  get_tickets_by_priority:
+    kind: postgres-sql
+    source: tickets-db
+    description: Tickets with a priority (P0 - Critical ... P3 - Low).
+    parameters:
+      - {name: priority, type: string, description: Priority.}
+    statement: SELECT * FROM tickets WHERE priority ILIKE '%' || $1 || '%';
+  get_tickets_by_date_range:
+    kind: postgres-sql
+    source: tickets-db
+    description: Tickets created or updated within a date range (inclusive).
+    parameters:
+      - {name: start_date, type: string, description: YYYY-MM-DD}
+      - {name: end_date, type: string, description: YYYY-MM-DD}
+      - {name: date_field, type: string, description: creation_time or updated_time}
+    statement: |
+      SELECT * FROM tickets
+      WHERE CASE WHEN $3 = 'updated_time' THEN updated_time ELSE creation_time END
+            BETWEEN $1::date AND ($2::date + INTERVAL '1 day');
+  create_new_ticket:
+    kind: postgres-sql
+    source: tickets-db
+    description: Create a ticket. Priority one of 'P0 - Critical','P1 - High','P2 - Medium','P3 - Low'.
+    parameters:
+      - {name: title, type: string, description: Short title.}
+      - {name: description, type: string, description: Detailed description.}
+      - {name: assignee, type: string, description: Assignee email (may be empty).}
+      - {name: priority, type: string, description: Priority.}
+      - {name: status, type: string, description: Initial status, usually Open.}
+    statement: |
+      INSERT INTO tickets (title, description, assignee, priority, status)
+      VALUES ($1, $2, $3, COALESCE(NULLIF($4,''), 'P3 - Low'), COALESCE(NULLIF($5,''), 'Open'))
+      RETURNING ticket_id;
+  update_ticket_status:
+    kind: postgres-sql
+    source: tickets-db
+    description: Update a ticket's status.
+    parameters:
+      - {name: ticket_id, type: integer, description: Ticket ID.}
+      - {name: status, type: string, description: New status.}
+    statement: UPDATE tickets SET status = $2 WHERE ticket_id = $1 RETURNING ticket_id, status;
+  update_ticket_priority:
+    kind: postgres-sql
+    source: tickets-db
+    description: Update a ticket's priority.
+    parameters:
+      - {name: ticket_id, type: integer, description: Ticket ID.}
+      - {name: priority, type: string, description: New priority.}
+    statement: UPDATE tickets SET priority = $2 WHERE ticket_id = $1 RETURNING ticket_id, priority;
+
+toolsets:
+  tickets_toolset:
+    - search_tickets
+    - get_ticket_by_id
+    - get_tickets_by_assignee
+    - get_tickets_by_status
+    - get_tickets_by_priority
+    - get_tickets_by_date_range
+    - create_new_ticket
+    - update_ticket_status
+    - update_ticket_priority
