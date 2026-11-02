@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walkthrough · Data Science Full-Stack Lab</title>
+<style>
+  :root { --paper:#f5f2ea; --panel:#fffdf8; --ink:#1e1d1a; --muted:#6b675e; --line:#e2ddd0; --accent:#2f5d50; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.55 "Inter","Segoe UI",system-ui,sans-serif; }
+  .wrap { max-width:1100px; margin:0 auto; padding:32px 24px 80px; }
+  h1 { font-size:1.8rem; margin:0 0 6px; }
+  p.sub { color:var(--muted); margin:0 0 22px; max-width:70ch; }
+  video { width:100%; border-radius:10px; border:1px solid var(--line); background:#000; display:block; }
+  .chapters { margin-top:22px; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+  .ch { text-align:left; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 14px; cursor:pointer; font:inherit; color:inherit; }
+  .ch:hover { border-color:var(--accent); }
+  .ch b { display:block; }
+  .ch small { color:var(--muted); font-family:"SFMono-Regular",Menlo,Consolas,monospace; }
+  .ch.on { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Data Science Full-Stack Lab — walkthrough</h1>
+  <p class="sub">A captioned tour of the code and UX of all six projects. Click a chapter to jump. <a href="../../README.md">Back to the repository README</a>.</p>
+  <video id="v" controls preload="metadata" src="walkthrough.mp4"></video>
+  <div class="chapters" id="ch"></div>
+</div>
+<script>
+fetch("chapters.json").then((r) => r.json()).then((cs) => {
+  const v = document.getElementById("v");
+  const mm = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  document.getElementById("ch").innerHTML = cs.map((c, i) =>
+    `<button class="ch" data-i="${i}" data-t="${c.start_sec}"><b>${c.title}</b><small>${mm(c.start_sec)} · ${mm(c.duration_sec)} long</small></button>`).join("");
+  const buttons = [...document.querySelectorAll(".ch")];
+  buttons.forEach((b) => (b.onclick = () => { v.currentTime = +b.dataset.t; v.play(); }));
+  v.addEventListener("timeupdate", () => {
+    let active = 0;
+    cs.forEach((c, i) => { if (v.currentTime >= c.start_sec) active = i; });
+    buttons.forEach((b, i) => b.classList.toggle("on", i === active));
+  });
+});
+</script>
+</body>
+</html>

@@ -299,13 +299,20 @@ def top(video: str, chapters: list[dict]):
         }[d["slug"]]()
         rows.append([f"[**{d['title']}**](projects/{d['slug']})", headline, f"![{d['slug']}](projects/{d['slug']}/screenshots/01_overview.png)"])
     chap = "\n".join(f"| `{int(c['start_sec'] // 60):02d}:{int(c['start_sec'] % 60):02d}` | {c['title']} | {int(c['duration_sec'] // 60)}m {int(c['duration_sec'] % 60)}s |" for c in chapters) if chapters else ""
+    pages = "https://ashivashankars.github.io/CMPE297/Data%20science%20full%20stack%20with%20ai%20coding%20assistant/docs/video/"
     return f"""# Data Science Full-Stack Lab
 
 Six end-to-end data science projects, each built from business question to deployed interactive app following **CRISP-DM**. They replicate (and extend) the experiments and prompts in [dlmastery/data_science_examples]({SOURCE}), rebuilt with an AI coding assistant (Claude).
 
 ## 🎬 Video walkthrough
 
-**[▶ Watch the walkthrough (code + UX of every project)]({video})**: a captioned tour of every tab of every app, including each app's Code tour of the source.
+A 14-minute captioned tour of the code **and** the UX of every project, including each app's Code tour of its own source.
+
+| How to watch | Link |
+|---|---|
+| **Play in the browser** (chapter buttons, no download) | **[▶ Open the player]({pages})** — requires GitHub Pages to be on for this repo (Settings → Pages → Source: `main` / root) |
+| **Download the MP4** (9 MB, plays in any video player) | [walkthrough.mp4]({video}?raw=1) |
+| **Watch locally after cloning** | open `docs/video/index.html` |
 
 {"| Start | Chapter | Length |" + chr(10) + "|---|---|---|" + chr(10) + chap if chap else ""}
 
