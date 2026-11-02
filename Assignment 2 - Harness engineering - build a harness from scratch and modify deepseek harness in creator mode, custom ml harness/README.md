@@ -6,20 +6,20 @@ Three parts, one idea: **Model + Harness = Agent.**
 
 | Part | What it is | Code | Video |
 |---|---|---|---|
-| **A** | A coding-agent harness built from scratch in 6 progressive steps, on the **OpenRouter** API | [`part-a-harness-from-scratch/`](part-a-harness-from-scratch/) | [6m 26s](videos/part-a-harness-from-scratch.mp4) |
-| **B** | **DeepSeek Harness** in **Creator mode**: 6 existing plugins installed + **2 plugins written from scratch** | [`part-b-deepseek-harness/`](part-b-deepseek-harness/) | [4m 56s](videos/part-b-deepseek-harness-creator-mode.mp4) |
-| **C** | A custom **ML autoresearch harness** + its DeepSeek Harness plugin, shown working end to end | [`part-c-ml-autoresearch-harness/`](part-c-ml-autoresearch-harness/) | [5m 39s](videos/part-c-ml-autoresearch-harness.mp4) |
+| **A** | A coding-agent harness built from scratch in 6 progressive steps, on the **OpenRouter** API | [`part-a-harness-from-scratch/`](https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) | [6m 26s]( https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) |
+| **B** | **DeepSeek Harness** in **Creator mode**: 6 existing plugins installed + **2 plugins written from scratch** | [`part-b-deepseek-harness/`](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) | [4m 56s](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) |
+| **C** | A custom **ML autoresearch harness** + its DeepSeek Harness plugin, shown working end to end | [`part-c-ml-autoresearch-harness/`](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) | [5m 39s](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) |
 
 ## 🎬 Videos
 
 Each video walks through **every file** with captions explaining the code, then shows it **executing** (real terminal output and real DeepSeek Harness screen recordings).
 
 ### Part A — harness from scratch
-[![Part A preview: the verifier catches a premature "done"](videos/preview-a.gif)](videos/part-a-harness-from-scratch.mp4)
+[![Part A preview: the verifier catches a premature "done"](videos/preview-a.gif)](https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing)
 
 | How to watch | Link |
 |---|---|
-| **MP4** (12 MB, 6m 26s) | [videos/part-a-harness-from-scratch.mp4](videos/part-a-harness-from-scratch.mp4) |
+| **MP4** (12 MB, 6m 26s) | [videos/part-a-harness-from-scratch.mp4](https://drive.google.com/file/d/1SfgilVU6VmwXVNRfZWXCUoJtl2q1UaGD/view?usp=sharing) |
 
 | Start | Chapter | Length |
 |---|---|---|
@@ -34,11 +34,11 @@ Each video walks through **every file** with captions explaining the code, then 
 | `06:16` | Recap | 0m 10s |
 
 ### Part B — DeepSeek Harness, Creator mode, plugins
-[![Part B preview: Creator mode in the DSH Web UI](videos/preview-b.gif)](videos/part-b-deepseek-harness-creator-mode.mp4)
+[![Part B preview: Creator mode in the DSH Web UI](videos/preview-b.gif)](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing)
 
 | How to watch | Link |
 |---|---|
-| **MP4** (9 MB, 4m 56s) | [videos/part-b-deepseek-harness-creator-mode.mp4](videos/part-b-deepseek-harness-creator-mode.mp4) |
+| **MP4** (9 MB, 4m 56s) | [videos/part-b-deepseek-harness-creator-mode.mp4](https://drive.google.com/file/d/1Ykqu9lsY3psSEofmge1rIDNdnnOmO8hM/view?usp=sharing) |
 
 | Start | Chapter | Length |
 |---|---|---|
@@ -53,11 +53,11 @@ Each video walks through **every file** with captions explaining the code, then 
 | `04:45` | Recap | 0m 10s |
 
 ### Part C — ML autoresearch harness
-[![Part C preview: 7 experiments, keep / discard / reject / crash](videos/preview-c.gif)](videos/part-c-ml-autoresearch-harness.mp4)
+[![Part C preview: 7 experiments, keep / discard / reject / crash](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing)
 
 | How to watch | Link |
 |---|---|
-| **MP4** (11 MB, 5m 39s) | [videos/part-c-ml-autoresearch-harness.mp4](videos/part-c-ml-autoresearch-harness.mp4) |
+| **MP4** (11 MB, 5m 39s) | [videos/part-c-ml-autoresearch-harness.mp4](https://drive.google.com/file/d/1MKF52iYRLyEEqS-liZLWITrsGKEQGQHs/view?usp=sharing) |
 
 | Start | Chapter | Length |
 |---|---|---|
