@@ -12,7 +12,7 @@ Five agents built with the [Google Agent Development Kit (ADK)](https://google.g
 | d | Production **code review assistant** | [`code_review_assistant/`](code_review_assistant/) | Multi-agent review pipeline, **sandboxed code execution**, LoopAgent fix cycle, `user:` state for cross-session history, versioned artifacts | [codelab](https://codelabs.developers.google.com/adk-code-reviewer-assistant/instructions) · [repo](https://github.com/ayoisio/adk-code-review-assistant) |
 | e | Production **e-commerce agent** | [`ecommerce_agent/`](ecommerce_agent/) | MCP store server with transactional orders, **identity enforcement** in `before_tool_callback`, **human-in-the-loop confirmation** on checkout, audit log, AlloyDB Toolbox config | [codelab](https://codelabs.developers.google.com/codelabs/sports-agent-adk-mcp-alloydb) · [repo](https://github.com/mtoscano84/sports-agent-adk-mcp-alloydb) |
 
-📹 **Video walkthrough:** [`video/Assignment3_ADK_walkthrough.mp4`](video/Assignment3_ADK_walkthrough.mp4), a narrated code and execution walkthrough of all five agents. Timestamps and a script for recording a live version are in [`VIDEO_WALKTHROUGH.md`](VIDEO_WALKTHROUGH.md).
+📹 **Video walkthrough:** [`video/Assignment3_ADK_walkthrough.mp4`](https://drive.google.com/file/d/15sSZnusLJcKP1WpK4NsnFMuozfsHFav3/view?usp=sharing), a narrated code and execution walkthrough of all five agents. Timestamps and a script for recording a live version are in [`VIDEO_WALKTHROUGH.md`](VIDEO_WALKTHROUGH.md).
 
 🧾 **Execution traces:** [`transcripts/offline/`](transcripts/offline/) has one trace per agent: every sub-agent hop, tool call, tool result and state change.
 
