@@ -8,9 +8,7 @@ A 14-minute captioned tour of the code **and** the UX of every project, includin
 
 | How to watch | Link |
 |---|---|
-| **Play in the browser** (chapter buttons, no download) | **[▶ Open the player](https://ashivashankars.github.io/CMPE297/Data%20science%20full%20stack%20with%20ai%20coding%20assistant/docs/video/)** — requires GitHub Pages to be on for this repo (Settings → Pages → Source: `main` / root) |
-| **Download the MP4** (9 MB, plays in any video player) | [walkthrough.mp4](https://github.com/ashivashankars/CMPE297/blob/main/Data%20science%20full%20stack%20with%20ai%20coding%20assistant/docs/video/walkthrough.mp4?raw=1) |
-| **Watch locally after cloning** | open `docs/video/index.html` |
+| **Download the MP4** (9 MB, plays in any video player) | [walkthrough.mp4](https://drive.google.com/file/d/1S8wBjR_qyN4oXEHe7Xev-Qh-AMnbu07u/view?usp=sharing) |
 
 | Start | Chapter | Length |
 |---|---|---|
