@@ -1,18 +1,18 @@
 # Video walkthrough
 
-## 1. Included video: code + execution walkthrough (≈ 9 min)
+## 1. Included video: code + execution walkthrough (8 min 41 s)
 
-**File:** [`video/Assignment3_ADK_walkthrough.mp4`](video/Assignment3_ADK_walkthrough.mp4) (1080p, narrated)
+**File:** [`video/Assignment3_ADK_walkthrough.mp4`](video/Assignment3_ADK_walkthrough.mp4) (1080p, 30 fps, narrated with a synthesized voice, 22 MB)
 
 | Time | Section | What is shown |
 |---|---|---|
 | 0:00 | Intro | The five agents, setup (`pip install`, `.env`, `adk web`, `pytest`) |
-| ~1:10 | (a) Lead generation | Architecture → `research_fanout.py` (dynamic ParallelAgent) → two-turn execution trace |
-| ~2:50 | (b) Gemini CLI tool | Architecture → `run_gemini_cli` hardening → URL-injection, loop and budget tests + pipeline trace |
-| ~4:20 | (c) MCP bug assistant | Architecture → `McpToolset` wiring (stdio, GitHub HTTP, Toolbox) → real MCP round-trip trace |
-| ~5:40 | (d) Code review | Architecture → fix `LoopAgent` + validator → trace where the loop runs twice and escalates |
-| ~7:00 | (e) E-commerce | Architecture → identity guard + `require_confirmation` → shopping journey with a spoofed email |
-| ~8:20 | Tests & deploy | `pytest -v` (19 passed) → `adk deploy cloud_run` / `agent_engine` |
+| 1:09 | (a) Lead generation | Architecture → `research_fanout.py` (dynamic ParallelAgent) → two-turn execution trace |
+| 2:38 | (b) Gemini CLI tool | Architecture → `run_gemini_cli` hardening → URL-injection, loop and budget tests + pipeline trace |
+| 4:02 | (c) MCP bug assistant | Architecture → `McpToolset` wiring (stdio, GitHub HTTP, Toolbox) → real MCP round-trip trace |
+| 5:23 | (d) Code review | Architecture → fix `LoopAgent` + validator → trace where the loop runs twice and escalates |
+| 6:38 | (e) E-commerce | Architecture → identity guard + `require_confirmation` → shopping journey with a spoofed email |
+| 7:53 | Tests & deploy | `pytest -v` (19 passed) → `adk deploy cloud_run` / `agent_engine` |
 
 The execution segments come from **real runs** of each agent through ADK's `Runner`: real tools, both MCP servers as stdio subprocesses, SQLite transactions, the Gemini CLI subprocess path, parallel fan-out, loops, callbacks, session state and artifacts. Only the Gemini model is replaced by a scripted stand-in (`tests/fake_llm.py`), so the runs are reproducible and need no API key. The full traces are in [`transcripts/offline/`](transcripts/offline/). To regenerate them:
 
