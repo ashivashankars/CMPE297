@@ -1,0 +1,8 @@
+[
+ {"tool": "brain_capture", "args": {"title": "Agent Loop", "tags": "harness, cmpe297", "body": "Call model -> run tools -> feed results back -> repeat until a plain answer. Needs a [[Verifier]] to decide when work is really done."}},
+ {"tool": "brain_capture", "args": {"title": "Verifier", "tags": "harness, evals", "body": "The harness, not the model, runs tests before accepting 'done'. Failures go back into the [[Agent Loop]] as a repair step."}},
+ {"tool": "brain_capture", "args": {"title": "Context Compaction", "tags": "context-engineering", "body": "Fold old turns into a summary so long runs fit the window. Used together with the [[Agent Loop]]."}},
+ {"tool": "brain_search", "args": {"query": "how does the harness know the agent loop is done?"}},
+ {"tool": "brain_graph", "args": {}},
+ {"text": "Saved 3 linked notes. The graph:\n{{last}}\n\nAnswer: the Verifier note says the harness runs tests before accepting 'done'; failures are fed back into the Agent Loop."}
+]

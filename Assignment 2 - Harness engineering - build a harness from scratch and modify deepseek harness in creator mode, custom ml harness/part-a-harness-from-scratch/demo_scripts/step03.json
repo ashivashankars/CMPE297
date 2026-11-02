@@ -1,0 +1,5 @@
+[
+ {"tool": "bash", "args": {"command": "ls"}},
+ {"tool": "read_file", "args": {"path": "notes.txt"}},
+ {"text": "The 3rd line of notes.txt is: \"2. A loop turns one tool call into an agent.\""}
+]

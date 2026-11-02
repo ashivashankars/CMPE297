@@ -1,0 +1,6 @@
+- insert:
+    - id: dataset-profiler
+      name: dsh-dataset-profiler
+      config:
+        maxRows: 200000      # rows read per file
+        missingWarnPct: 20   # flag columns missing more than this

@@ -1,0 +1,41 @@
+[
+ {
+  "tool": "ar_program",
+  "args": {}
+ },
+ {
+  "tool": "ar_experiment",
+  "args": {
+   "hypothesis": "Categorical plan and contract carry signal the numeric-only baseline ignores; one-hot encode them.",
+   "edits": "[{\"old\": \"    X = df[NUMERIC].copy()\\n\", \"new\": \"    X = df[NUMERIC].copy()\\n    X = X.join(pd.get_dummies(df[[\\\"plan\\\", \\\"contract\\\"]], dtype=float))\\n\"}]"
+  }
+ },
+ {
+  "tool": "ar_experiment",
+  "args": {
+   "hypothesis": "A missing last_login_days means no recent login (program.md); add an explicit missing-indicator instead of hiding it with median imputation.",
+   "edits": "[{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"login_missing\\\"] = df[\\\"last_login_days\\\"].isna().astype(float)\\n    return X\\n\"}]"
+  }
+ },
+ {
+  "tool": "ar_experiment",
+  "args": {
+   "hypothesis": "Refund amount should be a very strong churn signal; add it as a feature.",
+   "edits": "[{\"old\": \"NUMERIC = [\\\"monthly_spend\\\"\", \"new\": \"NUMERIC = [\\\"refund_amount\\\", \\\"monthly_spend\\\"\"}]"
+  }
+ },
+ {
+  "tool": "ar_experiment",
+  "args": {
+   "hypothesis": "Support tickets hurt most for basic-plan customers on monthly contracts; add that interaction term.",
+   "edits": "[{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"basic_monthly_tickets\\\"] = df[\\\"support_tickets\\\"] * (df[\\\"plan\\\"] == \\\"basic\\\") * (df[\\\"contract\\\"] == \\\"monthly\\\")\\n    return X\\n\"}]"
+  }
+ },
+ {
+  "tool": "ar_finalize",
+  "args": {}
+ },
+ {
+  "text": "Research summary (all numbers come from the frozen evaluator, not from me):\n\n{{last}}\n\nNote: experiment 3 (refund_amount) was rejected by the leakage gate - refunds happen after churn."
+ }
+]

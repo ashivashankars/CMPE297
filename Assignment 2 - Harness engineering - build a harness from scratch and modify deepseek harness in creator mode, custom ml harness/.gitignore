@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+node_modules/
+# Part A: scratch copy of the demo workspace + run logs
+part-a-harness-from-scratch/workspace/
+# Part B: notes written by demos, community plugin clones
+part-b-deepseek-harness/demo/brain/
+part-b-deepseek-harness/community/
+# Part C: generated data (python prepare.py recreates it exactly)
+part-c-ml-autoresearch-harness/autoresearch/data/

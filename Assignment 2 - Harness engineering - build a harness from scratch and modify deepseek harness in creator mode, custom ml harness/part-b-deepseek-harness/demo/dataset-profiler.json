@@ -1,0 +1,5 @@
+[
+ {"tool": "dataset_profile", "args": {"path": "churn.csv"}},
+ {"tool": "dataset_suggest", "args": {"path": "churn.csv", "target": "churned"}},
+ {"text": "Here is the modeling plan from the profiler:\n\n{{last}}\n\nBefore training I would drop customer_id and refund_amount (refunds happen after churn, so it leaks the answer), add a missing-indicator for last_login_days, and use a time split on signup_date."}
+]

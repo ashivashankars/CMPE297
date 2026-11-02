@@ -1,0 +1,13 @@
+{
+  "name": "dsh-dataset-profiler",
+  "version": "0.1.0",
+  "description": "Data-science tools for DeepSeek Harness: profile a CSV and recommend a validated baseline before any modeling.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "cordis.patch.yml"],
+  "keywords": ["dsh-plugin", "data-science"],
+  "license": "MIT",
+  "engines": { "dsh": ">=0.2.0 <0.3.0" },
+  "peerDependencies": { "@deepseek-ai/dsh-tools": ">=0.2.0-0" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

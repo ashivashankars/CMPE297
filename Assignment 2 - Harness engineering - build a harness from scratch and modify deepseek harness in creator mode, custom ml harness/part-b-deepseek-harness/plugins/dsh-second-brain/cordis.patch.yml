@@ -1,0 +1,7 @@
+# Layer added to a profile by `dsh plugin add`. Rows at the root are visible to every
+# agent preset (Standard, Creator, ...). `dir` can be overridden in the profile patch.
+- insert:
+    - id: second-brain
+      name: dsh-second-brain
+      config:
+        dir: !!js process.env.DSH_BRAIN_DIR ?? process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:os').homedir(), '.dsh-second-brain')

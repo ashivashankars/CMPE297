@@ -1,0 +1,8 @@
+# `dir` points at the autoresearch project (program.md, train.py, harness.py, frozen eval).
+- insert:
+    - id: autoresearch
+      name: dsh-autoresearch
+      config:
+        dir: !!js process.env.AUTORESEARCH_DIR ?? process.getBuiltinModule('node:path').join(process.cwd(), 'autoresearch')
+        python: !!js process.env.AUTORESEARCH_PYTHON ?? 'python3'
+        budgetSeconds: 60

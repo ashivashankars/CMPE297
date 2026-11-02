@@ -1,0 +1,3 @@
+- Python 3, standard library only.
+- Raise ValueError (never return None) for invalid input.
+- Do not delete or rename existing functions.

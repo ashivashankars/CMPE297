@@ -1,0 +1,13 @@
+{
+  "name": "dsh-autoresearch",
+  "version": "0.1.0",
+  "description": "Autoresearch ML harness for DeepSeek Harness: the agent proposes experiments, a frozen evaluator with anti-cheat gates decides keep or revert.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "cordis.patch.yml"],
+  "keywords": ["dsh-plugin", "autoresearch", "mlops"],
+  "license": "MIT",
+  "engines": { "dsh": ">=0.2.0 <0.3.0" },
+  "peerDependencies": { "@deepseek-ai/dsh-tools": ">=0.2.0-0" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

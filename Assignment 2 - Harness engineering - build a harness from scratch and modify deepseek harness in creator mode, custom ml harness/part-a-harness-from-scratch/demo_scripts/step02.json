@@ -1,0 +1,4 @@
+[
+ {"tool": "bash", "args": {"command": "ls *.py | wc -l"}},
+ {"text": "There are {{last}} Python files in this folder."}
+]

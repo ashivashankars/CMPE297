@@ -1,0 +1,28 @@
+{
+ "val_auc": 0.8182,
+ "path": "runs/best_train.py",
+ "iter": 5,
+ "hypothesis": "Support tickets hurt most for basic-plan customers on monthly contracts; add that interaction term.",
+ "features": [
+  "monthly_spend",
+  "discount_pct",
+  "support_tickets",
+  "tenure_months",
+  "logins_30d",
+  "last_login_days",
+  "plan_basic",
+  "plan_enterprise",
+  "plan_pro",
+  "contract_annual",
+  "contract_monthly",
+  "login_missing",
+  "basic_monthly_tickets"
+ ],
+ "frozen": {
+  "prepare.py": "11e8330109727118",
+  "evaluate.py": "57a22e3afece032b",
+  "data/train.csv": "757951106c2b39d4",
+  "data/val.csv": "2ea667e2c5459cc9",
+  "data/test.csv": "9ba8dbc2a3d4635d"
+ }
+}

@@ -1,0 +1,4 @@
+Harness engineering notes
+1. The model only decides; the harness acts.
+2. A loop turns one tool call into an agent.
+3. The verifier, not the model, decides when work is done.

@@ -1,0 +1,23 @@
+[
+ {
+  "text": "{\"hypothesis\": \"Categorical plan and contract carry signal the numeric-only baseline ignores; one-hot encode them.\", \"edits\": [{\"old\": \"    X = df[NUMERIC].copy()\\n\", \"new\": \"    X = df[NUMERIC].copy()\\n    X = X.join(pd.get_dummies(df[[\\\"plan\\\", \\\"contract\\\"]], dtype=float))\\n\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"A missing last_login_days means no recent login (program.md); add an explicit missing-indicator instead of hiding it with median imputation.\", \"edits\": [{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"login_missing\\\"] = df[\\\"last_login_days\\\"].isna().astype(float)\\n    return X\\n\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"Gradient boosting can learn non-linear effects; replace logistic regression with HistGradientBoosting.\", \"edits\": [{\"old\": \"from sklearn.linear_model import LogisticRegression\\n\", \"new\": \"from sklearn.ensemble import HistGradientBoostingClassifier\\nfrom sklearn.linear_model import LogisticRegression\\n\"}, {\"old\": \"    return make_pipeline(SimpleImputer(strategy=\\\"median\\\"), StandardScaler(),\\n                         LogisticRegression(max_iter=1000))\", \"new\": \"    return HistGradientBoostingClassifier(max_iter=200, learning_rate=0.05, random_state=0)\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"Refund amount should be a very strong churn signal; add it as a feature.\", \"edits\": [{\"old\": \"NUMERIC = [\\\"monthly_spend\\\"\", \"new\": \"NUMERIC = [\\\"refund_amount\\\", \\\"monthly_spend\\\"\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"Support tickets hurt most for basic-plan customers on monthly contracts; add that interaction term.\", \"edits\": [{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"basic_monthly_tickets\\\"] = df[\\\"support_tickets\\\"] * (df[\\\"plan\\\"] == \\\"basic\\\") * (df[\\\"contract\\\"] == \\\"monthly\\\")\\n    return X\\n\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"Short-tenure customers on discounts may churn when the discount ends; add discount x new-customer feature.\", \"edits\": [{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"new_discount\\\"] = df[\\\"discount_pct\\\"] * (df[\\\"tenure_mnths\\\"] < 12)\\n    return X\\n\"}]}"
+ },
+ {
+  "text": "{\"hypothesis\": \"The south region might churn more; add a region flag.\", \"edits\": [{\"old\": \"    return X\\n\", \"new\": \"    X[\\\"region_south\\\"] = (df[\\\"region\\\"] == \\\"south\\\").astype(float)\\n    return X\\n\"}]}"
+ }
+]
