@@ -1,0 +1,58 @@
+{
+  "coefficients": {
+    "intercept": 0.10098357943528068,
+    "parent_rate": 0.7387180765468427,
+    "lines_net": 0.013915346007581356,
+    "funcs_net": -0.10140554092466217,
+    "groupby_ops_delta": 0.0001315769792369437,
+    "window_ops_delta": 0.018623057127605626,
+    "features_delta": 0.04049241199748544,
+    "alarm_rate_delta": 0.25691409398549675,
+    "ensemble_delta": -0.04487490438134315,
+    "balanced_delta": -0.013959873616825828
+  },
+  "random": 0.36872910464147274,
+  "parent_rate": 0.5717487026274679,
+  "readout": 0.5519149156970521,
+  "best_of_k": 0.6125513950453524,
+  "spearman": 0.7602060182713672,
+  "captured": 0.7513087123910659,
+  "ablations": [
+    {
+      "kind": "diff coords",
+      "n": 8,
+      "picked": 0.5519149156970521,
+      "spearman": 0.7602060182713672
+    },
+    {
+      "kind": "diff coords",
+      "n": 4,
+      "picked": 0.5676248999881769,
+      "spearman": 0.8132810789076685
+    },
+    {
+      "kind": "diff coords",
+      "n": 0,
+      "picked": 0.5717487026274679,
+      "spearman": 0.7194443456096765
+    },
+    {
+      "kind": "labelled edits",
+      "n": 24,
+      "picked": 0.5334283180762333,
+      "spearman": 0.7184475247206042
+    },
+    {
+      "kind": "labelled edits",
+      "n": 48,
+      "picked": 0.5591620185546522,
+      "spearman": 0.7456212353430205
+    },
+    {
+      "kind": "labelled edits",
+      "n": 96,
+      "picked": 0.5519149156970521,
+      "spearman": 0.7602060182713672
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "anomalies": {
+    "mismatch": 54,
+    "recurrence": 69,
+    "opposing": 11
+  },
+  "hypotheses": {
+    "firmware v2 changed vibration units": {
+      "supported": 15,
+      "unresolved": 1
+    },
+    "oil temperature is dominated by weather, not wear": {
+      "refuted-by-test": 13,
+      "supported": 2,
+      "unresolved": 1
+    },
+    "wear shows up as a trend, not a level": {
+      "supported": 16
+    },
+    "particle counter is offline often; signal unused": {
+      "refuted-by-test": 14,
+      "supported": 2
+    },
+    "each sensor has its own calibration offset": {
+      "supported": 6,
+      "unresolved": 1
+    }
+  }
+}
