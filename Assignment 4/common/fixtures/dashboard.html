@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 14px; background: #1e1f24; color: #f2efe8; }
+  h2 { margin: 0 0 4px; font-size: 18px; } p { margin: 0 0 12px; color: #b9b5aa; font-size: 13px; }
+  .donut { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  svg { width: 150px; height: 150px; transform: rotate(-90deg); }
+  .legend div { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 4px 0; cursor: pointer; }
+  .legend div:hover { text-decoration: underline; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; }
+  .total { font-size: 26px; font-weight: 700; }
+</style></head><body>
+  <h2>Q3 revenue share - interactive</h2>
+  <p>Hover a slice, click a region to drill down. This view was written by the model as HTML.</p>
+  <div class="donut"><svg viewBox="0 0 42 42" id="chart"></svg><div><div class="total" id="total"></div><div class="legend" id="legend"></div></div></div>
+<script>
+  const data = [["West", 1420000], ["East", 1180000], ["Central", 860000], ["South", 740000]];
+  const colors = ["#e07a4f", "#e9b44c", "#7fb685", "#6c9bd1"];
+  const total = data.reduce((s, d) => s + d[1], 0);
+  const svg = document.getElementById("chart");
+  let offset = 0;
+  data.forEach(([name, v], i) => {
+    const pct = (100 * v) / total;
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    Object.entries({ cx: 21, cy: 21, r: 15.915, fill: "none", stroke: colors[i], "stroke-width": 6,
+      "stroke-dasharray": pct + " " + (100 - pct), "stroke-dashoffset": -offset }).forEach(([k, val]) => c.setAttribute(k, val));
+    c.onmouseenter = () => (document.getElementById("total").textContent = name + " " + pct.toFixed(1) + "%");
+    svg.appendChild(c);
+    offset += pct;
+    const row = document.createElement("div");
+    row.innerHTML = '<span class="sw" style="background:' + colors[i] + '"></span>' + name + " - $" + (v / 1e6).toFixed(2) + "M";
+    row.onclick = () => window.genui.action("drill_region", { region: name });
+    document.getElementById("legend").appendChild(row);
+  });
+  document.getElementById("total").textContent = "$" + (total / 1e6).toFixed(1) + "M total";
+</script>
+</body></html>

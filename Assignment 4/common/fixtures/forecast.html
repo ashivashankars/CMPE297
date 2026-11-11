@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 12px 14px; color: #1d1d1b; }
+  label { font-size: 13px; font-weight: 600; } input { width: 100%; accent-color: #b5532c; }
+  .out { display: flex; gap: 16px; margin-top: 8px; font-size: 13px; }
+  .out b { display: block; font-size: 20px; }
+</style></head><body>
+  <label for="g">What-if: Q4 growth over Q3 <span id="gv">8</span>%</label>
+  <input id="g" type="range" min="-10" max="30" value="8">
+  <div class="out"><div>Q4 forecast<b id="f"></b></div><div>Change<b id="d"></b></div></div>
+<script>
+  const q3 = 4200000;
+  const g = document.getElementById("g");
+  function draw() {
+    const pct = Number(g.value);
+    document.getElementById("gv").textContent = pct;
+    document.getElementById("f").textContent = "$" + (q3 * (1 + pct / 100) / 1e6).toFixed(2) + "M";
+    document.getElementById("d").textContent = (pct >= 0 ? "+" : "") + "$" + Math.round(q3 * pct / 100 / 1000) + "K";
+  }
+  g.oninput = draw; draw();
+</script>
+</body></html>

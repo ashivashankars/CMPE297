@@ -1,0 +1,173 @@
+== 04_json_render: all four modes + one click
+
+━━ json-render · flat specs streamed as JSON Patch · mode = static ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  add /root                    {"op": "add", "path": "/root", "value": "main"}
+      0 ms  add /elements/main           {"op": "add", "path": "/elements/main", "value": {"type": "SalesOverview", "props": {"title": "Q3 2026 sales", "revenue": "$4.20M"… (318 chars)
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "root": "main"}
+           add /state/detail            {"op": "add", "path": "/state/detail", "value": {"title": "West \u00b7 monthly detail", "total": "$1.42M", "months": ["Jul", "Aug"… (177 chars)
+           add /elements/detail         {"op": "add", "path": "/elements/detail", "value": {"type": "Card", "props": {"title": {"$state": "/detail/title"}}, "children": ["detail-row"]}}
+           add /elements/detail-row     {"op": "add", "path": "/elements/detail-row", "value": {"type": "Row", "props": {}, "children": ["detail-total", "detail-bars"]}}
+           add /elements/detail-total   {"op": "add", "path": "/elements/detail-total", "value": {"type": "Metric", "props": {"label": "Quarter total", "value": {"$state"… (151 chars)
+           add /elements/detail-bars    {"op": "add", "path": "/elements/detail-bars", "value": {"type": "BarChart", "props": {"title": "By month", "labels": {"$state": "… (190 chars)
+           add /elements/page           {"op": "add", "path": "/elements/page", "value": {"type": "Column", "props": {}, "children": ["main", "detail"]}}
+           replace /root                {"op": "replace", "path": "/root", "value": "page"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 11 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 sales (pre-built SalesOverview) ─────
+  │ [Revenue] $4.20M  (+12%)
+  │ [Top region] West
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ json-render · flat specs streamed as JSON Patch · mode = declarative ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  add /root                    {"op": "add", "path": "/root", "value": "main"}
+      0 ms  add /elements/main           {"op": "add", "path": "/elements/main", "value": {"type": "Column", "props": {}, "children": ["title", "kpis", "chart-card", "tabl… (179 chars)
+      0 ms  add /elements/title          {"op": "add", "path": "/elements/title", "value": {"type": "Heading", "props": {"text": {"$state": "/title"}}}}
+      0 ms  add /state/title             {"op": "add", "path": "/state/title", "value": "Q3 2026 - revenue up 12%, West leads"}
+      0 ms  add /elements/kpis           {"op": "add", "path": "/elements/kpis", "value": {"type": "Row", "props": {}, "children": ["k-rev", "k-orders", "k-ticket"]}}
+      0 ms  add /elements/k-rev          {"op": "add", "path": "/elements/k-rev", "value": {"type": "Metric", "props": {"label": "Revenue", "value": {"$state": "/kpi/reven… (154 chars)
+      0 ms  add /elements/k-orders       {"op": "add", "path": "/elements/k-orders", "value": {"type": "Metric", "props": {"label": "Orders", "value": {"$state": "/kpi/orders"}}}}
+      0 ms  add /elements/k-ticket       {"op": "add", "path": "/elements/k-ticket", "value": {"type": "Metric", "props": {"label": "Avg ticket", "value": {"$state": "/kpi/ticket"}}}}
+      0 ms  add /state/kpi               {"op": "add", "path": "/state/kpi", "value": {"revenue": "$4.20M", "orders": "579,300", "ticket": "$7.25"}}
+      0 ms  add /elements/chart-card     {"op": "add", "path": "/elements/chart-card", "value": {"type": "Card", "props": {"title": "Revenue by region"}, "children": ["chart"]}}
+      0 ms  add /elements/chart          {"op": "add", "path": "/elements/chart", "value": {"type": "BarChart", "props": {"labels": {"$state": "/chart/labels"}, "values": … (160 chars)
+      0 ms  add /state/chart             {"op": "add", "path": "/state/chart", "value": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}}
+      0 ms  add /elements/table-hide     {"op": "add", "path": "/elements/table-hide", "value": {"type": "Button", "props": {"label": "Hide orders (setState, client-only)"… (278 chars)
+      0 ms  add /elements/table-show     {"op": "add", "path": "/elements/table-show", "value": {"type": "Button", "props": {"label": "Show orders (setState, client-only)"… (278 chars)
+      0 ms  add /state/showTable         {"op": "add", "path": "/state/showTable", "value": true}
+      0 ms  add /elements/table-card     {"op": "add", "path": "/elements/table-card", "value": {"type": "Card", "props": {"title": "Orders by region"}, "visible": {"$stat… (226 chars)
+      0 ms  add /elements/region-row     {"op": "add", "path": "/elements/region-row", "value": {"type": "Text", "props": {"text": {"$item": "label"}}}}
+      0 ms  add /state/regions           {"op": "add", "path": "/state/regions", "value": []}
+      0 ms  add /state/regions/0         {"op": "add", "path": "/state/regions/0", "value": {"label": "West \u00b7 190,200 orders"}}
+      0 ms  add /state/regions/1         {"op": "add", "path": "/state/regions/1", "value": {"label": "East \u00b7 161,300 orders"}}
+      0 ms  add /state/regions/2         {"op": "add", "path": "/state/regions/2", "value": {"label": "Central \u00b7 122,500 orders"}}
+      0 ms  add /state/regions/3         {"op": "add", "path": "/state/regions/3", "value": {"label": "South \u00b7 105,300 orders"}}
+      0 ms  add /elements/actions        {"op": "add", "path": "/elements/actions", "value": {"type": "Row", "props": {}, "children": ["drill-west", "drill-east"]}}
+      0 ms  add /elements/drill-west     {"op": "add", "path": "/elements/drill-west", "value": {"type": "Button", "props": {"label": "West details"}, "on": {"press": {"ac… (185 chars)
+      0 ms  add /elements/drill-east     {"op": "add", "path": "/elements/drill-east", "value": {"type": "Button", "props": {"label": "East details"}, "on": {"press": {"ac… (185 chars)
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "root": "main"}
+           add /state/detail            {"op": "add", "path": "/state/detail", "value": {"title": "West \u00b7 monthly detail", "total": "$1.42M", "months": ["Jul", "Aug"… (177 chars)
+           add /elements/detail         {"op": "add", "path": "/elements/detail", "value": {"type": "Card", "props": {"title": {"$state": "/detail/title"}}, "children": ["detail-row"]}}
+           add /elements/detail-row     {"op": "add", "path": "/elements/detail-row", "value": {"type": "Row", "props": {}, "children": ["detail-total", "detail-bars"]}}
+           add /elements/detail-total   {"op": "add", "path": "/elements/detail-total", "value": {"type": "Metric", "props": {"label": "Quarter total", "value": {"$state"… (151 chars)
+           add /elements/detail-bars    {"op": "add", "path": "/elements/detail-bars", "value": {"type": "BarChart", "props": {"title": "By month", "labels": {"$state": "… (190 chars)
+           add /elements/page           {"op": "add", "path": "/elements/page", "value": {"type": "Column", "props": {}, "children": ["main", "detail"]}}
+           replace /root                {"op": "replace", "path": "/root", "value": "page"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 22 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  [ Hide orders (setState, client-only) ]  -> action:setState {'statePath': '/showTable', 'value': False}
+  ┌─ Orders by region ────────────────────────────
+  │ West · 190,200 orders
+  │ East · 161,300 orders
+  │ Central · 122,500 orders
+  │ South · 105,300 orders
+  └────────────────────────────────────────────────
+  [ West details ]  -> action:drill_region {'region': 'West'}
+  [ East details ]  -> action:drill_region {'region': 'East'}
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ json-render · flat specs streamed as JSON Patch · mode = open_ended ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  add /root                    {"op": "add", "path": "/root", "value": "main"}
+      0 ms  add /elements/main           {"op": "add", "path": "/elements/main", "value": {"type": "HtmlView", "props": {"title": "Q3 revenue share", "html": "<!doctype ht… (2461 chars)
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "root": "main"}
+           add /state/detail            {"op": "add", "path": "/state/detail", "value": {"title": "West \u00b7 monthly detail", "total": "$1.42M", "months": ["Jul", "Aug"… (177 chars)
+           add /elements/detail         {"op": "add", "path": "/elements/detail", "value": {"type": "Card", "props": {"title": {"$state": "/detail/title"}}, "children": ["detail-row"]}}
+           add /elements/detail-row     {"op": "add", "path": "/elements/detail-row", "value": {"type": "Row", "props": {}, "children": ["detail-total", "detail-bars"]}}
+           add /elements/detail-total   {"op": "add", "path": "/elements/detail-total", "value": {"type": "Metric", "props": {"label": "Quarter total", "value": {"$state"… (151 chars)
+           add /elements/detail-bars    {"op": "add", "path": "/elements/detail-bars", "value": {"type": "BarChart", "props": {"title": "By month", "labels": {"$state": "… (190 chars)
+           add /elements/page           {"op": "add", "path": "/elements/page", "value": {"type": "Column", "props": {}, "children": ["main", "detail"]}}
+           replace /root                {"op": "replace", "path": "/root", "value": "page"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 6 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ json-render · flat specs streamed as JSON Patch · mode = mixed ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  add /root                    {"op": "add", "path": "/root", "value": "main"}
+      0 ms  add /elements/main           {"op": "add", "path": "/elements/main", "value": {"type": "Column", "props": {}, "children": ["kpis", "chart-card", "whatif-card"]}}
+      0 ms  add /elements/kpis           {"op": "add", "path": "/elements/kpis", "value": {"type": "Row", "props": {}, "children": ["k1", "k2"]}}
+      0 ms  add /elements/k1             {"op": "add", "path": "/elements/k1", "value": {"type": "Metric", "props": {"label": "Q3 revenue", "value": "$4.20M", "delta": "+12%"}}}
+      0 ms  add /elements/k2             {"op": "add", "path": "/elements/k2", "value": {"type": "Metric", "props": {"label": "Top region", "value": "West"}}}
+      0 ms  add /elements/chart-card     {"op": "add", "path": "/elements/chart-card", "value": {"type": "Card", "props": {"title": "Revenue by region (catalog)"}, "childr… (155 chars)
+      0 ms  add /elements/chart          {"op": "add", "path": "/elements/chart", "value": {"type": "BarChart", "props": {"labels": ["West", "East", "Central", "South"], "… (176 chars)
+      0 ms  add /elements/drill          {"op": "add", "path": "/elements/drill", "value": {"type": "Button", "props": {"label": "Drill into West"}, "on": {"press": {"acti… (183 chars)
+      0 ms  add /elements/whatif-card    {"op": "add", "path": "/elements/whatif-card", "value": {"type": "Card", "props": {"title": "Q4 what-if (custom region)"}, "children": ["whatif"]}}
+      0 ms  add /elements/whatif         {"op": "add", "path": "/elements/whatif", "value": {"type": "HtmlView", "props": {"title": "What-if slider", "html": "<!doctype ht… (1228 chars)
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "root": "main"}
+           add /state/detail            {"op": "add", "path": "/state/detail", "value": {"title": "West \u00b7 monthly detail", "total": "$1.42M", "months": ["Jul", "Aug"… (177 chars)
+           add /elements/detail         {"op": "add", "path": "/elements/detail", "value": {"type": "Card", "props": {"title": {"$state": "/detail/title"}}, "children": ["detail-row"]}}
+           add /elements/detail-row     {"op": "add", "path": "/elements/detail-row", "value": {"type": "Row", "props": {}, "children": ["detail-total", "detail-bars"]}}
+           add /elements/detail-total   {"op": "add", "path": "/elements/detail-total", "value": {"type": "Metric", "props": {"label": "Quarter total", "value": {"$state"… (151 chars)
+           add /elements/detail-bars    {"op": "add", "path": "/elements/detail-bars", "value": {"type": "BarChart", "props": {"title": "By month", "labels": {"$state": "… (190 chars)
+           add /elements/page           {"op": "add", "path": "/elements/page", "value": {"type": "Column", "props": {}, "children": ["main", "detail"]}}
+           replace /root                {"op": "replace", "path": "/root", "value": "page"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 14 nodes, 1 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

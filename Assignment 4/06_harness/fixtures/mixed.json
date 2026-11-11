@@ -1,0 +1,13 @@
+[
+ {"text": "Loading Q3 sales by region.", "tool_calls": [{"name": "load_sales", "arguments": {"group_by": "region"}}]},
+ {"text": "Catalog for the numbers, one custom region for a what-if.", "tool_calls": [{"name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [
+   {"type": "Row", "props": {}, "children": [
+     {"type": "Metric", "props": {"label": "Q3 revenue", "value": "$4.20M", "delta": "+12%"}},
+     {"type": "Metric", "props": {"label": "Top region", "value": "West"}}]},
+   {"type": "Card", "props": {"title": "Revenue by region (catalog)"}, "children": [
+     {"type": "BarChart", "props": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}},
+     {"type": "Button", "props": {"label": "Drill into West", "action": "drill_region", "params": {"region": "West"}}}]},
+   {"type": "Card", "props": {"title": "Q4 what-if (custom region)"}, "children": [
+     {"type": "HtmlView", "props": {"title": "What-if slider", "html": {{json:forecast.html}}}}]}]}}}]},
+ {"text": "Drag the slider to explore Q4 scenarios.", "tool_calls": []}
+]

@@ -1,0 +1,13 @@
+region,month,revenue,orders
+West,Jul,452000,61200
+West,Aug,471000,63100
+West,Sep,497000,65900
+East,Jul,381000,52400
+East,Aug,392000,53800
+East,Sep,407000,55100
+Central,Jul,276000,39800
+Central,Aug,284000,40600
+Central,Sep,300000,42100
+South,Jul,238000,34100
+South,Aug,246000,35000
+South,Sep,256000,36200

@@ -1,0 +1,5 @@
+[
+ {"text": "Loading Q3 sales by region.", "tool_calls": [{"name": "load_sales", "arguments": {"group_by": "region"}}]},
+ {"text": "No catalog component draws an interactive donut, so I wrote one.", "tool_calls": [{"name": "render_ui", "arguments": {"title": "Q3 revenue share", "html": {{json:dashboard.html}}}}]},
+ {"text": "The donut is interactive: hover a slice, click a region to drill down.", "tool_calls": []}
+]

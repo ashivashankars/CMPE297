@@ -1,0 +1,261 @@
+== 05_openui: all four modes + one click
+
+━━ OpenUI Lang · a compact UI language · mode = static ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  text delta (48 chars)        {"delta": "root = SalesOverview(\"Q3 2026 sales\", \"$4.20M\", "}
+      0 ms  text delta (48 chars)        {"delta": "\"+12%\", [\"West\", \"East\", \"Central\", \"South\"], [1"}
+      0 ms  text delta (34 chars)        {"delta": "420000, 1180000, 860000, 740000])\n"}
+      0 ms  done: 130B vs JSON 537B      {"done": true, "bytes": 130, "jsonTreeBytes": 537, "statements": 1}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "program": "root = SalesOverview(\"Q3 2026 sales\", \"$4.20M\", \"+12%\",… (216 chars)
+           append (app patch)           {"append": "page = SalesOverview(\"Q3 2026 sales\", \"$4.20M\", \"+12%\", [\"West\", \"East\", \"Central\", \"South\"], [1420000, … (374 chars)
+
+  terminal renderer (same tree the browser draws):
+
+  program as streamed:
+    root = SalesOverview("Q3 2026 sales", "$4.20M", "+12%", ["West", "East", "Central", "South"], [1420000, 1180000, 860000, 740000])
+    
+    page = SalesOverview("Q3 2026 sales", "$4.20M", "+12%", ["West", "East", "Central", "South"], [1420000, 1180000, 860000, 740000])
+    detail = Card("West · monthly detail", [Stack([Metric("Quarter total", "$1.42M"), BarChart("By month", ["Jul", "Aug", "S… (162 chars)
+    root = Stack([page, detail])
+  ✓ catalog-valid tree: 11 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 sales (pre-built SalesOverview) ─────
+  │ [Revenue] $4.20M  (+12%)
+  │ [Top region] West
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ OpenUI Lang · a compact UI language · mode = declarative ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  text delta (48 chars)        {"delta": "root = Stack([title, kpis, split, actions])\ntitl"}
+      0 ms  text delta (48 chars)        {"delta": "e = Heading(\"Q3 2026 - revenue up 12%, West lead"}
+      0 ms  text delta (48 chars)        {"delta": "s\")\nkpis = Stack([revenue, orders, ticket], \"row"}
+      0 ms  text delta (48 chars)        {"delta": "\")\nrevenue = Metric(\"Revenue\", \"$4.20M\", \"+12%\")"}
+      0 ms  text delta (48 chars)        {"delta": "\norders = Metric(\"Orders\", \"579,300\")\nticket = M"}
+      0 ms  text delta (48 chars)        {"delta": "etric(\"Avg ticket\", \"$7.25\")\nsplit = Stack([char"}
+      0 ms  text delta (48 chars)        {"delta": "tCard, tableCard], \"row\")\nchartCard = Card(\"Reve"}
+      0 ms  text delta (48 chars)        {"delta": "nue by region\", [BarChart(\"\", [\"West\", \"East\", \""}
+      0 ms  text delta (48 chars)        {"delta": "Central\", \"South\"], [1420000, 1180000, 860000, 7"}
+      0 ms  text delta (48 chars)        {"delta": "40000])])\ntableCard = Card(\"Orders by region\", ["}
+      0 ms  text delta (48 chars)        {"delta": "ordersTable, status])\nordersTable = Table([\"Regi"}
+      0 ms  text delta (48 chars)        {"delta": "on\", \"Orders\"], [[\"West\", 190200], [\"East\", 1613"}
+      0 ms  text delta (48 chars)        {"delta": "00], [\"Central\", 122500], [\"South\", 105300]])\nst"}
+      0 ms  text delta (48 chars)        {"delta": "atus = Badge(\"All regions growing\", \"success\")\na"}
+      0 ms  text delta (48 chars)        {"delta": "ctions = Stack([Button(\"West details\", \"drill_re"}
+      0 ms  text delta (48 chars)        {"delta": "gion\", {\"region\": \"West\"}), Button(\"Central deta"}
+      0 ms  text delta (48 chars)        {"delta": "ils\", \"drill_region\", {\"region\": \"Central\"})], \""}
+      0 ms  text delta (6 chars)         {"delta": "row\")\n"}
+      1 ms  done: 822B vs JSON 1374B     {"done": true, "bytes": 822, "jsonTreeBytes": 1374, "statements": 12}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "program": "root = Stack([title, kpis, split, actions])\ntitle = Heading(… (973 chars)
+           append (app patch)           {"append": "page = Stack([title, kpis, split, actions])\ndetail = Card(\"West \u00b7 monthly detail\", [Stack([Metric(\"Quarter to… (274 chars)
+
+  terminal renderer (same tree the browser draws):
+
+  program as streamed:
+    root = Stack([title, kpis, split, actions])
+    title = Heading("Q3 2026 - revenue up 12%, West leads")
+    kpis = Stack([revenue, orders, ticket], "row")
+    revenue = Metric("Revenue", "$4.20M", "+12%")
+    orders = Metric("Orders", "579,300")
+    ticket = Metric("Avg ticket", "$7.25")
+    split = Stack([chartCard, tableCard], "row")
+    chartCard = Card("Revenue by region", [BarChart("", ["West", "East", "Central", "South"], [1420000, 1180000, 860000, 740000])])
+    tableCard = Card("Orders by region", [ordersTable, status])
+    ordersTable = Table(["Region", "Orders"], [["West", 190200], ["East", 161300], ["Central", 122500], ["South", 105300]])
+    status = Badge("All regions growing", "success")
+    actions = Stack([Button("West details", "drill_region", {"region": "West"}), Button("Central details", "drill_region", {… (150 chars)
+    
+    page = Stack([title, kpis, split, actions])
+    detail = Card("West · monthly detail", [Stack([Metric("Quarter total", "$1.42M"), BarChart("By month", ["Jul", "Aug", "S… (162 chars)
+    root = Stack([page, detail])
+  ✓ catalog-valid tree: 20 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ┌─ Orders by region ────────────────────────────
+  │ Region  | Orders
+  │ --------+-------
+  │ West    | 190200
+  │ East    | 161300
+  │ Central | 122500
+  │ South   | 105300
+  │ (All regions growing)
+  └────────────────────────────────────────────────
+  [ West details ]  -> action:drill_region {'region': 'West'}
+  [ Central details ]  -> action:drill_region {'region': 'Central'}
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ OpenUI Lang · a compact UI language · mode = open_ended ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  text delta (48 chars)        {"delta": "root = HtmlArtifact(\"Q3 revenue share\", \"<!docty"}
+      0 ms  text delta (48 chars)        {"delta": "pe html>\\n<html><head><style>\\n  body { font-fam"}
+      0 ms  text delta (48 chars)        {"delta": "ily: system-ui, sans-serif; margin: 0; padding: "}
+      0 ms  text delta (48 chars)        {"delta": "14px; background: #1e1f24; color: #f2efe8; }\\n  "}
+      0 ms  text delta (48 chars)        {"delta": "h2 { margin: 0 0 4px; font-size: 18px; } p { mar"}
+      0 ms  text delta (48 chars)        {"delta": "gin: 0 0 12px; color: #b9b5aa; font-size: 13px; "}
+      0 ms  text delta (48 chars)        {"delta": "}\\n  .donut { display: flex; gap: 18px; align-it"}
+      0 ms  text delta (48 chars)        {"delta": "ems: center; flex-wrap: wrap; }\\n  svg { width: "}
+      0 ms  text delta (48 chars)        {"delta": "150px; height: 150px; transform: rotate(-90deg);"}
+      0 ms  text delta (48 chars)        {"delta": " }\\n  .legend div { display: flex; align-items: "}
+      0 ms  text delta (48 chars)        {"delta": "center; gap: 8px; font-size: 13px; margin: 4px 0"}
+      0 ms  text delta (48 chars)        {"delta": "; cursor: pointer; }\\n  .legend div:hover { text"}
+      0 ms  text delta (48 chars)        {"delta": "-decoration: underline; }\\n  .sw { width: 12px; "}
+      0 ms  text delta (48 chars)        {"delta": "height: 12px; border-radius: 3px; }\\n  .total { "}
+      0 ms  text delta (48 chars)        {"delta": "font-size: 26px; font-weight: 700; }\\n</style></"}
+      0 ms  text delta (48 chars)        {"delta": "head><body>\\n  <h2>Q3 revenue share - interactiv"}
+      0 ms  text delta (48 chars)        {"delta": "e</h2>\\n  <p>Hover a slice, click a region to dr"}
+      0 ms  text delta (48 chars)        {"delta": "ill down. This view was written by the model as "}
+      0 ms  text delta (48 chars)        {"delta": "HTML.</p>\\n  <div class=\\\"donut\\\"><svg viewBox=\\"}
+      0 ms  text delta (48 chars)        {"delta": "\"0 0 42 42\\\" id=\\\"chart\\\"></svg><div><div class="}
+      0 ms  text delta (48 chars)        {"delta": "\\\"total\\\" id=\\\"total\\\"></div><div class=\\\"legend"}
+      0 ms  text delta (48 chars)        {"delta": "\\\" id=\\\"legend\\\"></div></div></div>\\n<script>\\n "}
+      0 ms  text delta (48 chars)        {"delta": " const data = [[\\\"West\\\", 1420000], [\\\"East\\\", 1"}
+      0 ms  text delta (48 chars)        {"delta": "180000], [\\\"Central\\\", 860000], [\\\"South\\\", 7400"}
+      0 ms  text delta (48 chars)        {"delta": "00]];\\n  const colors = [\\\"#e07a4f\\\", \\\"#e9b44c\\"}
+      0 ms  text delta (48 chars)        {"delta": "\", \\\"#7fb685\\\", \\\"#6c9bd1\\\"];\\n  const total = d"}
+      0 ms  text delta (48 chars)        {"delta": "ata.reduce((s, d) => s + d[1], 0);\\n  const svg "}
+      0 ms  text delta (48 chars)        {"delta": "= document.getElementById(\\\"chart\\\");\\n  let off"}
+      0 ms  text delta (48 chars)        {"delta": "set = 0;\\n  data.forEach(([name, v], i) => {\\n  "}
+      0 ms  text delta (48 chars)        {"delta": "  const pct = (100 * v) / total;\\n    const c = "}
+      0 ms  text delta (48 chars)        {"delta": "document.createElementNS(\\\"http://www.w3.org/200"}
+      0 ms  text delta (48 chars)        {"delta": "0/svg\\\", \\\"circle\\\");\\n    Object.entries({ cx: "}
+      0 ms  text delta (48 chars)        {"delta": "21, cy: 21, r: 15.915, fill: \\\"none\\\", stroke: c"}
+      0 ms  text delta (48 chars)        {"delta": "olors[i], \\\"stroke-width\\\": 6,\\n      \\\"stroke-d"}
+      0 ms  text delta (48 chars)        {"delta": "asharray\\\": pct + \\\" \\\" + (100 - pct), \\\"stroke-"}
+      0 ms  text delta (48 chars)        {"delta": "dashoffset\\\": -offset }).forEach(([k, val]) => c"}
+      0 ms  text delta (48 chars)        {"delta": ".setAttribute(k, val));\\n    c.onmouseenter = ()"}
+      0 ms  text delta (48 chars)        {"delta": " => (document.getElementById(\\\"total\\\").textCont"}
+      0 ms  text delta (48 chars)        {"delta": "ent = name + \\\" \\\" + pct.toFixed(1) + \\\"%\\\");\\n "}
+      0 ms  text delta (48 chars)        {"delta": "   svg.appendChild(c);\\n    offset += pct;\\n    "}
+      0 ms  text delta (48 chars)        {"delta": "const row = document.createElement(\\\"div\\\");\\n  "}
+      0 ms  text delta (48 chars)        {"delta": "  row.innerHTML = '<span class=\\\"sw\\\" style=\\\"ba"}
+      0 ms  text delta (48 chars)        {"delta": "ckground:' + colors[i] + '\\\"></span>' + name + \\"}
+      0 ms  text delta (48 chars)        {"delta": "\" - $\\\" + (v / 1e6).toFixed(2) + \\\"M\\\";\\n    row"}
+      0 ms  text delta (48 chars)        {"delta": ".onclick = () => window.genui.action(\\\"drill_reg"}
+      0 ms  text delta (48 chars)        {"delta": "ion\\\", { region: name });\\n    document.getEleme"}
+      0 ms  text delta (48 chars)        {"delta": "ntById(\\\"legend\\\").appendChild(row);\\n  });\\n  d"}
+      0 ms  text delta (48 chars)        {"delta": "ocument.getElementById(\\\"total\\\").textContent = "}
+      0 ms  text delta (48 chars)        {"delta": "\\\"$\\\" + (total / 1e6).toFixed(1) + \\\"M total\\\";\\"}
+      0 ms  text delta (31 chars)        {"delta": "n</script>\\n</body></html>\\n\")\n"}
+      1 ms  done: 2383B vs JSON 2427B    {"done": true, "bytes": 2383, "jsonTreeBytes": 2427, "statements": 1}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "program": "root = HtmlArtifact(\"Q3 revenue share\", \"<!doctype html>\\… (2639 chars)
+           append (app patch)           {"append": "page = HtmlArtifact(\"Q3 revenue share\", \"<!doctype html>\\n<html><head><style>\\n  body { font-family: system-ui, s… (2797 chars)
+
+  terminal renderer (same tree the browser draws):
+
+  program as streamed:
+    root = HtmlArtifact("Q3 revenue share", "<!doctype html>\n<html><head><style>\n  body { font-family: system-ui, sans-ser… (2382 chars)
+    
+    page = HtmlArtifact("Q3 revenue share", "<!doctype html>\n<html><head><style>\n  body { font-family: system-ui, sans-ser… (2382 chars)
+    detail = Card("West · monthly detail", [Stack([Metric("Quarter total", "$1.42M"), BarChart("By month", ["Jul", "Aug", "S… (162 chars)
+    root = Stack([page, detail])
+  ✓ catalog-valid tree: 6 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ OpenUI Lang · a compact UI language · mode = mixed ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  text delta (48 chars)        {"delta": "root = Stack([kpis, chartCard, whatIf])\nkpis = S"}
+      0 ms  text delta (48 chars)        {"delta": "tack([Metric(\"Q3 revenue\", \"$4.20M\", \"+12%\"), Me"}
+      0 ms  text delta (48 chars)        {"delta": "tric(\"Top region\", \"West\")], \"row\")\nchartCard = "}
+      0 ms  text delta (48 chars)        {"delta": "Card(\"Revenue by region (catalog)\", [BarChart(\"\""}
+      0 ms  text delta (48 chars)        {"delta": ", [\"West\", \"East\", \"Central\", \"South\"], [1420000"}
+      0 ms  text delta (48 chars)        {"delta": ", 1180000, 860000, 740000]), Button(\"Drill into "}
+      0 ms  text delta (48 chars)        {"delta": "West\", \"drill_region\", {\"region\": \"West\"})])\nwha"}
+      0 ms  text delta (48 chars)        {"delta": "tIf = Card(\"Q4 what-if (custom region)\", [HtmlAr"}
+      0 ms  text delta (48 chars)        {"delta": "tifact(\"What-if slider\", \"<!doctype html>\\n<html"}
+      0 ms  text delta (48 chars)        {"delta": "><head><style>\\n  body { font-family: system-ui,"}
+      0 ms  text delta (48 chars)        {"delta": " sans-serif; margin: 0; padding: 12px 14px; colo"}
+      0 ms  text delta (48 chars)        {"delta": "r: #1d1d1b; }\\n  label { font-size: 13px; font-w"}
+      0 ms  text delta (48 chars)        {"delta": "eight: 600; } input { width: 100%; accent-color:"}
+      0 ms  text delta (48 chars)        {"delta": " #b5532c; }\\n  .out { display: flex; gap: 16px; "}
+      0 ms  text delta (48 chars)        {"delta": "margin-top: 8px; font-size: 13px; }\\n  .out b { "}
+      0 ms  text delta (48 chars)        {"delta": "display: block; font-size: 20px; }\\n</style></he"}
+      0 ms  text delta (48 chars)        {"delta": "ad><body>\\n  <label for=\\\"g\\\">What-if: Q4 growth"}
+      0 ms  text delta (48 chars)        {"delta": " over Q3 <span id=\\\"gv\\\">8</span>%</label>\\n  <i"}
+      0 ms  text delta (48 chars)        {"delta": "nput id=\\\"g\\\" type=\\\"range\\\" min=\\\"-10\\\" max=\\\"3"}
+      0 ms  text delta (48 chars)        {"delta": "0\\\" value=\\\"8\\\">\\n  <div class=\\\"out\\\"><div>Q4 f"}
+      0 ms  text delta (48 chars)        {"delta": "orecast<b id=\\\"f\\\"></b></div><div>Change<b id=\\\""}
+      0 ms  text delta (48 chars)        {"delta": "d\\\"></b></div></div>\\n<script>\\n  const q3 = 420"}
+      0 ms  text delta (48 chars)        {"delta": "0000;\\n  const g = document.getElementById(\\\"g\\\""}
+      0 ms  text delta (48 chars)        {"delta": ");\\n  function draw() {\\n    const pct = Number("}
+      0 ms  text delta (48 chars)        {"delta": "g.value);\\n    document.getElementById(\\\"gv\\\").t"}
+      0 ms  text delta (48 chars)        {"delta": "extContent = pct;\\n    document.getElementById(\\"}
+      0 ms  text delta (48 chars)        {"delta": "\"f\\\").textContent = \\\"$\\\" + (q3 * (1 + pct / 100"}
+      0 ms  text delta (48 chars)        {"delta": ") / 1e6).toFixed(2) + \\\"M\\\";\\n    document.getEl"}
+      0 ms  text delta (48 chars)        {"delta": "ementById(\\\"d\\\").textContent = (pct >= 0 ? \\\"+\\\""}
+      0 ms  text delta (48 chars)        {"delta": " : \\\"\\\") + \\\"$\\\" + Math.round(q3 * pct / 100 / 1"}
+      0 ms  text delta (48 chars)        {"delta": "000) + \\\"K\\\";\\n  }\\n  g.oninput = draw; draw();\\"}
+      0 ms  text delta (33 chars)        {"delta": "n</script>\\n</body></html>\\n\")])\n"}
+      1 ms  done: 1521B vs JSON 1928B    {"done": true, "bytes": 1521, "jsonTreeBytes": 1928, "statements": 4}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}, "program": "root = Stack([kpis, chartCard, whatIf])\nkpis = Stack([Metric… (1736 chars)
+           append (app patch)           {"append": "page = Stack([kpis, chartCard, whatIf])\ndetail = Card(\"West \u00b7 monthly detail\", [Stack([Metric(\"Quarter total\… (270 chars)
+
+  terminal renderer (same tree the browser draws):
+
+  program as streamed:
+    root = Stack([kpis, chartCard, whatIf])
+    kpis = Stack([Metric("Q3 revenue", "$4.20M", "+12%"), Metric("Top region", "West")], "row")
+    chartCard = Card("Revenue by region (catalog)", [BarChart("", ["West", "East", "Central", "South"], [1420000, 1180000, 8… (200 chars)
+    whatIf = Card("Q4 what-if (custom region)", [HtmlArtifact("What-if slider", "<!doctype html>\n<html><head><style>\n  bod… (1187 chars)
+    
+    page = Stack([kpis, chartCard, whatIf])
+    detail = Card("West · monthly detail", [Stack([Metric("Quarter total", "$1.42M"), BarChart("By month", ["Jul", "Aug", "S… (162 chars)
+    root = Stack([page, detail])
+  ✓ catalog-valid tree: 14 nodes, 1 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

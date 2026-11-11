@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AG-UI codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>
+  .agui-chat { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .agui-bubble { margin: 0; align-self: flex-start; background: #f6e4da; padding: 8px 12px; border-radius: 12px 12px 12px 2px; font-size: 14px; }
+  .agui-ui, .agui-tools { margin-bottom: 12px; }
+  .agui-state { margin-top: 10px; font-size: 12px; }
+  .agui-state pre { max-height: 220px; overflow: auto; background: #faf9f6; padding: 8px; font-size: 11px; }
+</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { createRenderer, label } from "/agui-client.mjs";
+  mountShell({
+    title: "02 · AG-UI - Agent-User Interaction protocol",
+    subtitle: "One typed event stream (SSE) carries text, tool calls and shared state between the agent and the page.",
+    modes: {
+      static: "STATIC - the model calls show_sales_dashboard(args). The page owns a component registered for that tool name and renders it from the streamed TOOL_CALL_ARGS.",
+      declarative: "DECLARATIVE - the model calls update_ui(patch). The server validates each op against the catalog and streams it as a STATE_DELTA; the page renders state.ui.",
+      open_ended: "OPEN-ENDED - the model calls render_html(title, html). Arguments stream in TOOL_CALL_ARGS; on TOOL_CALL_END the document mounts in a sandboxed iframe.",
+      mixed: "MIXED - shared-state UI from the catalog plus one HtmlView node, patched in like any other node.",
+    },
+    createRenderer, label,
+  });
+</script>
+</body></html>

@@ -1,0 +1,90 @@
+# Test run - 2026-11-02 06:28 UTC - Python 3.13.18 - node v22.23.4
+
+## 01_a2ui
+test_action_detail_surface_structure_from_model_data_from_app (test_a2ui.A2UITests.test_action_detail_surface_structure_from_model_data_from_app) ... ok
+test_binding_reads_data_model (test_a2ui.A2UITests.test_binding_reads_data_model) ... ok
+test_disallowed_action (test_a2ui.A2UITests.test_disallowed_action) ... ok
+test_every_mode_streams_valid_messages (test_a2ui.A2UITests.test_every_mode_streams_valid_messages) ... ok
+test_html_not_allowed_in_declarative (test_a2ui.A2UITests.test_html_not_allowed_in_declarative) ... ok
+test_static_layout_comes_from_our_template (test_a2ui.A2UITests.test_static_layout_comes_from_our_template) ... ok
+test_unknown_surface_and_bad_version_rejected (test_a2ui.A2UITests.test_unknown_surface_and_bad_version_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+OK
+
+## 02_ag_ui
+test_action_new_run_patches_detail (test_ag_ui.AGUITests.test_action_new_run_patches_detail) ... ok
+test_declarative_is_one_state_delta_per_op (test_ag_ui.AGUITests.test_declarative_is_one_state_delta_per_op) ... ok
+test_invalid_patch_is_rejected_with_a_tool_result (test_ag_ui.AGUITests.test_invalid_patch_is_rejected_with_a_tool_result) ... ok
+test_run_lifecycle (test_ag_ui.AGUITests.test_run_lifecycle) ... ok
+test_tool_args_stream_in_pieces_and_reassemble (test_ag_ui.AGUITests.test_tool_args_stream_in_pieces_and_reassemble) ... ok
+test_wrong_tool_for_mode (test_ag_ui.AGUITests.test_wrong_tool_for_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.006s
+
+OK
+
+## 03_mcp_apps
+test_every_mode_end_to_end (test_mcp_apps.MCPAppsTests.test_every_mode_end_to_end) ... ok
+test_host_refuses_unknown_tool_from_view (test_mcp_apps.MCPAppsTests.test_host_refuses_unknown_tool_from_view) ... ok
+test_model_does_not_see_app_only_tool (test_mcp_apps.MCPAppsTests.test_model_does_not_see_app_only_tool) ... ok
+test_server_rejects_html_with_network_access (test_mcp_apps.MCPAppsTests.test_server_rejects_html_with_network_access) ... ok
+test_server_rejects_invalid_spec (test_mcp_apps.MCPAppsTests.test_server_rejects_invalid_spec) ... ok
+test_tools_point_at_ui_resources (test_mcp_apps.MCPAppsTests.test_tools_point_at_ui_resources) ... ok
+test_view_resource_is_a_self_contained_mcp_app (test_mcp_apps.MCPAppsTests.test_view_resource_is_a_self_contained_mcp_app) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 9.729s
+
+OK
+
+## 04_json_render
+test_action_answers_with_patches (test_json_render.JsonRenderTests.test_action_answers_with_patches) ... ok
+test_bad_patch_rejected (test_json_render.JsonRenderTests.test_bad_patch_rejected) ... ok
+test_every_mode_valid (test_json_render.JsonRenderTests.test_every_mode_valid) ... ok
+test_first_patch_paints_partial_tree (test_json_render.JsonRenderTests.test_first_patch_paints_partial_tree) ... ok
+test_visible_and_repeat (test_json_render.JsonRenderTests.test_visible_and_repeat) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+
+## 05_openui
+test_action_appends_and_redefines_root (test_openui.OpenUITests.test_action_appends_and_redefines_root) ... /home/claude/a4/05_openui/tests/test_openui.py:48: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/claude/a4/05_openui/fixtures/declarative.oui' mode='r' encoding='utf-8'>
+  prog = open(HERE / "fixtures" / "declarative.oui").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_every_mode_valid_and_smaller_than_json (test_openui.OpenUITests.test_every_mode_valid_and_smaller_than_json) ... ok
+test_forward_references_resolve (test_openui.OpenUITests.test_forward_references_resolve) ... ok
+test_mode_rules (test_openui.OpenUITests.test_mode_rules) ... ok
+test_partial_program_has_placeholders (test_openui.OpenUITests.test_partial_program_has_placeholders) ... ok
+test_positional_arguments_map_to_props (test_openui.OpenUITests.test_positional_arguments_map_to_props) ... ok
+test_syntax_error_reports_line (test_openui.OpenUITests.test_syntax_error_reports_line) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.009s
+
+OK
+
+## 06_harness
+test_click_continues_the_same_session (test_harness.HarnessTests.test_click_continues_the_same_session) ... ok
+test_every_mode_renders_once_and_finishes (test_harness.HarnessTests.test_every_mode_renders_once_and_finishes) ... ok
+test_static_mode_refuses_free_trees (test_harness.HarnessTests.test_static_mode_refuses_free_trees) ... ok
+test_turn_limit (test_harness.HarnessTests.test_turn_limit) ... ok
+test_validation_error_is_a_result_and_model_recovers (test_harness.HarnessTests.test_validation_error_is_a_result_and_model_recovers) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.006s
+
+OK
+
+## browser modules (node --test)
+ok 1 - OpenUI JS parser resolves the declarative fixture like the Python one
+ok 2 - OpenUI partial program renders placeholders
+ok 3 - JSON Patch add/replace/remove with '-'
+# pass 3
+# fail 0

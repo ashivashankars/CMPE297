@@ -1,0 +1,10 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Column","props":{},"children":["kpis","chart-card","whatif-card"]}}
+{"op":"add","path":"/elements/kpis","value":{"type":"Row","props":{},"children":["k1","k2"]}}
+{"op":"add","path":"/elements/k1","value":{"type":"Metric","props":{"label":"Q3 revenue","value":"$4.20M","delta":"+12%"}}}
+{"op":"add","path":"/elements/k2","value":{"type":"Metric","props":{"label":"Top region","value":"West"}}}
+{"op":"add","path":"/elements/chart-card","value":{"type":"Card","props":{"title":"Revenue by region (catalog)"},"children":["chart","drill"]}}
+{"op":"add","path":"/elements/chart","value":{"type":"BarChart","props":{"labels":["West","East","Central","South"],"values":[1420000,1180000,860000,740000]}}}
+{"op":"add","path":"/elements/drill","value":{"type":"Button","props":{"label":"Drill into West"},"on":{"press":{"action":"drill_region","params":{"region":"West"}}}}}
+{"op":"add","path":"/elements/whatif-card","value":{"type":"Card","props":{"title":"Q4 what-if (custom region)"},"children":["whatif"]}}
+{"op":"add","path":"/elements/whatif","value":{"type":"HtmlView","props":{"title":"What-if slider","html":{{json:forecast.html}}}}}

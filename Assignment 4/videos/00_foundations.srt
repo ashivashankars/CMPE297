@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:12,092
+Hi! In this assignment I build the same Q3 sales dashboard six times, once per generative-UI technology, and each one in four modes.
+
+2
+00:00:12,092 --> 00:00:24,135
+The four modes are a ladder of model freedom: static gives the least, open-ended the most, and mixed is the practical default.
+
+3
+00:00:24,135 --> 00:00:36,243
+The catalog is the contract. It is the prompt the model reads, the validator for its output, and the registry the page draws from, all from one list.
+
+4
+00:00:36,243 --> 00:00:48,267
+validate() walks the normalized tree. Unknown components, wrong prop types and disallowed actions all raise errors written so the model can read them and fix its output.
+
+5
+00:00:48,267 --> 00:00:59,319
+On the page, components.mjs has one function per catalog type. It builds DOM nodes and never evaluates model text as code. Buttons only send a named action back.
+
+6
+00:00:59,319 --> 00:01:11,371
+Open-ended HTML is mounted by sandbox.mjs: sandbox='allow-scripts' with no same-origin, a CSP with no network, and exactly one message shape back to the page.
+
+7
+00:01:11,371 --> 00:01:22,411
+llm.py: with no API key, the model's reply is replayed from a fixture file, streamed in small chunks. With ANTHROPIC_API_KEY or OPENAI_API_KEY set, the same code calls a live model.
+
+8
+00:01:22,411 --> 00:02:03,016
+Running run_all.sh: it runs the unit tests for all six parts plus the browser-module tests, then each CLI. Every test passes.
+

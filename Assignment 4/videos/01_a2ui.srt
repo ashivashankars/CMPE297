@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:10,027
+Part one is A2UI. Its key idea is that the layout and the data are sent separately, and components bind to data by path.
+
+2
+00:00:10,027 --> 00:00:21,128
+The four envelope messages. A surface must exist first; updateComponents sends a flat list where components reference each other by id.
+
+3
+00:00:21,128 --> 00:00:34,166
+The Surface keeps a component map and a data model. resolve() turns {path: ...} bindings into values, and tree() turns the flat map into the normalized tree. Ids that have not arrived yet render as placeholders.
+
+4
+00:00:34,166 --> 00:00:45,202
+STATIC mode: the templates are ours. The model only chooses 'sales_overview' and returns values; our code sends every component.
+
+5
+00:00:45,202 --> 00:00:57,227
+DECLARATIVE, OPEN-ENDED and MIXED: the model writes A2UI JSONL. Each complete line is applied and checked before it is forwarded, so the page can render while the model is still writing.
+
+6
+00:00:57,227 --> 00:01:08,264
+Here is what the model sends in declarative mode: components first, data afterwards. The title is a binding to /title, and it fills in when updateDataModel arrives.
+
+7
+00:01:08,264 --> 00:01:20,295
+Actions: a click sends an A2UI action. The model designs the detail surface with bindings only, and then the app supplies the real numbers with updateDataModel.
+
+8
+00:01:20,295 --> 00:01:36,379
+Running it in the terminal: each message, then the click, then the same tree drawn by a terminal renderer.
+
+9
+00:01:36,379 --> 00:01:47,562
+Static: the model only chose the template. The wire log shows our fixed updateComponents followed by one updateDataModel.
+
+10
+00:01:47,562 --> 00:02:00,719
+Declarative: watch the components stream in. Then I click 'West details', which creates a second surface designed by the model and filled with data by the app.
+
+11
+00:02:00,719 --> 00:02:12,889
+Open-ended: a single HtmlView holds model-written HTML in a sandbox. Clicking a legend row sends an action out through postMessage.
+
+12
+00:02:12,889 --> 00:02:25,046
+Mixed: catalog KPIs and chart, plus one sandboxed what-if slider, which is something the catalog cannot express.
+
+13
+00:02:25,046 --> 00:02:35,195
+The A2UI tests cover bindings, rejected envelopes, the template ownership in static mode, and the action round trip.
+

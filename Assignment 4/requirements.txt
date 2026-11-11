@@ -1,0 +1,5 @@
+# Part 03 (MCP Apps) - the official MCP Python SDK, 2.x API (MCPServer)
+mcp>=2.3,<3
+# Only for tools/shoot.py (screenshots) and tools/video/ (recording the walkthrough videos)
+playwright>=1.45
+pygments>=2.17

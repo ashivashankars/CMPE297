@@ -1,0 +1,1 @@
+{"text": "Here is the Q3 dashboard.", "tool_calls": [{"name": "show_sales_dashboard", "arguments": {"title": "Q3 2026 sales", "revenue": "$4.20M", "growth": "+12%", "regions": [{"name": "West", "revenue": 1420000}, {"name": "East", "revenue": 1180000}, {"name": "Central", "revenue": 860000}, {"name": "South", "revenue": 740000}]}}]}

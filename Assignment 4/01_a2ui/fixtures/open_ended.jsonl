@@ -1,0 +1,2 @@
+{"version": "v0.9.1", "createSurface": {"surfaceId": "sales", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+{"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "root", "component": "HtmlView", "title": "Q3 revenue share", "html": {{json:dashboard.html}}}]}}

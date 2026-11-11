@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenUI Lang codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>
+  .oui-code { background: #1e1f24; color: #e9e4d8; font: 12px/1.5 ui-monospace, monospace; padding: 12px; border-radius: 10px; white-space: pre-wrap; word-break: break-word; margin-top: 14px; max-height: 320px; overflow: auto; }
+  .oui-stats { font: 12px ui-monospace, monospace; color: #2f7d4f; margin-top: 10px; }
+</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { createRenderer, label } from "/oui-renderer.mjs";
+  mountShell({
+    title: "05 · OpenUI Lang - a compact language for UI",
+    subtitle: "The model writes a small program (name = Component(args)); the page re-parses it on every chunk. Names can be used before they are defined.",
+    modes: {
+      static: "STATIC - one line: root = SalesOverview(...). The library component is ours; the model only passes positional values.",
+      declarative: "DECLARATIVE - a full program from catalog signatures. Watch placeholders fill in as forward references get defined.",
+      open_ended: "OPEN-ENDED - root = HtmlArtifact(title, \"<!doctype html>…\"): the document mounts in a sandbox once the line completes.",
+      mixed: "MIXED - catalog components plus one HtmlArtifact for the what-if slider.",
+    },
+    createRenderer, label,
+  });
+</script>
+</body></html>

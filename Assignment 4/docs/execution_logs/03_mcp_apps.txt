@@ -1,0 +1,122 @@
+== 03_mcp_apps: all four modes + one click
+
+━━ MCP Apps · minimal host · mode = static ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+    932 ms  tools/list                   {"mcp": "tools/list", "modelSees": ["sales_dashboard", "render_spec", "render_html", "render_mixed"], "hiddenAppOnly": ["drill_region"]}
+    933 ms  model chose sales_dashboard  {"mcp": "model chose", "tool": "sales_dashboard", "arguments": {"quarter": "Q3"}}
+    933 ms  tools/call sales_dashboard   {"mcp": "tools/call", "name": "sales_dashboard", "result": {"content": [{"type": "text", "text": "Q3 2026: revenue $4.20M (+12%), … (599 chars)
+    933 ms  resources/read ui://sales/st {"mcp": "resources/read", "uri": "ui://sales/static.html", "mimeType": "text/html;profile=mcp-app", "_meta": {"ui": {"csp": {"conn… (17784 chars)
+
+  ⬆ user action: {"name": "drill_region", "arguments": {"region": "West"}}
+           tools/call from view drill_r {"mcp": "tools/call from view", "name": "drill_region", "result": {"content": [{"type": "text", "text": "\u250c\u2500 West \u00b7 … (1729 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 3 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 (static view data) ──────────────────
+  │ [Revenue] $4.20M  (+12%)
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ MCP Apps · minimal host · mode = declarative ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+   1082 ms  tools/list                   {"mcp": "tools/list", "modelSees": ["sales_dashboard", "render_spec", "render_html", "render_mixed"], "hiddenAppOnly": ["drill_region"]}
+   1082 ms  model chose render_spec      {"mcp": "model chose", "tool": "render_spec", "arguments": {"spec": {"type": "Column", "props": {}, "children": [{"type": "Heading… (1022 chars)
+   1082 ms  tools/call render_spec       {"mcp": "tools/call", "name": "render_spec", "result": {"content": [{"type": "text", "text": "## Q3 2026 - revenue up 12%, West le… (2493 chars)
+   1082 ms  resources/read ui://sales/ca {"mcp": "resources/read", "uri": "ui://sales/catalog.html", "mimeType": "text/html;profile=mcp-app", "_meta": {"ui": {"csp": {"con… (17950 chars)
+
+  ⬆ user action: {"name": "drill_region", "arguments": {"region": "West"}}
+           tools/call from view drill_r {"mcp": "tools/call from view", "name": "drill_region", "result": {"content": [{"type": "text", "text": "\u250c\u2500 West \u00b7 … (1729 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 12 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ West details ]  -> action:drill_region {'region': 'West'}
+  │ [ Central details ]  -> action:drill_region {'region': 'Central'}
+  └────────────────────────────────────────────────
+  (All regions growing)
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ MCP Apps · minimal host · mode = open_ended ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+   1133 ms  tools/list                   {"mcp": "tools/list", "modelSees": ["sales_dashboard", "render_spec", "render_html", "render_mixed"], "hiddenAppOnly": ["drill_region"]}
+   1133 ms  model chose render_html      {"mcp": "model chose", "tool": "render_html", "arguments": {"title": "Q3 revenue share", "html": "<!doctype html>\n<html><head><st… (2440 chars)
+   1133 ms  tools/call render_html       {"mcp": "tools/call", "name": "render_html", "result": {"content": [{"type": "text", "text": "[interactive view 'Q3 revenue share'… (2623 chars)
+   1133 ms  resources/read ui://sales/op {"mcp": "resources/read", "uri": "ui://sales/open.html", "mimeType": "text/html;profile=mcp-app", "_meta": {"ui": {"csp": {"connec… (18948 chars)
+
+  ⬆ user action: {"name": "drill_region", "arguments": {"region": "West"}}
+           tools/call from view drill_r {"mcp": "tools/call from view", "name": "drill_region", "result": {"content": [{"type": "text", "text": "\u250c\u2500 West \u00b7 … (1729 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 1 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ MCP Apps · minimal host · mode = mixed ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+   1290 ms  tools/list                   {"mcp": "tools/list", "modelSees": ["sales_dashboard", "render_spec", "render_html", "render_mixed"], "hiddenAppOnly": ["drill_region"]}
+   1290 ms  model chose render_mixed     {"mcp": "model chose", "tool": "render_mixed", "arguments": {"spec": {"type": "Column", "props": {}, "children": [{"type": "Row", … (1906 chars)
+   1290 ms  tools/call render_mixed      {"mcp": "tools/call", "name": "render_mixed", "result": {"content": [{"type": "text", "text": "[Q3 revenue] $4.20M  (+12%)\n[Top r… (3710 chars)
+   1290 ms  resources/read ui://sales/ca {"mcp": "resources/read", "uri": "ui://sales/catalog.html", "mimeType": "text/html;profile=mcp-app", "_meta": {"ui": {"csp": {"con… (18841 chars)
+
+  ⬆ user action: {"name": "drill_region", "arguments": {"region": "West"}}
+           tools/call from view drill_r {"mcp": "tools/call from view", "name": "drill_region", "result": {"content": [{"type": "text", "text": "\u250c\u2500 West \u00b7 … (1729 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 9 nodes, 1 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

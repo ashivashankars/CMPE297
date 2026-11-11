@@ -1,0 +1,1 @@
+{"text": "I wrote a custom interactive view for this.", "tool_calls": [{"name": "render_html", "arguments": {"title": "Q3 revenue share", "html": {{json:dashboard.html}}}}]}

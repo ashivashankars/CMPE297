@@ -1,0 +1,2 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"HtmlView","props":{"title":"Q3 revenue share","html":{{json:dashboard.html}}}}}

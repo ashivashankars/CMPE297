@@ -1,0 +1,42 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>/*__CATALOG_CSS__*/
+  body { background: #fff; padding: 12px; }
+  .hero { display: flex; gap: 10px; flex-wrap: wrap; }
+  .region { display: grid; grid-template-columns: 80px 1fr auto; gap: 8px; align-items: center; margin: 6px 0; font-size: 14px; }
+  .region button { font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid #1d1d1b; background: #fff; cursor: pointer; }
+  .meter { height: 10px; background: #b5532c; border-radius: 5px; }
+</style></head>
+<body>
+  <!-- STATIC: every element below was written by a developer in advance.
+       The tool result only fills in numbers (structuredContent). -->
+  <h2 class="c-heading" id="title">Waiting for the tool result…</h2>
+  <div class="hero" id="hero"></div>
+  <div id="regions"></div>
+  <div id="detail"></div>
+<script>/*__CATALOG_JS__*/</script>
+<script>/*__BRIDGE_JS__*/</script>
+<script>
+  const money = (n) => "$" + (n / 1e6).toFixed(2) + "M";
+  app.on("ui/notifications/tool-result", ({ structuredContent: s }) => {
+    document.getElementById("title").textContent = `${s.quarter} sales (pre-built MCP App view)`;
+    const hero = document.getElementById("hero");
+    hero.replaceChildren(...[["Revenue", money(s.revenue), s.growth], ["Orders", s.orders.toLocaleString()], ["Avg ticket", "$" + s.avg_ticket]]
+      .map(([label, value, delta]) => renderTree({ type: "Metric", props: { label, value, delta } })));
+    const top = s.regions[0].revenue;
+    const list = document.getElementById("regions");
+    list.replaceChildren(...s.regions.map((r) => {
+      const row = document.createElement("div");
+      row.className = "region";
+      row.innerHTML = `<b></b><div class="meter" style="width:${(100 * r.revenue / top).toFixed(0)}%"></div><button>Details</button>`;
+      row.querySelector("b").textContent = r.region;
+      row.querySelector("button").onclick = () => drill(r.region);
+      return row;
+    }));
+  });
+  async function drill(region) {
+    const res = await app.callTool("drill_region", { region });     // through the host, to the MCP server
+    paint(document.getElementById("detail"), res.structuredContent.tree, {});
+  }
+  app.connect("static-dashboard");
+</script>
+</body></html>

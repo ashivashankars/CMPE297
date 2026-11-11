@@ -1,0 +1,48 @@
+1
+00:00:00,000 --> 00:00:10,066
+Part two is AG-UI. It does not describe what a UI looks like. It describes how text, tool calls and shared state move between the agent and the page.
+
+2
+00:00:10,066 --> 00:00:21,189
+Events are written by hand so every field is visible. Text and tool arguments stream in pieces, the way a model emits them.
+
+3
+00:00:21,189 --> 00:00:32,218
+One run is a generator: RUN_STARTED, a STATE_SNAPSHOT, the model's text, its tool calls, and finally RUN_FINISHED. If the model call fails, the run ends with RUN_ERROR.
+
+4
+00:00:32,218 --> 00:00:45,252
+DECLARATIVE: update_ui(patch). Each op is tried on a copy, validated against the catalog, and only then sent as its own STATE_DELTA, so the page renders progressively.
+
+5
+00:00:45,252 --> 00:00:57,300
+STATIC: the page registers a component for the tool name show_sales_dashboard. OPEN-ENDED: render_html shows the bytes received, then mounts a sandbox at TOOL_CALL_END.
+
+6
+00:00:57,300 --> 00:01:09,356
+The client folds events into messages, tool calls and state. STATE_DELTA is just a JSON Patch on the shared state, followed by a re-render.
+
+7
+00:01:09,356 --> 00:01:24,444
+In the terminal, one STATE_DELTA per op, then the click as a new run: a server tool call, a delta on /detail, and a short message.
+
+8
+00:01:24,444 --> 00:01:35,683
+Static: the model called show_sales_dashboard and our pre-built widget renders from the streamed arguments. Then I click to drill into West.
+
+9
+00:01:35,683 --> 00:01:48,824
+Declarative: the UI is part of the shared state, and each STATE_DELTA adds a node. The last patch replaces the heading text.
+
+10
+00:01:48,824 --> 00:01:59,980
+Open-ended: the HTML arrives as TOOL_CALL_ARGS and mounts in a sandbox when the call ends.
+
+11
+00:01:59,980 --> 00:02:09,243
+Mixed: an HtmlView node sits inside the shared-state tree like any other component.
+
+12
+00:02:09,243 --> 00:02:18,900
+The tests check the run lifecycle, argument streaming, one delta per op, rejection of invalid patches, and the action run.
+

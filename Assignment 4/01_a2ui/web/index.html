@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A2UI codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>
+  .a2ui-surface { margin-bottom: 14px; }
+  .surface-tag { font: 11px ui-monospace, monospace; color: #6b6a64; margin-bottom: 6px; }
+</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { createRenderer, label } from "/a2ui-renderer.mjs";
+  mountShell({
+    title: "01 · A2UI - Agent-to-User Interface (v0.9)",
+    subtitle: "Structure (updateComponents) and data (updateDataModel) are separate streams; components bind to data with JSON Pointers.",
+    modes: {
+      static: "STATIC - the model only picks the 'sales_overview' template and supplies values. Our code sends every component; the model's output is just data.",
+      declarative: "DECLARATIVE - the model writes A2UI JSONL itself: a flat component list from the catalog, bound to a data model it fills progressively.",
+      open_ended: "OPEN-ENDED - the surface holds one HtmlView whose document the model wrote; it runs in a sandboxed iframe (no network, opaque origin).",
+      mixed: "MIXED - catalog components for KPIs and the chart, plus ONE HtmlView region for an interactive what-if slider the catalog cannot express.",
+    },
+    createRenderer, label,
+  });
+</script>
+</body></html>

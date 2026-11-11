@@ -1,0 +1,147 @@
+== 01_a2ui: all four modes + one click
+
+━━ A2UI · Agent-to-User Interface · mode = static ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      1 ms  createSurface(sales)         {"version": "v0.9.1", "createSurface": {"surfaceId": "sales", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+      1 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "root", "component": "Card", "title": {"pat… (947 chars)
+      1 ms  updateDataModel(sales)       {"version": "v0.9.1", "updateDataModel": {"surfaceId": "sales", "path": "/", "value": {"title": "Q3 2026 sales by region", "revenu… (301 chars)
+
+  ⬆ user action: {"version": "v0.9.1", "action": {"name": "drill_region", "surfaceId": "sales", "sourceComponentId": "drill_west", "context": {"region": "West"}}}
+           createSurface(detail)        {"version": "v0.9.1", "createSurface": {"surfaceId": "detail", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+           updateComponents(detail)     {"version": "v0.9.1", "updateComponents": {"surfaceId": "detail", "components": [{"id": "root", "component": "Card", "title": {"pa… (412 chars)
+           updateDataModel(detail)      {"version": "v0.9.1", "updateDataModel": {"surfaceId": "detail", "path": "/", "value": {"heading": "West \u00b7 monthly detail", "… (237 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 7 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 sales by region ─────────────────────
+  │ [Revenue] $4.20M  (+12%)
+  │ [Orders] 579,300
+  │ [Avg ticket] $7.25
+  │ Revenue by region
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into top region ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 3 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ Monthly revenue
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ A2UI · Agent-to-User Interface · mode = declarative ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  createSurface(sales)         {"version": "v0.9.1", "createSurface": {"surfaceId": "sales", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "root", "component": "Column", "children": … (240 chars)
+      0 ms  updateDataModel(sales)       {"version": "v0.9.1", "updateDataModel": {"surfaceId": "sales", "path": "/title", "value": "Q3 2026 - revenue up 12%, West leads"}}
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "kpis", "component": "Row", "children": ["k… (442 chars)
+      0 ms  updateDataModel(sales)       {"version": "v0.9.1", "updateDataModel": {"surfaceId": "sales", "path": "/kpi", "value": {"revenue": "$4.20M", "orders": "579,300"… (152 chars)
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "split", "component": "Row", "children": ["… (668 chars)
+      0 ms  updateDataModel(sales)       {"version": "v0.9.1", "updateDataModel": {"surfaceId": "sales", "path": "/regions", "value": {"names": ["West", "East", "Central",… (275 chars)
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "actions", "component": "Row", "children": … (568 chars)
+
+  ⬆ user action: {"version": "v0.9.1", "action": {"name": "drill_region", "surfaceId": "sales", "sourceComponentId": "drill_west", "context": {"region": "West"}}}
+           createSurface(detail)        {"version": "v0.9.1", "createSurface": {"surfaceId": "detail", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+           updateComponents(detail)     {"version": "v0.9.1", "updateComponents": {"surfaceId": "detail", "components": [{"id": "root", "component": "Card", "title": {"pa… (513 chars)
+           updateDataModel(detail)      {"version": "v0.9.1", "updateDataModel": {"surfaceId": "detail", "path": "/", "value": {"heading": "West \u00b7 monthly detail", "… (237 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 15 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ┌─ Orders ──────────────────────────────────────
+  │ Region  | Orders
+  │ --------+-------
+  │ West    | 190200
+  │ East    | 161300
+  │ Central | 122500
+  │ South   | 105300
+  │ (All regions growing)
+  └────────────────────────────────────────────────
+  [ West details ]  -> action:drill_region {'region': 'West'}
+  [ East details ]  -> action:drill_region {'region': 'East'}
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ Designed by the model, data from the app
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ A2UI · Agent-to-User Interface · mode = open_ended ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  createSurface(sales)         {"version": "v0.9.1", "createSurface": {"surfaceId": "sales", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+      1 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "root", "component": "HtmlView", "title": "… (2502 chars)
+
+  ⬆ user action: {"version": "v0.9.1", "action": {"name": "drill_region", "surfaceId": "sales", "sourceComponentId": "drill_west", "context": {"region": "West"}}}
+           createSurface(detail)        {"version": "v0.9.1", "createSurface": {"surfaceId": "detail", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+           updateComponents(detail)     {"version": "v0.9.1", "updateComponents": {"surfaceId": "detail", "components": [{"id": "root", "component": "Card", "title": {"pa… (513 chars)
+           updateDataModel(detail)      {"version": "v0.9.1", "updateDataModel": {"surfaceId": "detail", "path": "/", "value": {"heading": "West \u00b7 monthly detail", "… (237 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 1 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ Designed by the model, data from the app
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ A2UI · Agent-to-User Interface · mode = mixed ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  createSurface(sales)         {"version": "v0.9.1", "createSurface": {"surfaceId": "sales", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "root", "component": "Column", "children": … (428 chars)
+      0 ms  updateDataModel(sales)       {"version": "v0.9.1", "updateDataModel": {"surfaceId": "sales", "path": "/", "value": {"revenue": "$4.20M", "top": "West", "names"… (217 chars)
+      0 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "chart_card", "component": "Card", "title":… (508 chars)
+      1 ms  updateComponents(sales)      {"version": "v0.9.1", "updateComponents": {"surfaceId": "sales", "components": [{"id": "whatif_card", "component": "Card", "title"… (1376 chars)
+
+  ⬆ user action: {"version": "v0.9.1", "action": {"name": "drill_region", "surfaceId": "sales", "sourceComponentId": "drill_west", "context": {"region": "West"}}}
+           createSurface(detail)        {"version": "v0.9.1", "createSurface": {"surfaceId": "detail", "catalogId": "https://github.com/ashivashankars/CMPE297/a2ui/catalogs/sales/v1"}}
+           updateComponents(detail)     {"version": "v0.9.1", "updateComponents": {"surfaceId": "detail", "components": [{"id": "root", "component": "Card", "title": {"pa… (513 chars)
+           updateDataModel(detail)      {"version": "v0.9.1", "updateDataModel": {"surfaceId": "detail", "path": "/", "value": {"heading": "West \u00b7 monthly detail", "… (237 chars)
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 9 nodes, 1 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ Designed by the model, data from the app
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

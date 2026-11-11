@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harness + GenUI codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>
+  .h-transcript { list-style: none; padding: 10px 12px; margin: 0 0 12px; background: #1e1f24; color: #e9e4d8; border-radius: 10px; font: 12px/1.6 ui-monospace, monospace; max-height: 300px; overflow: auto; }
+  .h-user { color: #f2c38b; } .h-turn { color: #8a877e; } .h-call { color: #9cc3ff; } .h-ok { color: #8fd19e; } .h-err { color: #ff9b8f; } .h-text { color: #fff; }
+  .h-render { margin-bottom: 12px; }
+</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { createRenderer, label } from "/harness-surface.mjs";
+  mountShell({
+    title: "06 · Harness integration - generative UI as a tool in the agent loop",
+    subtitle: "The agent loads data with ordinary tools, then calls render_ui. Invalid UI is an error RESULT the model fixes; clicks become new user messages.",
+    prompt: "Analyze Q3 sales by region and show me a dashboard",
+    modes: {
+      static: "STATIC - render_ui({component: 'sales_overview', props}). The harness owns the component; the model only picks it and fills props.",
+      declarative: "DECLARATIVE - render_ui({tree}). Turn 2 uses a PieChart that is not in the catalog: the harness returns the error, and turn 3 corrects it.",
+      open_ended: "OPEN-ENDED - render_ui({html}). The policy check runs in the harness; the document runs in a sandbox on the surface.",
+      mixed: "MIXED - render_ui({tree}) with exactly one HtmlView region for the what-if slider.",
+    },
+    createRenderer, label,
+  });
+</script>
+</body></html>

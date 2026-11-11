@@ -1,0 +1,48 @@
+1
+00:00:00,000 --> 00:00:10,242
+Part four is json-render. The spec is a flat map of elements, so the model can stream it one patch line at a time and the page paints as it goes.
+
+2
+00:00:10,242 --> 00:00:21,410
+Every streamed line is checked: allowed paths, known types and known props, and actions must go in the 'on' field, not in props.
+
+3
+00:00:21,410 --> 00:00:33,447
+to_tree resolves the spec: $state props, visible filtering and repeat expansion. A Button's on.press becomes a named action.
+
+4
+00:00:33,447 --> 00:00:45,486
+The model's output in declarative mode: elements, with state patches right after the elements that use them. The table repeats over /state/regions.
+
+5
+00:00:45,486 --> 00:00:55,509
+STATIC: SalesOverview is a custom registry component that we wrote. The model sends a single element with props.
+
+6
+00:00:55,509 --> 00:01:06,556
+In the browser, setState runs locally without a server call. drill_region is POSTed, and the server answers with more patches on the same spec.
+
+7
+00:01:06,556 --> 00:01:21,645
+In the terminal, the patch stream, then the app's patches for the click, then the same spec drawn by the terminal renderer.
+
+8
+00:01:21,645 --> 00:01:30,886
+Static: one SalesOverview element. The layout is ours; the props come from the model.
+
+9
+00:01:30,886 --> 00:01:47,063
+Declarative: elements and state stream in. 'Hide orders' is a local setState; 'East details' asks the server for patches.
+
+10
+00:01:47,063 --> 00:01:56,257
+Open-ended: one HtmlView element in a sandbox.
+
+11
+00:01:56,257 --> 00:02:04,426
+Mixed: catalog elements plus one HtmlView element.
+
+12
+00:02:04,426 --> 00:02:13,536
+The tests check that the first patches already paint a partial tree, that visible and repeat work, and that bad patches are rejected.
+

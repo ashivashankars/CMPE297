@@ -1,0 +1,18 @@
+[
+ {"text": "Loading Q3 sales by region.", "tool_calls": [{"name": "load_sales", "arguments": {"group_by": "region"}}]},
+ {"text": "I'll show the share as a pie chart.", "tool_calls": [{"name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [
+   {"type": "Heading", "props": {"text": "Q3 2026 sales"}},
+   {"type": "PieChart", "props": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}}]}}}]},
+ {"text": "PieChart is not in the catalog - switching to BarChart and adding KPIs.", "tool_calls": [{"name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [
+   {"type": "Heading", "props": {"text": "Q3 2026 - revenue up 12%, West leads"}},
+   {"type": "Row", "props": {}, "children": [
+     {"type": "Metric", "props": {"label": "Revenue", "value": "$4.20M", "delta": "+12%"}},
+     {"type": "Metric", "props": {"label": "Orders", "value": "579,300"}},
+     {"type": "Metric", "props": {"label": "Avg ticket", "value": "$7.25"}}]},
+   {"type": "Card", "props": {"title": "Revenue by region"}, "children": [
+     {"type": "BarChart", "props": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}},
+     {"type": "Row", "props": {}, "children": [
+       {"type": "Button", "props": {"label": "West details", "action": "drill_region", "params": {"region": "West"}}},
+       {"type": "Button", "props": {"label": "South details", "action": "drill_region", "params": {"region": "South"}}}]}]}]}}}]},
+ {"text": "Dashboard is up. Click a region to drill in.", "tool_calls": []}
+]

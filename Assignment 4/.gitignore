@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+videos/.raw/
+videos/*.tmp.mp4
+videos/.cues_*
+.venv/

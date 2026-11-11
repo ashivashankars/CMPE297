@@ -1,0 +1,2 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"SalesOverview","props":{"title":"Q3 2026 sales","revenue":"$4.20M","growth":"+12%","regions":[{"name":"West","revenue":1420000},{"name":"East","revenue":1180000},{"name":"Central","revenue":860000},{"name":"South","revenue":740000}]}}}

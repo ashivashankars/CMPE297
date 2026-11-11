@@ -1,0 +1,5 @@
+[
+ {"text": "You clicked {{region}} - loading its months.", "tool_calls": [{"name": "load_region", "arguments": {"region": "{{region}}"}}]},
+ {"text": "Here is {{region}} month by month.", "tool_calls": [{"name": "render_ui", "arguments": {"component": "region_detail", "props": {"region": "{{region}}"}}}]},
+ {"text": "{{region}} grew every month of the quarter.", "tool_calls": []}
+]

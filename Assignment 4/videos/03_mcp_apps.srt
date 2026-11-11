@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:10,114
+Part three is MCP Apps. This time another application hosts the UI. My page is the host, and an MCP server supplies the views.
+
+2
+00:00:10,114 --> 00:00:22,280
+A normal MCP server (mcp 2.x MCPServer). sales_dashboard points at a hand-written view. Its result carries text for the model and structuredContent for the view.
+
+3
+00:00:22,280 --> 00:00:34,318
+DECLARATIVE: render_spec validates the model's tree on the server, so an invalid spec comes back as isError and the view never sees it. OPEN-ENDED: render_html runs the policy check.
+
+4
+00:00:34,318 --> 00:00:43,348
+drill_region is app-only, with visibility set to ['app']. The model never sees it; only a view can call it, through the host.
+
+5
+00:00:43,348 --> 00:00:56,370
+The host: tools/list, then the model picks a tool, then tools/call, then resources/read of the ui:// view. A host without MCP Apps support would just show result.content.
+
+6
+00:00:56,370 --> 00:01:09,432
+In the browser, the host answers ui/initialize. After ui/notifications/initialized it sends tool-input and tool-result, and it proxies tools/call back to the MCP server.
+
+7
+00:01:09,432 --> 00:01:19,466
+OPEN-ENDED in MCP Apps is two boundaries deep: the trusted view nests the model's HTML in a second sandbox.
+
+8
+00:01:19,466 --> 00:01:36,324
+Real MCP over stdio. The model sees four tools while drill_region stays hidden, and the view's click becomes a tools/call.
+
+9
+00:01:36,324 --> 00:01:50,442
+Static: the hand-written MCP App view. 'Details' calls drill_region through the bridge, and you can see the tools/call request and its response in the log.
+
+10
+00:01:50,442 --> 00:02:03,533
+Declarative: a generic catalog view draws whatever tree the server validated.
+
+11
+00:02:03,533 --> 00:02:16,631
+Open-ended: the model's HTML runs in a sandbox nested inside the view's sandbox, and clicks still reach the server.
+
+12
+00:02:16,631 --> 00:02:26,755
+Mixed: catalog components plus a nested sandboxed slider, all inside one MCP App.
+
+13
+00:02:26,755 --> 00:02:50,971
+The tests start the real server, check the _meta and MIME types, reject invalid specs and network HTML, and check that the host refuses unknown tools.
+

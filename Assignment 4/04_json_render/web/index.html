@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>json-render codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>.jr-info { font: 11px ui-monospace, monospace; color: #6b6a64; margin-bottom: 8px; }</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { createRenderer, label } from "/jr-renderer.mjs";
+  mountShell({
+    title: "04 · json-render - one flat spec, streamed as JSON Patch",
+    subtitle: "Elements are a flat map, so every JSONL patch can paint immediately. Props read state with $state; buttons bind named actions with on.press.",
+    modes: {
+      static: "STATIC - the spec has ONE element of the registry's custom type SalesOverview. We wrote its layout; the model only filled its props.",
+      declarative: "DECLARATIVE - the model streams elements and state patch by patch. Try 'Hide orders' (setState runs locally) and 'West details' (server answers with patches).",
+      open_ended: "OPEN-ENDED - one HtmlView element whose html the model wrote, mounted in a sandboxed iframe.",
+      mixed: "MIXED - catalog elements for numbers and chart, one HtmlView element for an interactive what-if slider.",
+    },
+    createRenderer, label,
+  });
+</script>
+</body></html>

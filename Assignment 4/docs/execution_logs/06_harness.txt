@@ -1,0 +1,212 @@
+== 06_harness: all four modes + one click
+
+━━ Harness integration · render_ui as a tool · mode = static ━━
+prompt: Analyze Q3 sales by region and show me a dashboard
+model backend: scripted
+      0 ms  user                         {"event": "user", "content": "Analyze Q3 sales by region and show me a dashboard"}
+      0 ms  turn                         {"event": "turn", "n": 1}
+      0 ms  text                         {"event": "text", "content": "Let me load the quarter first."}
+      0 ms  tool_call load_sales         {"event": "tool_call", "name": "load_sales", "arguments": {"group_by": "region"}}
+      0 ms  tool_result load_sales       {"event": "tool_result", "name": "load_sales", "ok": true, "content": "{\"quarter\": \"Q3 2026\", \"revenue\": 4200000, \"growth\"… (466 chars)
+      0 ms  turn                         {"event": "turn", "n": 2}
+      0 ms  text                         {"event": "text", "content": "West leads with $1.42M. Showing the standard dashboard."}
+      0 ms  tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"component": "sales_overview", "props": {"title": "Q3 2026 sales", "reve… (259 chars)
+      0 ms  render                       {"event": "render", "tree": {"type": "Card", "props": {"title": "Q3 2026 sales (pre-built sales_overview)"}, "children": [{"type":… (567 chars)
+      0 ms  tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+      0 ms  turn                         {"event": "turn", "n": 3}
+      0 ms  text                         {"event": "text", "content": "Q3 revenue was $4.20M (+12%). West is the largest region; every region grew."}
+      0 ms  done                         {"event": "done", "turns": 3}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}}
+           user                         {"event": "user", "content": "[ui action] drill_region {\"region\": \"West\"}"}
+           turn                         {"event": "turn", "n": 1}
+           text                         {"event": "text", "content": "You clicked West - loading its months."}
+           tool_call load_region        {"event": "tool_call", "name": "load_region", "arguments": {"region": "West"}}
+           tool_result load_region      {"event": "tool_result", "name": "load_region", "ok": true, "content": "{\"region\": \"West\", \"months\": [\"Jul\", \"Aug\", \"Se… (231 chars)
+           turn                         {"event": "turn", "n": 2}
+           text                         {"event": "text", "content": "Here is West month by month."}
+           tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"component": "region_detail", "props": {"region": "West"}}}
+           render                       {"event": "render", "tree": {"type": "Card", "props": {"title": "West \u00b7 monthly detail (pre-built region_detail)"}, "children… (378 chars)
+           tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+           turn                         {"event": "turn", "n": 3}
+           text                         {"event": "text", "content": "West grew every month of the quarter."}
+           done                         {"event": "done", "turns": 3}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 6 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 sales (pre-built sales_overview) ────
+  │ [Revenue] $4.20M  (+12%)
+  │ [Top region] West
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail (pre-built region_detail) ──
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ Harness integration · render_ui as a tool · mode = declarative ━━
+prompt: Analyze Q3 sales by region and show me a dashboard
+model backend: scripted
+      0 ms  user                         {"event": "user", "content": "Analyze Q3 sales by region and show me a dashboard"}
+      0 ms  turn                         {"event": "turn", "n": 1}
+      0 ms  text                         {"event": "text", "content": "Loading Q3 sales by region."}
+      0 ms  tool_call load_sales         {"event": "tool_call", "name": "load_sales", "arguments": {"group_by": "region"}}
+      0 ms  tool_result load_sales       {"event": "tool_result", "name": "load_sales", "ok": true, "content": "{\"quarter\": \"Q3 2026\", \"revenue\": 4200000, \"growth\"… (466 chars)
+      0 ms  turn                         {"event": "turn", "n": 2}
+      0 ms  text                         {"event": "text", "content": "I'll show the share as a pie chart."}
+      0 ms  tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [{"type": "Heading",… (297 chars)
+      0 ms  tool_result render_ui ✗      {"event": "tool_result", "name": "render_ui", "ok": false, "content": "error: root.children[1]: unknown component 'PieChart'. Allo… (219 chars)
+      0 ms  turn                         {"event": "turn", "n": 3}
+      0 ms  text                         {"event": "text", "content": "PieChart is not in the catalog - switching to BarChart and adding KPIs."}
+      0 ms  tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [{"type": "Heading",… (936 chars)
+      0 ms  render                       {"event": "render", "tree": {"type": "Column", "props": {}, "children": [{"type": "Heading", "props": {"text": "Q3 2026 - revenue … (897 chars)
+      0 ms  tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+      0 ms  turn                         {"event": "turn", "n": 4}
+      0 ms  text                         {"event": "text", "content": "Dashboard is up. Click a region to drill in."}
+      0 ms  done                         {"event": "done", "turns": 4}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}}
+           user                         {"event": "user", "content": "[ui action] drill_region {\"region\": \"West\"}"}
+           turn                         {"event": "turn", "n": 1}
+           text                         {"event": "text", "content": "You clicked West - loading its months."}
+           tool_call load_region        {"event": "tool_call", "name": "load_region", "arguments": {"region": "West"}}
+           tool_result load_region      {"event": "tool_result", "name": "load_region", "ok": true, "content": "{\"region\": \"West\", \"months\": [\"Jul\", \"Aug\", \"Se… (231 chars)
+           turn                         {"event": "turn", "n": 2}
+           text                         {"event": "text", "content": "Here is West month by month."}
+           tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"component": "region_detail", "props": {"region": "West"}}}
+           render                       {"event": "render", "tree": {"type": "Card", "props": {"title": "West \u00b7 monthly detail (pre-built region_detail)"}, "children… (378 chars)
+           tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+           turn                         {"event": "turn", "n": 3}
+           text                         {"event": "text", "content": "West grew every month of the quarter."}
+           done                         {"event": "done", "turns": 3}
+
+  terminal renderer (same tree the browser draws):
+  note: the model received this error and retried → error: root.children[1]: unknown component 'PieChart'. Allowed: Column, Row, Card, Heading, Text, Metric, BarChart, Table, Badge, Button, HtmlView
+  ✓ catalog-valid tree: 11 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ West details ]  -> action:drill_region {'region': 'West'}
+  │ [ South details ]  -> action:drill_region {'region': 'South'}
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail (pre-built region_detail) ──
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ Harness integration · render_ui as a tool · mode = open_ended ━━
+prompt: Analyze Q3 sales by region and show me a dashboard
+model backend: scripted
+      0 ms  user                         {"event": "user", "content": "Analyze Q3 sales by region and show me a dashboard"}
+      0 ms  turn                         {"event": "turn", "n": 1}
+      0 ms  text                         {"event": "text", "content": "Loading Q3 sales by region."}
+      0 ms  tool_call load_sales         {"event": "tool_call", "name": "load_sales", "arguments": {"group_by": "region"}}
+      0 ms  tool_result load_sales       {"event": "tool_result", "name": "load_sales", "ok": true, "content": "{\"quarter\": \"Q3 2026\", \"revenue\": 4200000, \"growth\"… (466 chars)
+      0 ms  turn                         {"event": "turn", "n": 2}
+      0 ms  text                         {"event": "text", "content": "No catalog component draws an interactive donut, so I wrote one."}
+      0 ms  tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"title": "Q3 revenue share", "html": "<!doctype html>\n<html><head><styl… (200 chars)
+      0 ms  render                       {"event": "render", "tree": {"type": "HtmlView", "props": {"title": "Q3 revenue share", "html": "<!doctype html>\n<html><head><sty… (2440 chars)
+      0 ms  tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+      0 ms  turn                         {"event": "turn", "n": 3}
+      0 ms  text                         {"event": "text", "content": "The donut is interactive: hover a slice, click a region to drill down."}
+      0 ms  done                         {"event": "done", "turns": 3}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}}
+           user                         {"event": "user", "content": "[ui action] drill_region {\"region\": \"West\"}"}
+           turn                         {"event": "turn", "n": 1}
+           text                         {"event": "text", "content": "You clicked West - loading its months."}
+           tool_call load_region        {"event": "tool_call", "name": "load_region", "arguments": {"region": "West"}}
+           tool_result load_region      {"event": "tool_result", "name": "load_region", "ok": true, "content": "{\"region\": \"West\", \"months\": [\"Jul\", \"Aug\", \"Se… (231 chars)
+           turn                         {"event": "turn", "n": 2}
+           text                         {"event": "text", "content": "Here is West month by month."}
+           tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"component": "region_detail", "props": {"region": "West"}}}
+           render                       {"event": "render", "tree": {"type": "Card", "props": {"title": "West \u00b7 monthly detail (pre-built region_detail)"}, "children… (378 chars)
+           tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+           turn                         {"event": "turn", "n": 3}
+           text                         {"event": "text", "content": "West grew every month of the quarter."}
+           done                         {"event": "done", "turns": 3}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 1 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail (pre-built region_detail) ──
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ Harness integration · render_ui as a tool · mode = mixed ━━
+prompt: Analyze Q3 sales by region and show me a dashboard
+model backend: scripted
+      0 ms  user                         {"event": "user", "content": "Analyze Q3 sales by region and show me a dashboard"}
+      0 ms  turn                         {"event": "turn", "n": 1}
+      0 ms  text                         {"event": "text", "content": "Loading Q3 sales by region."}
+      0 ms  tool_call load_sales         {"event": "tool_call", "name": "load_sales", "arguments": {"group_by": "region"}}
+      0 ms  tool_result load_sales       {"event": "tool_result", "name": "load_sales", "ok": true, "content": "{\"quarter\": \"Q3 2026\", \"revenue\": 4200000, \"growth\"… (466 chars)
+      0 ms  turn                         {"event": "turn", "n": 2}
+      0 ms  text                         {"event": "text", "content": "Catalog for the numbers, one custom region for a what-if."}
+      0 ms  tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"tree": {"type": "Column", "props": {}, "children": [{"type": "Row", "pr… (1903 chars)
+      0 ms  render                       {"event": "render", "tree": {"type": "Column", "props": {}, "children": [{"type": "Row", "props": {}, "children": [{"type": "Metri… (1864 chars)
+      0 ms  tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+      0 ms  turn                         {"event": "turn", "n": 3}
+      0 ms  text                         {"event": "text", "content": "Drag the slider to explore Q4 scenarios."}
+      0 ms  done                         {"event": "done", "turns": 3}
+
+  ⬆ user action: {"action": "drill_region", "params": {"region": "West"}}
+           user                         {"event": "user", "content": "[ui action] drill_region {\"region\": \"West\"}"}
+           turn                         {"event": "turn", "n": 1}
+           text                         {"event": "text", "content": "You clicked West - loading its months."}
+           tool_call load_region        {"event": "tool_call", "name": "load_region", "arguments": {"region": "West"}}
+           tool_result load_region      {"event": "tool_result", "name": "load_region", "ok": true, "content": "{\"region\": \"West\", \"months\": [\"Jul\", \"Aug\", \"Se… (231 chars)
+           turn                         {"event": "turn", "n": 2}
+           text                         {"event": "text", "content": "Here is West month by month."}
+           tool_call render_ui          {"event": "tool_call", "name": "render_ui", "arguments": {"component": "region_detail", "props": {"region": "West"}}}
+           render                       {"event": "render", "tree": {"type": "Card", "props": {"title": "West \u00b7 monthly detail (pre-built region_detail)"}, "children… (378 chars)
+           tool_result render_ui        {"event": "tool_result", "name": "render_ui", "ok": true, "content": "rendered on the user's surfaces"}
+           turn                         {"event": "turn", "n": 3}
+           text                         {"event": "text", "content": "West grew every month of the quarter."}
+           done                         {"event": "done", "turns": 3}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 9 nodes, 1 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail (pre-built region_detail) ──
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

@@ -1,0 +1,16 @@
+{"text": "Building the Q3 view in shared state.", "tool_calls": [{"name": "update_ui", "arguments": {"patch": [
+ {"op": "add", "path": "/ui/children/-", "value": {"type": "Heading", "props": {"text": "Q3 2026 - revenue up 12%"}}},
+ {"op": "add", "path": "/ui/children/-", "value": {"type": "Row", "props": {}, "children": [
+   {"type": "Metric", "props": {"label": "Revenue", "value": "$4.20M", "delta": "+12%"}},
+   {"type": "Metric", "props": {"label": "Orders", "value": "579,300"}},
+   {"type": "Metric", "props": {"label": "Avg ticket", "value": "$7.25"}}]}},
+ {"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Revenue by region"}, "children": [
+   {"type": "BarChart", "props": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}}]}},
+ {"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Orders by region"}, "children": [
+   {"type": "Table", "props": {"columns": ["Region", "Orders"], "rows": [["West", 190200], ["East", 161300], ["Central", 122500], ["South", 105300]]}},
+   {"type": "Badge", "props": {"text": "All regions growing", "tone": "success"}}]}},
+ {"op": "add", "path": "/ui/children/-", "value": {"type": "Row", "props": {}, "children": [
+   {"type": "Button", "props": {"label": "West details", "action": "drill_region", "params": {"region": "West"}}},
+   {"type": "Button", "props": {"label": "South details", "action": "drill_region", "params": {"region": "South"}}}]}},
+ {"op": "replace", "path": "/ui/children/0/props/text", "value": "Q3 2026 - revenue up 12%, West leads"}
+]}}]}

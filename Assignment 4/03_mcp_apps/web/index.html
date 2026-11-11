@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP Apps codelab</title>
+<link rel="stylesheet" href="/common/style.css">
+<style>
+  .mcp-view { width: 100%; border: 1px solid #e3e1d9; border-radius: 12px; height: 200px; background: #fff; }
+  .mcp-text { font: 12px ui-monospace, monospace; white-space: pre-wrap; background: #faf9f6; padding: 8px; border-radius: 8px; margin-bottom: 10px; }
+  .mcp-chat { font-size: 13px; background: #e3f2e8; color: #2f7d4f; padding: 6px 10px; border-radius: 8px; margin-top: 8px; }
+  .host-tag { font: 11px ui-monospace, monospace; color: #6b6a64; margin-bottom: 6px; }
+</style>
+</head><body>
+<script type="module">
+  import { mountShell } from "/common/shell.mjs";
+  import { mountApp } from "/host-bridge.mjs";
+  let dispose = null;
+  mountShell({
+    title: "03 · MCP Apps - UI resources inside a host",
+    subtitle: "An MCP server ships a ui:// view with its tool; this page is the HOST: it mounts the view in a sandbox and bridges JSON-RPC over postMessage.",
+    modes: {
+      static: "STATIC - tool sales_dashboard → ui://sales/static.html, a hand-written view. The model supplies only arguments; the view draws structuredContent.",
+      declarative: "DECLARATIVE - tool render_spec(spec) → ui://sales/catalog.html, a generic catalog renderer. The server validates the spec before the view sees it.",
+      open_ended: "OPEN-ENDED - tool render_html(title, html) → ui://sales/open.html, which nests the model's HTML in a SECOND sandbox (two boundaries deep).",
+      mixed: "MIXED - tool render_mixed(spec) → the catalog view; catalog components plus an HtmlView region nested in its own sandbox.",
+    },
+    label: (m) => m.mcp ? `${m.mcp}${m.name ? " " + m.name : m.tool && typeof m.tool === "string" ? " " + m.tool : ""}` :
+      m.method ? `bridge ${m.method}` : m.id !== undefined ? `bridge response #${m.id}` : "message",
+    createRenderer(surface, ctx) {
+      return {
+        reset() { dispose?.(); surface.replaceChildren(); },
+        onMessage(m) {
+          if (m.mcp === "tools/call") {
+            const t = document.createElement("div");
+            t.className = "mcp-text";
+            t.textContent = "result.content (what a text-only host shows):\n" + (m.result.content?.[0]?.text ?? "");
+            surface.append(t);
+          }
+          if (m.mcp === "resources/read") {
+            const tag = document.createElement("div");
+            tag.className = "host-tag";
+            tag.textContent = `mounted ${m.uri} (${m.mimeType}, ${m.html.length} bytes) in sandbox="allow-scripts"`;
+            const chat = document.createElement("div");
+            surface.append(tag);
+            const result = window.__lastResult;
+            dispose = mountApp(surface, { html: m.html, mimeType: m.mimeType, meta: m._meta, tool: m.tool, toolInput: m.toolInput,
+              toolResult: result, log: (msg, dir) => ctx.log(msg, dir),
+              onChat: (text) => { chat.className = "mcp-chat"; chat.textContent = `ui/message from the view: ${text}`; surface.append(chat); } });
+          }
+          if (m.mcp === "tools/call") window.__lastResult = m.result;
+        },
+      };
+    },
+  });
+</script>
+</body></html>

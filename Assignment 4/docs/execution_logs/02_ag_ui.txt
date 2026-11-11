@@ -1,0 +1,277 @@
+== 02_ag_ui: all four modes + one click
+
+━━ AG-UI · Agent-User Interaction protocol · mode = static ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_41cbcc3f"}
+      0 ms  STATE_SNAPSHOT               {"type": "STATE_SNAPSHOT", "snapshot": {"ui": {"type": "Column", "props": {}, "children": []}, "mode": "static"}}
+      0 ms  TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_289557f7", "role": "assistant"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_289557f7", "delta": "Here is the Q3 dashboard"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_289557f7", "delta": "."}
+      0 ms  TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_289557f7"}
+      0 ms  TOOL_CALL_START show_sales_d {"type": "TOOL_CALL_START", "toolCallId": "call_45696749", "toolCallName": "show_sales_dashboard", "parentMessageId": null}
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_45696749", "delta": "{\"title\": \"Q3 2026 sales\", \"revenue\": \"$4.20M\", \"grow… (257 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_45696749", "delta": "\": \"Central\", \"revenue\": 860000}, {\"name\": \"South\", \… (153 chars)
+      0 ms  TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_45696749"}
+      0 ms  TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_cb15ec20", "toolCallId": "call_45696749", "content": "rendered by the page's show_s… (172 chars)
+      0 ms  RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run_41cbcc3f"}
+
+  ⬆ user action: {"action": {"name": "drill_region", "params": {"region": "West"}}}
+           RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_d43201e5"}
+           TOOL_CALL_START get_region_d {"type": "TOOL_CALL_START", "toolCallId": "call_981acf61", "toolCallName": "get_region_detail", "parentMessageId": null}
+           TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_981acf61", "delta": "{\"region\": \"West\"}"}
+           TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_981acf61"}
+           TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_726d2c93", "toolCallId": "call_981acf61", "content": "{\"region\": \"West\", \"mont… (276 chars)
+           STATE_DELTA add /detail      {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/detail", "value": {"type": "Card", "props": {"title": "West \u00b7 month… (402 chars)
+           TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_63ca0702", "role": "assistant"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_63ca0702", "delta": "West grew every month of"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_63ca0702", "delta": " the quarter."}
+           TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_63ca0702"}
+           RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 3 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ Q3 2026 sales (pre-built widget) ────────────
+  │ [Revenue] $4.20M  (+12%)
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ AG-UI · Agent-User Interaction protocol · mode = declarative ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_30495939"}
+      0 ms  STATE_SNAPSHOT               {"type": "STATE_SNAPSHOT", "snapshot": {"ui": {"type": "Column", "props": {}, "children": []}, "mode": "declarative"}}
+      0 ms  TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_8e27936b", "role": "assistant"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_8e27936b", "delta": "Building the Q3 view in "}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_8e27936b", "delta": "shared state."}
+      0 ms  TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_8e27936b"}
+      0 ms  TOOL_CALL_START update_ui    {"type": "TOOL_CALL_START", "toolCallId": "call_9a009fe1", "toolCallName": "update_ui", "parentMessageId": null}
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "{\"patch\": [{\"op\": \"add\", \"path\": \"/ui/children/-\", \… (259 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "dren/-\", \"value\": {\"type\": \"Row\", \"props\": {}, \"chil… (262 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "ric\", \"props\": {\"label\": \"Orders\", \"value\": \"579,300… (262 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "hildren/-\", \"value\": {\"type\": \"Card\", \"props\": {\"tit… (259 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": " \"South\"], \"values\": [1420000, 1180000, 860000, 740000]}}]… (253 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "gion\"}, \"children\": [{\"type\": \"Table\", \"props\": {\"co… (255 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "5300]]}}, {\"type\": \"Badge\", \"props\": {\"text\": \"All re… (259 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "rops\": {}, \"children\": [{\"type\": \"Button\", \"props\": {… (258 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": "s\": {\"label\": \"South details\", \"action\": \"drill_region… (256 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_9a009fe1", "delta": " 2026 - revenue up 12%, West leads\"}]}"}
+      0 ms  TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_9a009fe1"}
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Heading", "props": {"text": "Q3 2026 … (152 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Row", "props": {}, "children": [{"typ… (357 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Revenue by… (284 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Orders by … (385 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Row", "props": {}, "children": [{"typ… (354 chars)
+      0 ms  STATE_DELTA replace /ui/chil {"type": "STATE_DELTA", "delta": [{"op": "replace", "path": "/ui/children/0/props/text", "value": "Q3 2026 - revenue up 12%, West leads"}]}
+      0 ms  TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_3b922158", "toolCallId": "call_9a009fe1", "content": "applied 6 operation(s)", "role": "tool"}
+      0 ms  RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run_30495939"}
+
+  ⬆ user action: {"action": {"name": "drill_region", "params": {"region": "West"}}}
+           RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_a408aa55"}
+           TOOL_CALL_START get_region_d {"type": "TOOL_CALL_START", "toolCallId": "call_569e3d11", "toolCallName": "get_region_detail", "parentMessageId": null}
+           TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_569e3d11", "delta": "{\"region\": \"West\"}"}
+           TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_569e3d11"}
+           TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_eb57a999", "toolCallId": "call_569e3d11", "content": "{\"region\": \"West\", \"mont… (276 chars)
+           STATE_DELTA add /detail      {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/detail", "value": {"type": "Card", "props": {"title": "West \u00b7 month… (402 chars)
+           TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_5192f2f6", "role": "assistant"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_5192f2f6", "delta": "West grew every month of"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_5192f2f6", "delta": " the quarter."}
+           TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_5192f2f6"}
+           RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 27 nodes, 0 sandboxed HtmlView region(s)
+  ## Q3 2026 - revenue up 12%, West leads
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ┌─ Orders by region ────────────────────────────
+  │ Region  | Orders
+  │ --------+-------
+  │ West    | 190200
+  │ East    | 161300
+  │ Central | 122500
+  │ South   | 105300
+  │ (All regions growing)
+  └────────────────────────────────────────────────
+  [ West details ]  -> action:drill_region {'region': 'West'}
+  [ South details ]  -> action:drill_region {'region': 'South'}
+  ## Q3 2026 - revenue up 12%
+  [Revenue] $4.20M  (+12%)
+  [Orders] 579,300
+  [Avg ticket] $7.25
+  ┌─ Revenue by region ───────────────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  └────────────────────────────────────────────────
+  ┌─ Orders by region ────────────────────────────
+  │ Region  | Orders
+  │ --------+-------
+  │ West    | 190200
+  │ East    | 161300
+  │ Central | 122500
+  │ South   | 105300
+  │ (All regions growing)
+  └────────────────────────────────────────────────
+  [ West details ]  -> action:drill_region {'region': 'West'}
+  [ South details ]  -> action:drill_region {'region': 'South'}
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ AG-UI · Agent-User Interaction protocol · mode = open_ended ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_9ab73148"}
+      0 ms  STATE_SNAPSHOT               {"type": "STATE_SNAPSHOT", "snapshot": {"ui": {"type": "Column", "props": {}, "children": []}, "mode": "open_ended"}}
+      0 ms  TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_9bd837fe", "role": "assistant"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_9bd837fe", "delta": "I wrote a custom interac"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_9bd837fe", "delta": "tive view for this."}
+      0 ms  TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_9bd837fe"}
+      0 ms  TOOL_CALL_START render_html  {"type": "TOOL_CALL_START", "toolCallId": "call_d5d83da5", "toolCallName": "render_html", "parentMessageId": null}
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "{\"title\": \"Q3 revenue share\", \"html\": \"<!doctype html>\… (239 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "#1e1f24; color: #f2efe8; }\\n  h2 { margin: 0 0 4px; font-size… (232 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "18px; align-items: center; flex-wrap: wrap; }\\n  svg { width:… (232 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "nter; gap: 8px; font-size: 13px; margin: 4px 0; cursor: pointe… (232 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "er-radius: 3px; }\\n  .total { font-size: 26px; font-weight: 7… (234 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "a region to drill down. This view was written by the model as … (245 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "total\\\" id=\\\"total\\\"></div><div class=\\\"legend\\\" id=… (256 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "l\\\", 860000], [\\\"South\\\", 740000]];\\n  const colors = [… (254 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "\\n  const svg = document.getElementById(\\\"chart\\\");\\n  l… (239 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "cument.createElementNS(\\\"http://www.w3.org/2000/svg\\\", \\\… (245 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "-width\\\": 6,\\n      \\\"stroke-dasharray\\\": pct + \\\" \\… (246 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "ouseenter = () => (document.getElementById(\\\"total\\\").text… (245 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": "nst row = document.createElement(\\\"div\\\");\\n    row.inner… (247 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": ").toFixed(2) + \\\"M\\\";\\n    row.onclick = () => window.gen… (244 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_d5d83da5", "delta": ");\\n  });\\n  document.getElementById(\\\"total\\\").textCont… (228 chars)
+      0 ms  TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_d5d83da5"}
+      0 ms  TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_18e1fac3", "toolCallId": "call_d5d83da5", "content": "html accepted; mounted in san… (152 chars)
+      0 ms  RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run_9ab73148"}
+
+  ⬆ user action: {"action": {"name": "drill_region", "params": {"region": "West"}}}
+           RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_4bd59d08"}
+           TOOL_CALL_START get_region_d {"type": "TOOL_CALL_START", "toolCallId": "call_6b101502", "toolCallName": "get_region_detail", "parentMessageId": null}
+           TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_6b101502", "delta": "{\"region\": \"West\"}"}
+           TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_6b101502"}
+           TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_e207688d", "toolCallId": "call_6b101502", "content": "{\"region\": \"West\", \"mont… (276 chars)
+           STATE_DELTA add /detail      {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/detail", "value": {"type": "Card", "props": {"title": "West \u00b7 month… (402 chars)
+           TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_56d8003f", "role": "assistant"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_56d8003f", "delta": "West grew every month of"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_56d8003f", "delta": " the quarter."}
+           TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_56d8003f"}
+           RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 1 nodes, 1 sandboxed HtmlView region(s)
+  <HtmlView 'Q3 revenue share': 2231 bytes, runs only in a sandboxed browser frame>
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────
+
+━━ AG-UI · Agent-User Interaction protocol · mode = mixed ━━
+prompt: Show me Q3 sales by region
+model backend: scripted
+      0 ms  RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_35afb890"}
+      0 ms  STATE_SNAPSHOT               {"type": "STATE_SNAPSHOT", "snapshot": {"ui": {"type": "Column", "props": {}, "children": []}, "mode": "mixed"}}
+      0 ms  TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_b9207978", "role": "assistant"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_b9207978", "delta": "Catalog for the numbers,"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_b9207978", "delta": " one custom region for t"}
+      0 ms  TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_b9207978", "delta": "he what-if."}
+      0 ms  TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_b9207978"}
+      0 ms  TOOL_CALL_START update_ui    {"type": "TOOL_CALL_START", "toolCallId": "call_a3124b09", "toolCallName": "update_ui", "parentMessageId": null}
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "{\"patch\": [{\"op\": \"add\", \"path\": \"/ui/children/-\", \… (261 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "\": \"$4.20M\", \"delta\": \"+12%\"}}, {\"type\": \"Metric\", … (262 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "e\": \"Card\", \"props\": {\"title\": \"Revenue by region (cat… (258 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "es\": [1420000, 1180000, 860000, 740000]}}, {\"type\": \"Butto… (251 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": " {\"op\": \"add\", \"path\": \"/ui/children/-\", \"value\": {\… (258 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "{\"title\": \"What-if slider\", \"html\": \"<!doctype html>\\n… (239 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "d1d1b; }\\n  label { font-size: 13px; font-weight: 600; } inpu… (232 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "-size: 13px; }\\n  .out b { display: block; font-size: 20px; }… (241 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "abel>\\n  <input id=\\\"g\\\" type=\\\"range\\\" min=\\\"-10\\… (264 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "/b></div></div>\\n<script>\\n  const q3 = 4200000;\\n  const g… (240 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "nt.getElementById(\\\"gv\\\").textContent = pct;\\n    documen… (248 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "ument.getElementById(\\\"d\\\").textContent = (pct >= 0 ? \\\"… (253 chars)
+      0 ms  TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_a3124b09", "delta": "ript>\\n</body></html>\\n\"}}]}}]}"}
+      0 ms  TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_a3124b09"}
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Row", "props": {}, "children": [{"typ… (289 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Revenue by… (409 chars)
+      0 ms  STATE_DELTA add /ui/children {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/ui/children/-", "value": {"type": "Card", "props": {"title": "Q4 what-if… (1344 chars)
+      0 ms  TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_fc243d6d", "toolCallId": "call_a3124b09", "content": "applied 3 operation(s)", "role": "tool"}
+      0 ms  RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run_35afb890"}
+
+  ⬆ user action: {"action": {"name": "drill_region", "params": {"region": "West"}}}
+           RUN_STARTED                  {"type": "RUN_STARTED", "threadId": "thread_demo", "runId": "run_9328f6d7"}
+           TOOL_CALL_START get_region_d {"type": "TOOL_CALL_START", "toolCallId": "call_851c9573", "toolCallName": "get_region_detail", "parentMessageId": null}
+           TOOL_CALL_ARGS               {"type": "TOOL_CALL_ARGS", "toolCallId": "call_851c9573", "delta": "{\"region\": \"West\"}"}
+           TOOL_CALL_END                {"type": "TOOL_CALL_END", "toolCallId": "call_851c9573"}
+           TOOL_CALL_RESULT             {"type": "TOOL_CALL_RESULT", "messageId": "msg_88cc52b6", "toolCallId": "call_851c9573", "content": "{\"region\": \"West\", \"mont… (276 chars)
+           STATE_DELTA add /detail      {"type": "STATE_DELTA", "delta": [{"op": "add", "path": "/detail", "value": {"type": "Card", "props": {"title": "West \u00b7 month… (402 chars)
+           TEXT_MESSAGE_START           {"type": "TEXT_MESSAGE_START", "messageId": "msg_67152fa5", "role": "assistant"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_67152fa5", "delta": "West grew every month of"}
+           TEXT_MESSAGE_CONTENT         {"type": "TEXT_MESSAGE_CONTENT", "messageId": "msg_67152fa5", "delta": " the quarter."}
+           TEXT_MESSAGE_END             {"type": "TEXT_MESSAGE_END", "messageId": "msg_67152fa5"}
+           RUN_FINISHED                 {"type": "RUN_FINISHED", "threadId": "thread_demo", "runId": "run"}
+
+  terminal renderer (same tree the browser draws):
+  ✓ catalog-valid tree: 17 nodes, 2 sandboxed HtmlView region(s)
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  [Q3 revenue] $4.20M  (+12%)
+  [Top region] West
+  ┌─ Revenue by region (catalog) ─────────────────
+  │     West ████████████████████████████ 1,420,000
+  │     East ███████████████████████ 1,180,000
+  │  Central █████████████████ 860,000
+  │    South ███████████████ 740,000
+  │ [ Drill into West ]  -> action:drill_region {'region': 'West'}
+  └────────────────────────────────────────────────
+  ┌─ Q4 what-if (custom region) ──────────────────
+  │ <HtmlView 'What-if slider': 1044 bytes, runs only in a sandboxed browser frame>
+  └────────────────────────────────────────────────
+  ✓ catalog-valid tree: 4 nodes, 0 sandboxed HtmlView region(s)
+  ┌─ West · monthly detail ───────────────────────
+  │ [Quarter total] $1.42M
+  │ By month
+  │      Jul █████████████████████████ 452,000
+  │      Aug ███████████████████████████ 471,000
+  │      Sep ████████████████████████████ 497,000
+  └────────────────────────────────────────────────

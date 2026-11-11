@@ -1,0 +1,48 @@
+1
+00:00:00,000 --> 00:00:10,073
+Part five is OpenUI Lang. The model writes a small program instead of JSON, and the page re-parses it on every chunk.
+
+2
+00:00:10,073 --> 00:00:21,209
+This is a program. root refers to title, kpis, split and actions before they are defined, which is called hoisting, and it is what makes streaming work.
+
+3
+00:00:21,209 --> 00:00:32,237
+Arguments are positional, so each component has a fixed signature. HtmlArtifact maps to our sandboxed HtmlView, and SalesOverview is the pre-built static component.
+
+4
+00:00:32,237 --> 00:00:44,270
+parse() with partial=True skips the line that is still being written. resolve() turns names that are not defined yet into placeholders.
+
+5
+00:00:44,270 --> 00:00:53,310
+The same resolver in JavaScript, which the browser runs after every streamed chunk.
+
+6
+00:00:53,310 --> 00:01:04,348
+Actions: the app answers drill_region by appending lines. A later root = ... replaces the earlier one.
+
+7
+00:01:04,348 --> 00:01:19,463
+In the terminal: the program as streamed, its size compared with the JSON tree, and the terminal render after the click.
+
+8
+00:01:19,463 --> 00:01:28,629
+Static: a single line, root = SalesOverview(...).
+
+9
+00:01:28,629 --> 00:01:42,788
+Declarative: placeholders fill in as forward references get defined. The program here is about 60% of the size of the same UI as JSON.
+
+10
+00:01:42,788 --> 00:01:53,047
+Open-ended: root = HtmlArtifact(...). The document mounts once its line is complete.
+
+11
+00:01:53,047 --> 00:02:01,215
+Mixed: catalog components plus one HtmlArtifact.
+
+12
+00:02:01,215 --> 00:02:10,338
+The tests cover forward references, partial programs, positional props, the rules for each mode, and the appended action.
+

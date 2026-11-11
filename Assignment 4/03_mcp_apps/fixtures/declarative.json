@@ -1,0 +1,12 @@
+{"tool": "render_spec", "arguments": {"spec": {"type": "Column", "props": {}, "children": [
+  {"type": "Heading", "props": {"text": "Q3 2026 - revenue up 12%, West leads"}},
+  {"type": "Row", "props": {}, "children": [
+    {"type": "Metric", "props": {"label": "Revenue", "value": "$4.20M", "delta": "+12%"}},
+    {"type": "Metric", "props": {"label": "Orders", "value": "579,300"}},
+    {"type": "Metric", "props": {"label": "Avg ticket", "value": "$7.25"}}]},
+  {"type": "Card", "props": {"title": "Revenue by region"}, "children": [
+    {"type": "BarChart", "props": {"labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}},
+    {"type": "Row", "props": {}, "children": [
+      {"type": "Button", "props": {"label": "West details", "action": "drill_region", "params": {"region": "West"}}},
+      {"type": "Button", "props": {"label": "Central details", "action": "drill_region", "params": {"region": "Central"}}}]}]},
+  {"type": "Badge", "props": {"text": "All regions growing", "tone": "success"}}]}}}

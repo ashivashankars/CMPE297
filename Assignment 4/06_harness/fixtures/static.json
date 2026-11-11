@@ -1,0 +1,5 @@
+[
+ {"text": "Let me load the quarter first.", "tool_calls": [{"name": "load_sales", "arguments": {"group_by": "region"}}]},
+ {"text": "West leads with $1.42M. Showing the standard dashboard.", "tool_calls": [{"name": "render_ui", "arguments": {"component": "sales_overview", "props": {"title": "Q3 2026 sales", "revenue": "$4.20M", "growth": "+12%", "labels": ["West", "East", "Central", "South"], "values": [1420000, 1180000, 860000, 740000]}}}]},
+ {"text": "Q3 revenue was $4.20M (+12%). West is the largest region; every region grew.", "tool_calls": []}
+]

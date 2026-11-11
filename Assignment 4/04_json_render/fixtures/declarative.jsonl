@@ -1,0 +1,25 @@
+{"op":"add","path":"/root","value":"main"}
+{"op":"add","path":"/elements/main","value":{"type":"Column","props":{},"children":["title","kpis","chart-card","table-hide","table-show","table-card","actions"]}}
+{"op":"add","path":"/elements/title","value":{"type":"Heading","props":{"text":{"$state":"/title"}}}}
+{"op":"add","path":"/state/title","value":"Q3 2026 - revenue up 12%, West leads"}
+{"op":"add","path":"/elements/kpis","value":{"type":"Row","props":{},"children":["k-rev","k-orders","k-ticket"]}}
+{"op":"add","path":"/elements/k-rev","value":{"type":"Metric","props":{"label":"Revenue","value":{"$state":"/kpi/revenue"},"delta":"+12%"}}}
+{"op":"add","path":"/elements/k-orders","value":{"type":"Metric","props":{"label":"Orders","value":{"$state":"/kpi/orders"}}}}
+{"op":"add","path":"/elements/k-ticket","value":{"type":"Metric","props":{"label":"Avg ticket","value":{"$state":"/kpi/ticket"}}}}
+{"op":"add","path":"/state/kpi","value":{"revenue":"$4.20M","orders":"579,300","ticket":"$7.25"}}
+{"op":"add","path":"/elements/chart-card","value":{"type":"Card","props":{"title":"Revenue by region"},"children":["chart"]}}
+{"op":"add","path":"/elements/chart","value":{"type":"BarChart","props":{"labels":{"$state":"/chart/labels"},"values":{"$state":"/chart/values"}}}}
+{"op":"add","path":"/state/chart","value":{"labels":["West","East","Central","South"],"values":[1420000,1180000,860000,740000]}}
+{"op":"add","path":"/elements/table-hide","value":{"type":"Button","props":{"label":"Hide orders (setState, client-only)"},"visible":{"$state":"/showTable","eq":true},"on":{"press":{"action":"setState","params":{"statePath":"/showTable","value":false}}}}}
+{"op":"add","path":"/elements/table-show","value":{"type":"Button","props":{"label":"Show orders (setState, client-only)"},"visible":{"$state":"/showTable","eq":false},"on":{"press":{"action":"setState","params":{"statePath":"/showTable","value":true}}}}}
+{"op":"add","path":"/state/showTable","value":true}
+{"op":"add","path":"/elements/table-card","value":{"type":"Card","props":{"title":"Orders by region"},"visible":{"$state":"/showTable","eq":true},"repeat":{"statePath":"/regions"},"children":["region-row"]}}
+{"op":"add","path":"/elements/region-row","value":{"type":"Text","props":{"text":{"$item":"label"}}}}
+{"op":"add","path":"/state/regions","value":[]}
+{"op":"add","path":"/state/regions/0","value":{"label":"West · 190,200 orders"}}
+{"op":"add","path":"/state/regions/1","value":{"label":"East · 161,300 orders"}}
+{"op":"add","path":"/state/regions/2","value":{"label":"Central · 122,500 orders"}}
+{"op":"add","path":"/state/regions/3","value":{"label":"South · 105,300 orders"}}
+{"op":"add","path":"/elements/actions","value":{"type":"Row","props":{},"children":["drill-west","drill-east"]}}
+{"op":"add","path":"/elements/drill-west","value":{"type":"Button","props":{"label":"West details"},"on":{"press":{"action":"drill_region","params":{"region":"West"}}}}}
+{"op":"add","path":"/elements/drill-east","value":{"type":"Button","props":{"label":"East details"},"on":{"press":{"action":"drill_region","params":{"region":"East"}}}}}

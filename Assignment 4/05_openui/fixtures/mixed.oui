@@ -1,0 +1,4 @@
+root = Stack([kpis, chartCard, whatIf])
+kpis = Stack([Metric("Q3 revenue", "$4.20M", "+12%"), Metric("Top region", "West")], "row")
+chartCard = Card("Revenue by region (catalog)", [BarChart("", ["West", "East", "Central", "South"], [1420000, 1180000, 860000, 740000]), Button("Drill into West", "drill_region", {"region": "West"})])
+whatIf = Card("Q4 what-if (custom region)", [HtmlArtifact("What-if slider", {{json:forecast.html}})])
